@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel -DCMAKE_INSTALL_PREFIX=/home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install -G Unix Makefiles
