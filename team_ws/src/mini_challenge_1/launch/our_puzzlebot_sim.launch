@@ -1,0 +1,7 @@
+
+<launch>        
+    <node name="differential_drive_model" pkg="mini_challenge_1" type="differentialDriveModel.py" output="screen"/>
+    <node name="solver" pkg="mini_challenge_1" type="solver.py" output="screen"/>
+    <node name="coordinate_transform" pkg="mini_challenge_1" type="coordinateTransform.py" output="screen"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mini_challenge_1)/rviz_config/our_puzzlebot_sim.rviz"/>
+</launch>
