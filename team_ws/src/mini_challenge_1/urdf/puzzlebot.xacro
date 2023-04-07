@@ -2,18 +2,15 @@
 <!-- PuzzleBot differential drive -->
 <robot name="puzzlebot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-	<!-- files for gazebo costumization 
-	<xacro:include filename="$(find puzzlebot_gazebo)/urdf/materials.xacro" />
-	<xacro:include filename="$(find puzzlebot_gazebo)/urdf/parameters.xacro" />
-	<xacro:include filename="$(find puzzlebot_gazebo)/urdf/puzzlebot.gazebo" />
-	<xacro:include filename="$(find puzzlebot_gazebo)/urdf/macros.xacro" />  
-	-->
+	<!-- ================ URDF VARIABLES ================ -->
+	<xacro:property name="PI" value="3.1415926535897931"/>
 
-	<!-- Dummy link to fiz robot chassis -->
+	<!-- ================ DUMMY LINK TO FIX CHASIS ================ -->
   	<link name="puzzlebot_frame">
 		<pose>0 0 0 0 0 0</pose>
 	</link>
-  
+
+	<!-- ================ CHASIS ================ -->
 	<joint name="base_link_to_chassis" type="fixed">
 		<parent link="puzzlebot_frame"/>
 		<child link="chassis"/>
@@ -21,52 +18,51 @@
 
 	<link name="chassis">
 		<pose>0 0 0 0 0 0</pose>
-		<visual>
-			<!-- box only -->
-			<origin xyz="0 0 0" rpy="0 0 0"/>        
-			<geometry>
-				<box size="0.3 0.2 0.15"/> 
-			</geometry> 
-
-			<!-- with mesh  -->
-			<!--
+		<visual>					
 			<origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
 			<geometry>
-				<mesh filename="file://${mesh_chassis}"/>
-			</geometry> 
-			-->
+				<mesh filename="file://$(find mini_challenge_1)/meshes/MCR2_1000_13_Chassis.stl"/>
+			</geometry> 			
 		</visual>
 
-		<!--
-		<collision name="collision_chassis">
-			<origin rpy="0 0 0" xyz="0 0 0"/>
-			<geometry>
-					<box size="${chassisX} ${chassisY} ${chassisZ}"/> 
-			</geometry>
-		</collision>
-		
-		<inertial>
-		<mass value="${chassisMass}"/>    
-		<xacro:box_inertia m="${chassisMass}" x="${chassisX}" y="${chassisY}" z="${chassisZ}" />
-		</inertial>
-		-->
-
-	<!-- agregar caster wheel en frame --> 
-		<collision>
-			<origin xyz="-0.095 0 -0.0425" rpy="0 0 0"/>
-			<geometry>
-				<sphere radius="0.1"/>
-			</geometry>			
-		</collision>
-
-		<visual>
-			<origin xyz="-0.095 0 -0.0425" rpy="0 0 0"/>
-			<geometry>
-				<sphere radius="0.1"/>
-			</geometry>
-		</visual>
-	
 	</link>
+
+	<!-- ================ RIGHT WHEEL ================ -->
+	<joint name="base_to_right_w" type="continuous">
+		<parent link="chassis" /> 
+		<child link="right_wheel" />
+		<origin xyz="0.05 -0.09 0.0" />
+		<axis xyz="0 1 0" rpy="0 0 0" />
+	</joint>
+
+	<link name="right_wheel">
+		<pose>0 0 0 0 0 0</pose>
+		<visual>
+			<origin xyz="0 0 0" rpy="-${PI/2} 0 0" />
+			<geometry>	      
+				<mesh filename="file://$(find mini_challenge_1)/meshes/MCR2_1000_1_1_Wheel_Coupler_2.stl"/>	    	
+			</geometry>
+		</visual>
+	</link>
+
+	<!-- ================ RIGHT WHEEL ================ -->
+	<joint name="base_to_left_w" type="continuous">
+		<parent link="chassis" /> 
+		<child link="left_wheel" />
+		<origin xyz="0.05 0.09 0.0" />
+		<axis xyz="0 1 0" rpy="0 0 0" />
+	</joint>
+	
+	<link name="left_wheel">
+		<pose>0 0 0 0 0 0</pose>
+		<visual>
+			<origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+			<geometry>	      
+				<mesh filename="file://$(find mini_challenge_1)/meshes/MCR2_1000_1_1_Wheel_Coupler_2.stl"/>	    	
+			</geometry>
+		</visual>
+	</link>
+	
 
 <!---->
 </robot>
