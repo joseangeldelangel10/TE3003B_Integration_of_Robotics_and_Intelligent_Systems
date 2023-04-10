@@ -7,5 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export LD_LIBRARY_PATH="/home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel/lib:/home/jose/Documents/8th_semester/robotica_final/class_ws/devel/lib:/home/jose/Documents/8th_semester/robotica_final/mobile-robots-module/ros/catkin_ws/devel/lib:/home/jose/Documents/quantum/quantum_ws/devel/lib:$LD_LIBRARY_PATH"
-export PWD='/home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build'
+export LD_LIBRARY_PATH='/opt/ros/melodic/lib'
+export PKG_CONFIG_PATH='/opt/ros/melodic/lib/pkgconfig'
+export PWD='/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build'
+export ROS_PACKAGE_PATH='/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src:/opt/ros/melodic/share'
