@@ -9,5 +9,10 @@
 # modified environment variables
 export LD_LIBRARY_PATH='/opt/ros/melodic/lib'
 export PKG_CONFIG_PATH='/opt/ros/melodic/lib/pkgconfig'
+<<<<<<< HEAD
 export PWD='/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build'
 export ROS_PACKAGE_PATH='/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src:/opt/ros/melodic/share'
+=======
+export PWD='/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build'
+export ROS_PACKAGE_PATH='/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src:/opt/ros/melodic/share'
+>>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e

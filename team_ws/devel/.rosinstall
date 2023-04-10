@@ -1,2 +1,6 @@
 - setup-file:
+<<<<<<< HEAD
     local-name: /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel/setup.sh
+=======
+    local-name: /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel/setup.sh
+>>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e

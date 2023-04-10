@@ -1,2 +1,6 @@
 mini_challenge_1
+<<<<<<< HEAD
 -DCATKIN_DEVEL_PREFIX=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel -DCMAKE_INSTALL_PREFIX=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install -G Unix Makefiles
+=======
+-DCATKIN_DEVEL_PREFIX=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel -DCMAKE_INSTALL_PREFIX=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install -G Unix Makefiles
+>>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e

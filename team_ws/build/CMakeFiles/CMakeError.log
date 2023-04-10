@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
 Change Dir: /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-thOCLY
 
@@ -23,6 +24,30 @@ make: *** [cmTC_1772d/fast] Error 2
 
 
 Source file was:
+=======
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_908ec/fast"
+/usr/bin/make -f CMakeFiles/cmTC_908ec.dir/build.make CMakeFiles/cmTC_908ec.dir/build
+make[1]: Entering directory '/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_908ec.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_908ec.dir/CheckSymbolExists.c.o   -c /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_908ec
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_908ec.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_908ec.dir/CheckSymbolExists.c.o  -o cmTC_908ec 
+CMakeFiles/cmTC_908ec.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_908ec.dir/build.make:97: recipe for target 'cmTC_908ec' failed
+make[1]: *** [cmTC_908ec] Error 1
+make[1]: Leaving directory '/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_908ec/fast' failed
+make: *** [cmTC_908ec/fast] Error 2
+
+File /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+>>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 #include <pthread.h>
 
 static void* test_func(void* data)
@@ -45,6 +70,7 @@ int main(void)
 
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
+<<<<<<< HEAD
 Change Dir: /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-ZMtTWu
 
 Run Build Command(s):/usr/bin/make -f Makefile cmTC_eddcd/fast && /usr/bin/make  -f CMakeFiles/cmTC_eddcd.dir/build.make CMakeFiles/cmTC_eddcd.dir/build
@@ -62,5 +88,24 @@ make[1]: Leaving directory '/home/leonardonavacastellanos/Documents/Tec/OctavoSe
 Makefile:127: recipe for target 'cmTC_eddcd/fast' failed
 make: *** [cmTC_eddcd/fast] Error 2
 
+=======
+Change Dir: /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_691e7/fast"
+/usr/bin/make -f CMakeFiles/cmTC_691e7.dir/build.make CMakeFiles/cmTC_691e7.dir/build
+make[1]: Entering directory '/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_691e7.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_691e7.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_691e7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_691e7.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_691e7.dir/CheckFunctionExists.c.o  -o cmTC_691e7 -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_691e7.dir/build.make:97: recipe for target 'cmTC_691e7' failed
+make[1]: *** [cmTC_691e7] Error 1
+make[1]: Leaving directory '/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_691e7/fast' failed
+make: *** [cmTC_691e7/fast] Error 2
+>>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 
