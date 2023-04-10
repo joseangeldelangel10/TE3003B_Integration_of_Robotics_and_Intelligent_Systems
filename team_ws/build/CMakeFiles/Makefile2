@@ -54,22 +54,14 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 #=============================================================================
 # Directory level rules for the build root directory
 
-<<<<<<< HEAD
 # The main recursive "all" target.
 all: gtest/all
 all: mini_challenge_1/all
@@ -79,21 +71,6 @@ all: mini_challenge_1/all
 preinstall: gtest/preinstall
 preinstall: mini_challenge_1/preinstall
 .PHONY : preinstall
-=======
-# All Build rule for target.
-CMakeFiles/tests.dir/all:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/depend
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target tests"
-.PHONY : CMakeFiles/tests.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/tests.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : CMakeFiles/tests.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # The main recursive "clean" target.
 clean: CMakeFiles/download_extra_data.dir/clean
@@ -202,28 +179,16 @@ mini_challenge_1/clean: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messa
 
 # All Build rule for target.
 CMakeFiles/download_extra_data.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/download_extra_data.dir/build.make CMakeFiles/download_extra_data.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/download_extra_data.dir/build.make CMakeFiles/download_extra_data.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target download_extra_data"
-=======
-	$(MAKE) -f CMakeFiles/download_extra_data.dir/build.make CMakeFiles/download_extra_data.dir/depend
-	$(MAKE) -f CMakeFiles/download_extra_data.dir/build.make CMakeFiles/download_extra_data.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target download_extra_data"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : CMakeFiles/download_extra_data.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/download_extra_data.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/download_extra_data.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/download_extra_data.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : CMakeFiles/download_extra_data.dir/rule
 
 # Convenience name for target.
@@ -266,28 +231,16 @@ CMakeFiles/tests.dir/clean:
 
 # All Build rule for target.
 CMakeFiles/run_tests.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target run_tests"
-=======
-	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
-	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target run_tests"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : CMakeFiles/run_tests.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/run_tests.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/run_tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/run_tests.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : CMakeFiles/run_tests.dir/rule
 
 # Convenience name for target.
@@ -304,28 +257,16 @@ CMakeFiles/run_tests.dir/clean:
 
 # All Build rule for target.
 CMakeFiles/clean_test_results.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_test_results.dir/build.make CMakeFiles/clean_test_results.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_test_results.dir/build.make CMakeFiles/clean_test_results.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target clean_test_results"
-=======
-	$(MAKE) -f CMakeFiles/clean_test_results.dir/build.make CMakeFiles/clean_test_results.dir/depend
-	$(MAKE) -f CMakeFiles/clean_test_results.dir/build.make CMakeFiles/clean_test_results.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target clean_test_results"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : CMakeFiles/clean_test_results.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/clean_test_results.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/clean_test_results.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/clean_test_results.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : CMakeFiles/clean_test_results.dir/rule
 
 # Convenience name for target.
@@ -342,28 +283,16 @@ CMakeFiles/clean_test_results.dir/clean:
 
 # All Build rule for target.
 CMakeFiles/doxygen.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/doxygen.dir/build.make CMakeFiles/doxygen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/doxygen.dir/build.make CMakeFiles/doxygen.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target doxygen"
-=======
-	$(MAKE) -f CMakeFiles/doxygen.dir/build.make CMakeFiles/doxygen.dir/depend
-	$(MAKE) -f CMakeFiles/doxygen.dir/build.make CMakeFiles/doxygen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target doxygen"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : CMakeFiles/doxygen.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/doxygen.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/doxygen.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/doxygen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : CMakeFiles/doxygen.dir/rule
 
 # Convenience name for target.
@@ -406,28 +335,16 @@ gtest/googlemock/CMakeFiles/gmock.dir/clean:
 
 # All Build rule for target.
 gtest/googlemock/CMakeFiles/gmock_main.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) $(MAKESILENT) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num=4,5,6,7 "Built target gmock_main"
-=======
-	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/depend
-	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num=4,5,6,7 "Built target gmock_main"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : gtest/googlemock/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
 gtest/googlemock/CMakeFiles/gmock_main.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest/googlemock/CMakeFiles/gmock_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 gtest/googlemock/CMakeFiles/gmock_main.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : gtest/googlemock/CMakeFiles/gmock_main.dir/rule
 
 # Convenience name for target.
@@ -443,7 +360,6 @@ gtest/googlemock/CMakeFiles/gmock_main.dir/clean:
 # Target rules for target gtest/googlemock/gtest/CMakeFiles/gtest.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 gtest/googlemock/gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) $(MAKESILENT) -f gtest/googlemock/gtest/CMakeFiles/gtest.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) $(MAKESILENT) -f gtest/googlemock/gtest/CMakeFiles/gtest.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest.dir/build
@@ -456,20 +372,6 @@ gtest/googlemock/gtest/CMakeFiles/gtest.dir/rule: cmake_check_build_system
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest/googlemock/gtest/CMakeFiles/gtest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : gtest/googlemock/gtest/CMakeFiles/gtest.dir/rule
-=======
-gtest/googlemock/CMakeFiles/gmock.dir/all:
-	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/depend
-	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num=1,2,3 "Built target gmock"
-.PHONY : gtest/googlemock/CMakeFiles/gmock.dir/all
-
-# Build rule for subdir invocation for target.
-gtest/googlemock/CMakeFiles/gmock.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 gtest/googlemock/CMakeFiles/gmock.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : gtest/googlemock/CMakeFiles/gmock.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 gtest: gtest/googlemock/gtest/CMakeFiles/gtest.dir/rule
@@ -485,28 +387,16 @@ gtest/googlemock/gtest/CMakeFiles/gtest.dir/clean:
 
 # All Build rule for target.
 gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/all: gtest/googlemock/gtest/CMakeFiles/gtest.dir/all
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) $(MAKESILENT) -f gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num=10,11 "Built target gtest_main"
-=======
-	$(MAKE) -f gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/depend
-	$(MAKE) -f gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num=10,11 "Built target gtest_main"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
 gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/rule
 
 # Convenience name for target.
@@ -522,7 +412,6 @@ gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
@@ -535,253 +424,20 @@ mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule: cmake_
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-=======
-gtest/googlemock/gtest/CMakeFiles/gtest.dir/all:
-	$(MAKE) -f gtest/googlemock/gtest/CMakeFiles/gtest.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest.dir/depend
-	$(MAKE) -f gtest/googlemock/gtest/CMakeFiles/gtest.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num=8,9 "Built target gtest"
-.PHONY : gtest/googlemock/gtest/CMakeFiles/gtest.dir/all
-
-# Build rule for subdir invocation for target.
-gtest/googlemock/gtest/CMakeFiles/gtest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 gtest/googlemock/gtest/CMakeFiles/gtest.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : gtest/googlemock/gtest/CMakeFiles/gtest.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 geometry_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 .PHONY : geometry_msgs_generate_messages_cpp
 
 # clean rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/clean:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/clean
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/clean
-=======
-gtest/googlemock/gtest/CMakeFiles/gtest.dir/clean:
-	$(MAKE) -f gtest/googlemock/gtest/CMakeFiles/gtest.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest.dir/clean
-.PHONY : gtest/googlemock/gtest/CMakeFiles/gtest.dir/clean
-
-# clean rule for target.
-clean: gtest/googlemock/gtest/CMakeFiles/gtest.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Directory level rules for directory mini_challenge_1
-
-# Convenience name for "all" pass in the directory.
-mini_challenge_1/all:
-
-.PHONY : mini_challenge_1/all
-
-# Convenience name for "clean" pass in the directory.
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean
-mini_challenge_1/clean: mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/clean
-
-.PHONY : mini_challenge_1/clean
-
-# Convenience name for "preinstall" pass in the directory.
-mini_challenge_1/preinstall:
-
-.PHONY : mini_challenge_1/preinstall
-
-#=============================================================================
-# Target rules for target mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir
-
-# All Build rule for target.
-mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target actionlib_msgs_generate_messages_cpp"
-.PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_cpp
-
-# clean rule for target.
-mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/clean:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/clean
-.PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/clean
-
-# clean rule for target.
-clean: mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir
-
-# All Build rule for target.
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target rosgraph_msgs_generate_messages_eus"
-.PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_eus
-
-# clean rule for target.
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
-.PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
-
-# clean rule for target.
-clean: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir
-
-# All Build rule for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target nav_msgs_generate_messages_py"
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-
-.PHONY : nav_msgs_generate_messages_py
-
-# clean rule for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/clean:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/clean
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/clean
-
-# clean rule for target.
-clean: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir
-
-# All Build rule for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target std_msgs_generate_messages_py"
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-.PHONY : std_msgs_generate_messages_py
-
-# clean rule for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/clean:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/clean
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/clean
-
-# clean rule for target.
-clean: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir
-
-# All Build rule for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target nav_msgs_generate_messages_nodejs"
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_nodejs: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : nav_msgs_generate_messages_nodejs
-
-# clean rule for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean
-
-# clean rule for target.
-clean: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean
-
-.PHONY : clean
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 #=============================================================================
 # Target rules for target mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
@@ -794,20 +450,6 @@ mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule: cmake_
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
-=======
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target std_msgs_generate_messages_cpp"
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 geometry_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
@@ -822,7 +464,6 @@ mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
@@ -835,20 +476,6 @@ mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule: cmake
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
-=======
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target nav_msgs_generate_messages_eus"
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 geometry_msgs_generate_messages_lisp: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
@@ -864,28 +491,16 @@ mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/clean:
 
 # All Build rule for target.
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target geometry_msgs_generate_messages_nodejs"
-=======
-	$(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target geometry_msgs_generate_messages_nodejs"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -901,7 +516,6 @@ mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
@@ -914,20 +528,6 @@ mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule: cmake_c
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
-=======
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target roscpp_generate_messages_lisp"
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 geometry_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
@@ -942,7 +542,6 @@ mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
@@ -955,20 +554,6 @@ mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule: cmake_check
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-=======
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target nav_msgs_generate_messages_lisp"
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 std_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
@@ -983,7 +568,6 @@ mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build
@@ -996,20 +580,6 @@ mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule: cmake_check
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-=======
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target std_msgs_generate_messages_nodejs"
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 std_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
@@ -1025,28 +595,16 @@ mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/clean:
 
 # All Build rule for target.
 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target std_msgs_generate_messages_lisp"
-=======
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target std_msgs_generate_messages_lisp"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1059,7 +617,6 @@ mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean:
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean
 
 #=============================================================================
-<<<<<<< HEAD
 # Target rules for target mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir
 
 # All Build rule for target.
@@ -1075,55 +632,6 @@ mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule: cmake_ch
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-=======
-# Target rules for target mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir
-
-# All Build rule for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target std_msgs_generate_messages_eus"
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-.PHONY : std_msgs_generate_messages_eus
-
-# clean rule for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/clean:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/clean
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/clean
-
-# clean rule for target.
-clean: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir
-
-# All Build rule for target.
-mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target actionlib_msgs_generate_messages_nodejs"
-.PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 std_msgs_generate_messages_nodejs: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
@@ -1138,7 +646,6 @@ mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build
@@ -1151,20 +658,6 @@ mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule: cmake_check_
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-=======
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target rosgraph_msgs_generate_messages_nodejs"
-.PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 std_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule
@@ -1179,7 +672,6 @@ mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
@@ -1192,20 +684,6 @@ mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule: cmake_check
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
-=======
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target rosgraph_msgs_generate_messages_py"
-.PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 nav_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
@@ -1220,7 +698,6 @@ mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
@@ -1233,20 +710,6 @@ mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule: cmake_check
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
-=======
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target roscpp_generate_messages_py"
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 nav_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
@@ -1261,7 +724,6 @@ mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
@@ -1274,20 +736,6 @@ mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule: cmake_chec
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
-=======
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target nav_msgs_generate_messages_cpp"
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 nav_msgs_generate_messages_lisp: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
@@ -1302,7 +750,6 @@ mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
@@ -1315,20 +762,6 @@ mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule: cmake_ch
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-=======
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target geometry_msgs_generate_messages_cpp"
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 nav_msgs_generate_messages_nodejs: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
@@ -1343,7 +776,6 @@ mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build
@@ -1356,20 +788,6 @@ mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule: cmake_check_
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-=======
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target geometry_msgs_generate_messages_lisp"
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 nav_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
@@ -1384,7 +802,6 @@ mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
@@ -1397,20 +814,6 @@ mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule: cmake
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-=======
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target geometry_msgs_generate_messages_py"
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 actionlib_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
@@ -1426,28 +829,16 @@ mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/clean:
 
 # All Build rule for target.
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target actionlib_msgs_generate_messages_eus"
-=======
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target actionlib_msgs_generate_messages_eus"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1464,28 +855,16 @@ mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/clean:
 
 # All Build rule for target.
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target actionlib_msgs_generate_messages_lisp"
-=======
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target actionlib_msgs_generate_messages_lisp"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1528,28 +907,16 @@ mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/clean:
 
 # All Build rule for target.
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target actionlib_msgs_generate_messages_py"
-=======
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target actionlib_msgs_generate_messages_py"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1565,7 +932,6 @@ mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/build
@@ -1578,20 +944,6 @@ mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule: cmake_check_b
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-=======
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target roscpp_generate_messages_nodejs"
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 roscpp_generate_messages_cpp: mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
@@ -1606,7 +958,6 @@ mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/build
@@ -1619,20 +970,6 @@ mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule: cmake_check_b
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-=======
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target geometry_msgs_generate_messages_eus"
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 roscpp_generate_messages_eus: mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule
@@ -1673,7 +1010,6 @@ mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
@@ -1686,20 +1022,6 @@ mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule: cmake_chec
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-=======
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target roscpp_generate_messages_eus"
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 roscpp_generate_messages_nodejs: mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
@@ -1741,28 +1063,16 @@ mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/clean:
 
 # All Build rule for target.
 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target rosgraph_msgs_generate_messages_cpp"
-=======
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target rosgraph_msgs_generate_messages_cpp"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1805,28 +1115,16 @@ mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean:
 
 # All Build rule for target.
 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all:
-<<<<<<< HEAD
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target rosgraph_msgs_generate_messages_lisp"
-=======
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target rosgraph_msgs_generate_messages_lisp"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1842,7 +1140,6 @@ mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean:
 # Target rules for target mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir
 
 # All Build rule for target.
-<<<<<<< HEAD
 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all:
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/depend
 	$(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
@@ -1855,20 +1152,6 @@ mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule: cma
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
 .PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-=======
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/all:
-	$(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/depend
-	$(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles --progress-num= "Built target roscpp_generate_messages_cpp"
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/all
-
-# Build rule for subdir invocation for target.
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 rosgraph_msgs_generate_messages_nodejs: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule

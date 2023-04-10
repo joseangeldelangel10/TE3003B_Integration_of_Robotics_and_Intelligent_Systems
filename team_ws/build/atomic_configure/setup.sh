@@ -11,11 +11,7 @@
 
 # since this file is sourced either use the provided _CATKIN_SETUP_DIR
 # or fall back to the destination set at configure time
-<<<<<<< HEAD
 : ${_CATKIN_SETUP_DIR:=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel}
-=======
-: ${_CATKIN_SETUP_DIR:=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel}
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 _SETUP_UTIL="$_CATKIN_SETUP_DIR/_setup_util.py"
 unset _CATKIN_SETUP_DIR
 

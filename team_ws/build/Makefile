@@ -57,17 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -149,15 +142,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/progress.marks
-	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : all
 
 # The main clean target

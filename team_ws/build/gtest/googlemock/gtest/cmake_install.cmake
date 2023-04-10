@@ -2,11 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-<<<<<<< HEAD
   set(CMAKE_INSTALL_PREFIX "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install")
-=======
-  set(CMAKE_INSTALL_PREFIX "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

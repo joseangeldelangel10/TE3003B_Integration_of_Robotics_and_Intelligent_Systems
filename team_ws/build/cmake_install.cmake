@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 # Install script for directory: /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
   set(CMAKE_INSTALL_PREFIX "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install")
-=======
-# Install script for directory: /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
-
-# Set the install prefix
-if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -62,148 +54,89 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-<<<<<<< HEAD
    "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/_setup_util.py")
-=======
-   "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/_setup_util.py")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-<<<<<<< HEAD
   file(INSTALL DESTINATION "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE PROGRAM FILES "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/_setup_util.py")
-=======
-file(INSTALL DESTINATION "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE PROGRAM FILES "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/_setup_util.py")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-<<<<<<< HEAD
    "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/env.sh")
-=======
-   "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/env.sh")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-<<<<<<< HEAD
   file(INSTALL DESTINATION "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE PROGRAM FILES "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/env.sh")
-=======
-file(INSTALL DESTINATION "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE PROGRAM FILES "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/env.sh")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-<<<<<<< HEAD
    "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/setup.bash;/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/local_setup.bash")
-=======
-   "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/setup.bash;/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/local_setup.bash")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-<<<<<<< HEAD
   file(INSTALL DESTINATION "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE FILE FILES
     "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/setup.bash"
     "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/local_setup.bash"
-=======
-file(INSTALL DESTINATION "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE FILE FILES
-    "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/setup.bash"
-    "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/local_setup.bash"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-<<<<<<< HEAD
    "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/setup.sh;/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/local_setup.sh")
-=======
-   "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/setup.sh;/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/local_setup.sh")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-<<<<<<< HEAD
   file(INSTALL DESTINATION "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE FILE FILES
     "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/setup.sh"
     "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/local_setup.sh"
-=======
-file(INSTALL DESTINATION "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE FILE FILES
-    "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/setup.sh"
-    "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/local_setup.sh"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-<<<<<<< HEAD
    "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/setup.zsh;/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/local_setup.zsh")
-=======
-   "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/setup.zsh;/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/local_setup.zsh")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-<<<<<<< HEAD
   file(INSTALL DESTINATION "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE FILE FILES
     "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/setup.zsh"
     "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/local_setup.zsh"
-=======
-file(INSTALL DESTINATION "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE FILE FILES
-    "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/setup.zsh"
-    "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/local_setup.zsh"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-<<<<<<< HEAD
    "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/.rosinstall")
-=======
-   "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install/.rosinstall")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-<<<<<<< HEAD
   file(INSTALL DESTINATION "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE FILE FILES "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/.rosinstall")
-=======
-file(INSTALL DESTINATION "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install" TYPE FILE FILES "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/catkin_generated/installspace/.rosinstall")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-<<<<<<< HEAD
   include("/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/gtest/cmake_install.cmake")
   include("/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/cmake_install.cmake")
-=======
-  include("/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/gtest/cmake_install.cmake")
-  include("/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/cmake_install.cmake")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 endif()
 
@@ -215,9 +148,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-<<<<<<< HEAD
 file(WRITE "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/${CMAKE_INSTALL_MANIFEST}"
-=======
-file(WRITE "/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/${CMAKE_INSTALL_MANIFEST}"
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

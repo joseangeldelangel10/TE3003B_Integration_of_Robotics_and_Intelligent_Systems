@@ -67,23 +67,14 @@ set(mini_challenge_1_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-<<<<<<< HEAD
   set(mini_challenge_1_SOURCE_PREFIX /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src/mini_challenge_1)
   set(mini_challenge_1_DEVEL_PREFIX /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel)
-=======
-  set(mini_challenge_1_SOURCE_PREFIX /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src/mini_challenge_1)
-  set(mini_challenge_1_DEVEL_PREFIX /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel)
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
   set(mini_challenge_1_INSTALL_PREFIX "")
   set(mini_challenge_1_PREFIX ${mini_challenge_1_DEVEL_PREFIX})
 else()
   set(mini_challenge_1_SOURCE_PREFIX "")
   set(mini_challenge_1_DEVEL_PREFIX "")
-<<<<<<< HEAD
   set(mini_challenge_1_INSTALL_PREFIX /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install)
-=======
-  set(mini_challenge_1_INSTALL_PREFIX /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install)
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
   set(mini_challenge_1_PREFIX ${mini_challenge_1_INSTALL_PREFIX})
 endif()
 
@@ -119,11 +110,7 @@ if(NOT " " STREQUAL " ")
         message(FATAL_ERROR "Project 'mini_challenge_1' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-<<<<<<< HEAD
       message(FATAL_ERROR "Project 'mini_challenge_1' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src/mini_challenge_1/${idir}'.  ${_report}")
-=======
-      message(FATAL_ERROR "Project 'mini_challenge_1' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src/mini_challenge_1/${idir}'.  ${_report}")
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
     endif()
     _list_append_unique(mini_challenge_1_INCLUDE_DIRS ${include})
   endforeach()
@@ -167,11 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-<<<<<<< HEAD
     foreach(path /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel/lib;/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel/lib;/opt/ros/melodic/lib)
-=======
-    foreach(path /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel/lib;/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel/lib;/opt/ros/melodic/lib)
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

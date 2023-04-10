@@ -1,53 +1,28 @@
-<<<<<<< HEAD
 Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
-Change Dir: /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-thOCLY
+Change Dir: /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-sWCKbu
 
-Run Build Command(s):/usr/bin/make -f Makefile cmTC_1772d/fast && /usr/bin/make  -f CMakeFiles/cmTC_1772d.dir/build.make CMakeFiles/cmTC_1772d.dir/build
-make[1]: Entering directory '/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-thOCLY'
-Building C object CMakeFiles/cmTC_1772d.dir/src.c.o
-/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_1772d.dir/src.c.o -c /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-thOCLY/src.c
-Linking C executable cmTC_1772d
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1772d.dir/link.txt --verbose=1
-/usr/bin/cc -rdynamic CMakeFiles/cmTC_1772d.dir/src.c.o -o cmTC_1772d 
-CMakeFiles/cmTC_1772d.dir/src.c.o: In function `main':
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_74594/fast && /usr/bin/make  -f CMakeFiles/cmTC_74594.dir/build.make CMakeFiles/cmTC_74594.dir/build
+make[1]: Entering directory '/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-sWCKbu'
+Building C object CMakeFiles/cmTC_74594.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_74594.dir/src.c.o -c /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-sWCKbu/src.c
+Linking C executable cmTC_74594
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_74594.dir/link.txt --verbose=1
+/usr/bin/cc -rdynamic CMakeFiles/cmTC_74594.dir/src.c.o -o cmTC_74594 
+CMakeFiles/cmTC_74594.dir/src.c.o: In function `main':
 src.c:(.text+0x3e): undefined reference to `pthread_create'
 src.c:(.text+0x4a): undefined reference to `pthread_detach'
 src.c:(.text+0x56): undefined reference to `pthread_cancel'
 src.c:(.text+0x67): undefined reference to `pthread_join'
 src.c:(.text+0x7b): undefined reference to `pthread_atfork'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_1772d.dir/build.make:98: recipe for target 'cmTC_1772d' failed
-make[1]: *** [cmTC_1772d] Error 1
-make[1]: Leaving directory '/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-thOCLY'
-Makefile:127: recipe for target 'cmTC_1772d/fast' failed
-make: *** [cmTC_1772d/fast] Error 2
+CMakeFiles/cmTC_74594.dir/build.make:98: recipe for target 'cmTC_74594' failed
+make[1]: *** [cmTC_74594] Error 1
+make[1]: Leaving directory '/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-sWCKbu'
+Makefile:127: recipe for target 'cmTC_74594/fast' failed
+make: *** [cmTC_74594/fast] Error 2
 
 
 Source file was:
-=======
-Determining if the pthread_create exist failed with the following output:
-Change Dir: /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp
-
-Run Build Command:"/usr/bin/make" "cmTC_908ec/fast"
-/usr/bin/make -f CMakeFiles/cmTC_908ec.dir/build.make CMakeFiles/cmTC_908ec.dir/build
-make[1]: Entering directory '/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_908ec.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_908ec.dir/CheckSymbolExists.c.o   -c /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_908ec
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_908ec.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_908ec.dir/CheckSymbolExists.c.o  -o cmTC_908ec 
-CMakeFiles/cmTC_908ec.dir/CheckSymbolExists.c.o: In function `main':
-CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
-collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_908ec.dir/build.make:97: recipe for target 'cmTC_908ec' failed
-make[1]: *** [cmTC_908ec] Error 1
-make[1]: Leaving directory '/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_908ec/fast' failed
-make: *** [cmTC_908ec/fast] Error 2
-
-File /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
-/* */
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 #include <pthread.h>
 
 static void* test_func(void* data)
@@ -70,42 +45,22 @@ int main(void)
 
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-<<<<<<< HEAD
-Change Dir: /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-ZMtTWu
+Change Dir: /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-GpF7kA
 
-Run Build Command(s):/usr/bin/make -f Makefile cmTC_eddcd/fast && /usr/bin/make  -f CMakeFiles/cmTC_eddcd.dir/build.make CMakeFiles/cmTC_eddcd.dir/build
-make[1]: Entering directory '/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-ZMtTWu'
-Building C object CMakeFiles/cmTC_eddcd.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_eddcd.dir/CheckFunctionExists.c.o -c /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-ZMtTWu/CheckFunctionExists.c
-Linking C executable cmTC_eddcd
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eddcd.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_eddcd.dir/CheckFunctionExists.c.o -o cmTC_eddcd  -lpthreads 
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_34a6b/fast && /usr/bin/make  -f CMakeFiles/cmTC_34a6b.dir/build.make CMakeFiles/cmTC_34a6b.dir/build
+make[1]: Entering directory '/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-GpF7kA'
+Building C object CMakeFiles/cmTC_34a6b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_34a6b.dir/CheckFunctionExists.c.o -c /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-GpF7kA/CheckFunctionExists.c
+Linking C executable cmTC_34a6b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_34a6b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_34a6b.dir/CheckFunctionExists.c.o -o cmTC_34a6b  -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_eddcd.dir/build.make:98: recipe for target 'cmTC_eddcd' failed
-make[1]: *** [cmTC_eddcd] Error 1
-make[1]: Leaving directory '/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-ZMtTWu'
-Makefile:127: recipe for target 'cmTC_eddcd/fast' failed
-make: *** [cmTC_eddcd/fast] Error 2
+CMakeFiles/cmTC_34a6b.dir/build.make:98: recipe for target 'cmTC_34a6b' failed
+make[1]: *** [cmTC_34a6b] Error 1
+make[1]: Leaving directory '/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeScratch/TryCompile-GpF7kA'
+Makefile:127: recipe for target 'cmTC_34a6b/fast' failed
+make: *** [cmTC_34a6b/fast] Error 2
 
-=======
-Change Dir: /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp
-
-Run Build Command:"/usr/bin/make" "cmTC_691e7/fast"
-/usr/bin/make -f CMakeFiles/cmTC_691e7.dir/build.make CMakeFiles/cmTC_691e7.dir/build
-make[1]: Entering directory '/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_691e7.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_691e7.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
-Linking C executable cmTC_691e7
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_691e7.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_691e7.dir/CheckFunctionExists.c.o  -o cmTC_691e7 -lpthreads 
-/usr/bin/ld: cannot find -lpthreads
-collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_691e7.dir/build.make:97: recipe for target 'cmTC_691e7' failed
-make[1]: *** [cmTC_691e7] Error 1
-make[1]: Leaving directory '/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_691e7/fast' failed
-make: *** [cmTC_691e7/fast] Error 2
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 

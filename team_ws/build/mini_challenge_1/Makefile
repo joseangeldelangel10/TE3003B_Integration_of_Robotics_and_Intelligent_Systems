@@ -57,17 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -149,24 +142,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1//CMakeFiles/progress.marks
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/CMakeFiles/progress.marks
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : all
 
 # The main clean target
 clean:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/clean
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/clean
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : clean
 
 # The main clean target
@@ -175,25 +158,16 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/preinstall
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/preinstall
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/preinstall
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/preinstall
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
@@ -201,82 +175,12 @@ depend:
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
-.PHONY : depend
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_cpp
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_cpp/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
-.PHONY : actionlib_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_eus
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
-.PHONY : rosgraph_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-
-.PHONY : nav_msgs_generate_messages_py
-
-# fast build rule for target.
-nav_msgs_generate_messages_py/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build
-.PHONY : nav_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-.PHONY : std_msgs_generate_messages_py
-
-# fast build rule for target.
-std_msgs_generate_messages_py/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build
-.PHONY : std_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 geometry_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 .PHONY : geometry_msgs_generate_messages_cpp
 
 # fast build rule for target.
-<<<<<<< HEAD
 geometry_msgs_generate_messages_cpp/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
 .PHONY : geometry_msgs_generate_messages_cpp/fast
@@ -285,23 +189,12 @@ geometry_msgs_generate_messages_cpp/fast:
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
-=======
-nav_msgs_generate_messages_nodejs/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
-.PHONY : nav_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 geometry_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
 .PHONY : geometry_msgs_generate_messages_eus
 
 # fast build rule for target.
-<<<<<<< HEAD
 geometry_msgs_generate_messages_eus/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
 .PHONY : geometry_msgs_generate_messages_eus/fast
@@ -310,23 +203,12 @@ geometry_msgs_generate_messages_eus/fast:
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
-=======
-std_msgs_generate_messages_cpp/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
-.PHONY : std_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 geometry_msgs_generate_messages_lisp: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
 .PHONY : geometry_msgs_generate_messages_lisp
 
 # fast build rule for target.
-<<<<<<< HEAD
 geometry_msgs_generate_messages_lisp/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
 .PHONY : geometry_msgs_generate_messages_lisp/fast
@@ -334,15 +216,6 @@ geometry_msgs_generate_messages_lisp/fast:
 # Convenience name for target.
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
-=======
-nav_msgs_generate_messages_eus/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
-.PHONY : nav_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -351,7 +224,6 @@ geometry_msgs_generate_messages_nodejs: mini_challenge_1/CMakeFiles/geometry_msg
 
 # fast build rule for target.
 geometry_msgs_generate_messages_nodejs/fast:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
@@ -359,22 +231,12 @@ geometry_msgs_generate_messages_nodejs/fast:
 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
-.PHONY : geometry_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 geometry_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
 .PHONY : geometry_msgs_generate_messages_py
 
 # fast build rule for target.
-<<<<<<< HEAD
 geometry_msgs_generate_messages_py/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
 .PHONY : geometry_msgs_generate_messages_py/fast
@@ -383,23 +245,12 @@ geometry_msgs_generate_messages_py/fast:
 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-=======
-roscpp_generate_messages_lisp/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/build
-.PHONY : roscpp_generate_messages_lisp/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 std_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 .PHONY : std_msgs_generate_messages_cpp
 
 # fast build rule for target.
-<<<<<<< HEAD
 std_msgs_generate_messages_cpp/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 .PHONY : std_msgs_generate_messages_cpp/fast
@@ -408,23 +259,12 @@ std_msgs_generate_messages_cpp/fast:
 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-=======
-nav_msgs_generate_messages_lisp/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
-.PHONY : nav_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 std_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
 .PHONY : std_msgs_generate_messages_eus
 
 # fast build rule for target.
-<<<<<<< HEAD
 std_msgs_generate_messages_eus/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build
 .PHONY : std_msgs_generate_messages_eus/fast
@@ -432,15 +272,6 @@ std_msgs_generate_messages_eus/fast:
 # Convenience name for target.
 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-=======
-std_msgs_generate_messages_nodejs/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
-.PHONY : std_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -449,7 +280,6 @@ std_msgs_generate_messages_lisp: mini_challenge_1/CMakeFiles/std_msgs_generate_m
 
 # fast build rule for target.
 std_msgs_generate_messages_lisp/fast:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 .PHONY : std_msgs_generate_messages_lisp/fast
 
@@ -457,37 +287,12 @@ std_msgs_generate_messages_lisp/fast:
 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
-.PHONY : std_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-.PHONY : std_msgs_generate_messages_eus
-
-# fast build rule for target.
-std_msgs_generate_messages_eus/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_eus.dir/build
-.PHONY : std_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 std_msgs_generate_messages_nodejs: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : std_msgs_generate_messages_nodejs
 
 # fast build rule for target.
-<<<<<<< HEAD
 std_msgs_generate_messages_nodejs/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
 .PHONY : std_msgs_generate_messages_nodejs/fast
@@ -496,23 +301,12 @@ std_msgs_generate_messages_nodejs/fast:
 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-=======
-actionlib_msgs_generate_messages_nodejs/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
-.PHONY : actionlib_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 std_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 .PHONY : std_msgs_generate_messages_py
 
 # fast build rule for target.
-<<<<<<< HEAD
 std_msgs_generate_messages_py/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
@@ -521,23 +315,12 @@ std_msgs_generate_messages_py/fast:
 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
-=======
-rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
-.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 nav_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
 .PHONY : nav_msgs_generate_messages_cpp
 
 # fast build rule for target.
-<<<<<<< HEAD
 nav_msgs_generate_messages_cpp/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
 .PHONY : nav_msgs_generate_messages_cpp/fast
@@ -546,23 +329,12 @@ nav_msgs_generate_messages_cpp/fast:
 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
-=======
-rosgraph_msgs_generate_messages_py/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
-.PHONY : rosgraph_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 nav_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
 .PHONY : nav_msgs_generate_messages_eus
 
 # fast build rule for target.
-<<<<<<< HEAD
 nav_msgs_generate_messages_eus/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
 .PHONY : nav_msgs_generate_messages_eus/fast
@@ -571,23 +343,12 @@ nav_msgs_generate_messages_eus/fast:
 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
-=======
-roscpp_generate_messages_py/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/build
-.PHONY : roscpp_generate_messages_py/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 nav_msgs_generate_messages_lisp: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
 .PHONY : nav_msgs_generate_messages_lisp
 
 # fast build rule for target.
-<<<<<<< HEAD
 nav_msgs_generate_messages_lisp/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
 .PHONY : nav_msgs_generate_messages_lisp/fast
@@ -596,23 +357,12 @@ nav_msgs_generate_messages_lisp/fast:
 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-=======
-nav_msgs_generate_messages_cpp/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
-.PHONY : nav_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 nav_msgs_generate_messages_nodejs: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
 .PHONY : nav_msgs_generate_messages_nodejs
 
 # fast build rule for target.
-<<<<<<< HEAD
 nav_msgs_generate_messages_nodejs/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
 .PHONY : nav_msgs_generate_messages_nodejs/fast
@@ -621,23 +371,12 @@ nav_msgs_generate_messages_nodejs/fast:
 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-=======
-geometry_msgs_generate_messages_cpp/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
-.PHONY : geometry_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 nav_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
 .PHONY : nav_msgs_generate_messages_py
 
 # fast build rule for target.
-<<<<<<< HEAD
 nav_msgs_generate_messages_py/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/nav_msgs_generate_messages_py.dir/build
 .PHONY : nav_msgs_generate_messages_py/fast
@@ -646,23 +385,12 @@ nav_msgs_generate_messages_py/fast:
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-=======
-geometry_msgs_generate_messages_lisp/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
-.PHONY : geometry_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 actionlib_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
 .PHONY : actionlib_msgs_generate_messages_cpp
 
 # fast build rule for target.
-<<<<<<< HEAD
 actionlib_msgs_generate_messages_cpp/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
 .PHONY : actionlib_msgs_generate_messages_cpp/fast
@@ -670,15 +398,6 @@ actionlib_msgs_generate_messages_cpp/fast:
 # Convenience name for target.
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-=======
-geometry_msgs_generate_messages_py/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
-.PHONY : geometry_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -687,20 +406,12 @@ actionlib_msgs_generate_messages_eus: mini_challenge_1/CMakeFiles/actionlib_msgs
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_eus/fast:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : actionlib_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -709,11 +420,7 @@ actionlib_msgs_generate_messages_lisp: mini_challenge_1/CMakeFiles/actionlib_msg
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_lisp/fast:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : actionlib_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
@@ -732,11 +439,7 @@ actionlib_msgs_generate_messages_nodejs/fast:
 
 # Convenience name for target.
 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -745,7 +448,6 @@ actionlib_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/actionlib_msgs_
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_py/fast:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 .PHONY : actionlib_msgs_generate_messages_py/fast
 
@@ -753,22 +455,12 @@ actionlib_msgs_generate_messages_py/fast:
 mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
-.PHONY : actionlib_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 roscpp_generate_messages_cpp: mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 .PHONY : roscpp_generate_messages_cpp
 
 # fast build rule for target.
-<<<<<<< HEAD
 roscpp_generate_messages_cpp/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
@@ -777,16 +469,6 @@ roscpp_generate_messages_cpp/fast:
 mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-=======
-roscpp_generate_messages_nodejs/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
-.PHONY : roscpp_generate_messages_nodejs/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 roscpp_generate_messages_eus: mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule
@@ -807,7 +489,6 @@ roscpp_generate_messages_lisp: mini_challenge_1/CMakeFiles/roscpp_generate_messa
 .PHONY : roscpp_generate_messages_lisp
 
 # fast build rule for target.
-<<<<<<< HEAD
 roscpp_generate_messages_lisp/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_lisp.dir/build
 .PHONY : roscpp_generate_messages_lisp/fast
@@ -816,16 +497,6 @@ roscpp_generate_messages_lisp/fast:
 mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-=======
-geometry_msgs_generate_messages_eus/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
-.PHONY : geometry_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 roscpp_generate_messages_nodejs: mini_challenge_1/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
@@ -846,7 +517,6 @@ roscpp_generate_messages_py: mini_challenge_1/CMakeFiles/roscpp_generate_message
 .PHONY : roscpp_generate_messages_py
 
 # fast build rule for target.
-<<<<<<< HEAD
 roscpp_generate_messages_py/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_py.dir/build
 .PHONY : roscpp_generate_messages_py/fast
@@ -854,15 +524,6 @@ roscpp_generate_messages_py/fast:
 # Convenience name for target.
 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-=======
-roscpp_generate_messages_eus/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/build
-.PHONY : roscpp_generate_messages_eus/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -871,11 +532,7 @@ rosgraph_msgs_generate_messages_cpp: mini_challenge_1/CMakeFiles/rosgraph_msgs_g
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_cpp/fast:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
@@ -894,11 +551,7 @@ rosgraph_msgs_generate_messages_eus/fast:
 
 # Convenience name for target.
 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -907,7 +560,6 @@ rosgraph_msgs_generate_messages_lisp: mini_challenge_1/CMakeFiles/rosgraph_msgs_
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_lisp/fast:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
@@ -915,15 +567,6 @@ rosgraph_msgs_generate_messages_lisp/fast:
 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 .PHONY : mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Convenience name for target.
 rosgraph_msgs_generate_messages_nodejs: mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
@@ -944,15 +587,9 @@ rosgraph_msgs_generate_messages_py: mini_challenge_1/CMakeFiles/rosgraph_msgs_ge
 .PHONY : rosgraph_msgs_generate_messages_py
 
 # fast build rule for target.
-<<<<<<< HEAD
 rosgraph_msgs_generate_messages_py/fast:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make mini_challenge_1/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
-=======
-roscpp_generate_messages_cpp/fast:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make mini_challenge_1/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-.PHONY : roscpp_generate_messages_cpp/fast
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Help Target
 help:
@@ -1008,10 +645,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : cmake_check_build_system
 

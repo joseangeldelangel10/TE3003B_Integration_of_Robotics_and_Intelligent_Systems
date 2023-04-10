@@ -53,17 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Utility rule file for download_extra_data.
 
@@ -85,10 +78,6 @@ CMakeFiles/download_extra_data.dir/clean:
 .PHONY : CMakeFiles/download_extra_data.dir/clean
 
 CMakeFiles/download_extra_data.dir/depend:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/download_extra_data.dir/DependInfo.cmake --color=$(COLOR)
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles/download_extra_data.dir/DependInfo.cmake --color=$(COLOR)
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : CMakeFiles/download_extra_data.dir/depend
 

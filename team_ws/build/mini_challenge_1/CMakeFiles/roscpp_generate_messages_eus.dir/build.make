@@ -53,17 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 # Utility rule file for roscpp_generate_messages_eus.
 
@@ -81,18 +74,10 @@ mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/build: roscpp_gener
 .PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/build
 
 mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/clean:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1 && $(CMAKE_COMMAND) -P CMakeFiles/roscpp_generate_messages_eus.dir/cmake_clean.cmake
 .PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/clean
 
 mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/depend:
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src/mini_challenge_1 /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1 /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1 && $(CMAKE_COMMAND) -P CMakeFiles/roscpp_generate_messages_eus.dir/cmake_clean.cmake
-.PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/clean
-
-mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/depend:
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src/mini_challenge_1 /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1 /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : mini_challenge_1/CMakeFiles/roscpp_generate_messages_eus.dir/depend
 

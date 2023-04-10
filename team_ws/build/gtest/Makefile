@@ -57,17 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
-=======
-CMAKE_SOURCE_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -149,24 +142,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/gtest//CMakeFiles/progress.marks
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/gtest/CMakeFiles/progress.marks
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/CMakeFiles 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : all
 
 # The main clean target
 clean:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest/clean
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/clean
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : clean
 
 # The main clean target
@@ -175,29 +158,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest/preinstall
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/preinstall
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest/preinstall
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(MAKE) -f CMakeFiles/Makefile2 gtest/preinstall
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : depend
 
 # Help Target
@@ -224,10 +195,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-<<<<<<< HEAD
 	cd /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
-=======
-	cd /home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
->>>>>>> c8dd5f9352ebabc349fb7a5d17739ee853746a5e
 .PHONY : cmake_check_build_system
 
