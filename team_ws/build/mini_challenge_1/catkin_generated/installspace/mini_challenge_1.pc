@@ -1,4 +1,4 @@
-prefix=/home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install
+prefix=/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install
 
 Name: mini_challenge_1
 Description: Description of mini_challenge_1

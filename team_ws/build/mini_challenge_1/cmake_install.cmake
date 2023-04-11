@@ -1,8 +1,8 @@
-# Install script for directory: /home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src/mini_challenge_1
+# Install script for directory: /home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src/mini_challenge_1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -37,18 +37,23 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/catkin_generated/installspace/mini_challenge_1.pc")
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/catkin_generated/installspace/mini_challenge_1.pc")
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/mini_challenge_1/cmake" TYPE FILE FILES
-    "/home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/catkin_generated/installspace/mini_challenge_1Config.cmake"
-    "/home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/catkin_generated/installspace/mini_challenge_1Config-version.cmake"
+    "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/catkin_generated/installspace/mini_challenge_1Config.cmake"
+    "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/build/mini_challenge_1/catkin_generated/installspace/mini_challenge_1Config-version.cmake"
     )
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/mini_challenge_1" TYPE FILE FILES "/home/jose/Documents/8th_semester/robotica_final/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src/mini_challenge_1/package.xml")
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/mini_challenge_1" TYPE FILE FILES "/home/leonardonavacastellanos/Documents/Tec/OctavoSemestre/Reto/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/src/mini_challenge_1/package.xml")
 endif()
 
