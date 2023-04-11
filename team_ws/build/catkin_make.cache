@@ -1,2 +1,0 @@
-mini_challenge_1
--DCATKIN_DEVEL_PREFIX=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/devel -DCMAKE_INSTALL_PREFIX=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install -G Unix Makefiles

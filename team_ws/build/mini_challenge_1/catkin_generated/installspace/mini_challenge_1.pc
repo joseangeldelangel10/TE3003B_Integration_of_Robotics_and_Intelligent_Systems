@@ -1,8 +1,0 @@
-prefix=/home/raul/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/team_ws/install
-
-Name: mini_challenge_1
-Description: Description of mini_challenge_1
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
