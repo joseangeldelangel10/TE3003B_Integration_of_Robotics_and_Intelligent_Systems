@@ -22,6 +22,7 @@ class Point2PointController:
         self.kpw2 = 1
         self.vel_msg = Twist()
         self.rate = rospy.Rate(10.0)
+        self.goal_reached = True
 
     def define_experiment_pose_topic(self, pose_topic, topic_d_type):        
         self.nav_pose_sub = rospy.Subscriber(pose_topic, topic_d_type, self.experiment_pose_callback)
@@ -30,6 +31,7 @@ class Point2PointController:
         self.nav_pose_sub = rospy.Subscriber(pose_topic, topic_d_type, self.nav_pose_callback)
 
     def experiment_pose_callback(self):
+        #if self.goal_reached:
         pass
 
     def nav_pose_callback(self, msg):

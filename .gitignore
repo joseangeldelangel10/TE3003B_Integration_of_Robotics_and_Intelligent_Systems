@@ -1,2 +1,3 @@
-/team_ws/src/CMakeLists.txt
-
+**/team_ws/src/CMakeLists.txt
+**/team_ws/src/build/*
+**/team_ws/src/devel/*
