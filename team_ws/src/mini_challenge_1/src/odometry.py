@@ -5,6 +5,7 @@ import numpy as np
 from geometry_msgs.msg import Twist, Pose2D
 from nav_msgs.msg import Odometry
 from tf.transformations import quaternion_from_euler
+from mini_challenge_1.srv import *
 
 class OdometryNode():
     
@@ -12,6 +13,7 @@ class OdometryNode():
         rospy.init_node('odometry')
         self.twist_sub = rospy.Subscriber('/cmd_vel', Twist, self.twist_callback)        
         self.puzzlebot_odom_pub = rospy.Publisher('/odom', Odometry, queue_size=1)        
+        self.reset_puzzlebot_service_result = rospy.Service("reset_odometry", ResetOdometry, self.reset_odometry)
         self.puzzlebot_estimated_pose = Odometry()        
         self.puzzlebot_estimated_pose.pose.pose.position.x, self.puzzlebot_estimated_pose.pose.pose.position.y = (initial_x, initial_y)        
         self.puzzlebot_estimated_rot = initial_theta
@@ -21,6 +23,19 @@ class OdometryNode():
         self.last_sampling_time = None
         self.rate = rospy.Rate(20.0)            
     
+    def reset_odometry(self, req):
+        self.puzzlebot_estimated_pose = Odometry()                
+        # TODO refactor this so that this has initial_theta val 
+        self.puzzlebot_estimated_pose.pose.pose.position.x, self.puzzlebot_estimated_pose.pose.pose.position.y = (0.0, 0.0)        
+        self.puzzlebot_estimated_rot = 0.0 
+        # end of TODO
+        self.puzzlebot_estimated_rot_quaternion = None
+        self.puzzlebot_twist = None
+        self.first_time_with_twist = True
+        self.last_sampling_time = None
+        rospy.loginfo("ODOMETRY RESET")
+        return ResetOdometryResponse(True)
+
     def twist_callback(self, msg):
         """
         self.puzzlebot_vel_on_base_frame_x = msg.linear.x

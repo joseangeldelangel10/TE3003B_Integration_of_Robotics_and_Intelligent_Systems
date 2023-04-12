@@ -14,6 +14,7 @@ class PuzzlebotP2PExperiment():
         self.experiment_pose_sub = None
         self.csv_file_name = None
         self.data_saved = False
+        self.nav_topic_d_type = None
         self.rate = rospy.Rate(20.0)                
 
     def reset_puzzlebot_sim(self):
@@ -25,7 +26,19 @@ class PuzzlebotP2PExperiment():
         except rospy.ServiceException:
             print("reset sim service call failed")
 
+    def reset_odometry(self):
+        print("data type is {t}".format(t = self.nav_topic_d_type))
+        if self.nav_topic_d_type == "<class 'nav_msgs.msg._Odometry.Odometry'>":
+            rospy.wait_for_service('reset_odometry')
+            try:
+                reset_odom = rospy.ServiceProxy('reset_odometry', ResetOdometry)
+                response = reset_odom()
+                return response.success
+            except rospy.ServiceException:
+                print("reset odom service call failed")
+
     def define_nav_pose_topic(self, topic_name, topic_d_type):
+        self.nav_topic_d_type = str(topic_d_type)
         self.p2p_contr.define_nav_pose_topic(topic_name, topic_d_type)
 
     def define_csv_file_to_save_experiment_data(self, csv_file_name):
@@ -84,9 +97,10 @@ if __name__ == '__main__':
     completed_experiments = 0
     while (total_experiments - completed_experiments) > 0:     
         p2p_experiment = PuzzlebotP2PExperiment()
-        p2p_experiment.define_nav_pose_topic("/pose", Pose2D)
+        p2p_experiment.define_nav_pose_topic("/odom", Odometry)
         p2p_experiment.define_experiment_pose_topic("/pose", Pose2D)
         p2p_experiment.define_csv_file_to_save_experiment_data("our_sim.csv")
         p2p_experiment.main()
         p2p_experiment.reset_puzzlebot_sim()
+        p2p_experiment.reset_odometry()
         completed_experiments += 1
