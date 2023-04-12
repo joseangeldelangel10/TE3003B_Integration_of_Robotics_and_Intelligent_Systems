@@ -8,7 +8,7 @@ import pandas as pd
 import rospkg
 import os
 
-class Point2PointController:
+class Point2PointController(object):
     
     def __init__(self):
         rospy.init_node('point_2_point_controller')

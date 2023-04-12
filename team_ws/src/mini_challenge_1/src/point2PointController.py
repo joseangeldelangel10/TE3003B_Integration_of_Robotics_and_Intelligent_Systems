@@ -6,7 +6,7 @@ from geometry_msgs.msg import Twist, Pose2D, Pose
 from nav_msgs.msg import Odometry
 from tf.transformations import euler_from_quaternion
 
-class Point2PointController:
+class Point2PointController(object):
     
     def __init__(self):
         rospy.init_node('point_2_point_controller')
@@ -66,9 +66,16 @@ class Point2PointController:
 
         if abs(self.angular_err) < self.angular_tresh and abs(self.linear_err) < self.linear_tresh:
             print("goal reached")
+            self.goal_reached = True
 
         return v,w
 
+    def inherited_main(self):        
+        if self.linear_err is not None and self.angular_err is not None:            
+            v_pid,w_pid = self.pid2D()                
+            self.vel_msg.linear.x = v_pid
+            self.vel_msg.angular.z = w_pid
+            self.vel_pub.publish(self.vel_msg)                            
 
     def main(self):
         while not rospy.is_shutdown():
