@@ -3,7 +3,8 @@
 import rospy
 import numpy as np
 from geometry_msgs.msg import Twist, Pose2D, Pose
-import pandas as pd
+from nav_msgs.msg import Odometry
+from tf.transformations import euler_from_quaternion
 
 class Point2PointController:
     
@@ -35,8 +36,14 @@ class Point2PointController:
             self.angular_err = self.goal[2] - msg.theta                        
         elif str(type(msg)) == "<class 'geometry_msgs.msg._Pose.Pose'>":
             self.linear_err = np.sqrt( (self.goal[0] - msg.position.x)**2 + (self.goal[1] - msg.position.y)**2 )
-            self.p2p_angular_err = (np.arctan2(self.goal[1], self.goal[0])) - msg.orientation.z
-            self.angular_err = self.goal[2] - msg.theta
+            _, _, robot_yaw = euler_from_quaternion([msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w])
+            self.p2p_angular_err = (np.arctan2(self.goal[1], self.goal[0])) - robot_yaw
+            self.angular_err = self.goal[2] - robot_yaw
+        elif str(type(msg)) == "<class 'nav_msgs.msg._Odometry.Odometry'>":
+            self.linear_err = np.sqrt( (self.goal[0] - msg.pose.pose.position.x)**2 + (self.goal[1] - msg.pose.pose.position.y)**2 )
+            _, _, robot_yaw = euler_from_quaternion([msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w])
+            self.p2p_angular_err = (np.arctan2(self.goal[1], self.goal[0])) - robot_yaw
+            self.angular_err = self.goal[2] - robot_yaw
 
     def pid2D(self):                      
         if abs(self.linear_err) >= self.linear_tresh:
@@ -74,5 +81,5 @@ class Point2PointController:
 
 if __name__ == '__main__':
     ddm = Point2PointController()
-    ddm.define_nav_pose_topic("/pose", Pose2D)
+    ddm.define_nav_pose_topic("/odom", Odometry)
     ddm.main()
