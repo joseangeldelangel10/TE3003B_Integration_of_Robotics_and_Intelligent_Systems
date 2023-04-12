@@ -27,8 +27,7 @@ for i in range(len(data)):
         thf[1].append(data[i,2])
     elif abs(data[i,3] + 1.57079633) < 0.01:
         thf[2].append(data[i,2])
-
-
+        
 plt.figure()
 plt.scatter(xf[0], yf[0], marker="*", c="blue")
 plt.scatter(xf[1], yf[1], marker="*", c="red")
