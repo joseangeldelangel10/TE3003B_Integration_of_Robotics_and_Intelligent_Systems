@@ -1,4 +1,3 @@
-import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -12,9 +11,6 @@ xf = [[],[],[]]
 yf = [[],[],[]]
 thf = [[],[],[]]
 
-print(data[:,3])
-
-
 for i in range(len(data)):
     if data[i,5] == 1:
         xf[0].append(data[i,4])
@@ -27,15 +23,11 @@ for i in range(len(data)):
         yf[2].append(data[i,6])
     elif abs(data[i,3] - 1.57079633) < 0.01:
         thf[0].append(data[i,2])
+    elif abs(data[i,3] - 3.14159265358979) < 0.01:
+        thf[1].append(data[i,2])
+    elif abs(data[i,3] + 1.57079633) < 0.01:
+        thf[2].append(data[i,2])
 
-print("X")
-print(xf)
-print("")
-print("Y")
-print(yf)
-print("")
-print("Theta")
-print(thf)
 
 plt.figure()
 plt.scatter(xf[0], yf[0], marker="*", c="blue")
@@ -57,8 +49,8 @@ plt.title('Histograma en y')
 
 plt.figure()
 plt.hist(thf[0])
-#plt.hist(thf[1])
-#plt.hist(thf[2])
+plt.hist(thf[1])
+plt.hist(thf[2])
 plt.title('Histograma en theta')
 
 
