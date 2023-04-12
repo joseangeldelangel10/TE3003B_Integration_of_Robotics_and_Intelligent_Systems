@@ -12,7 +12,17 @@ xf = data[:,4]
 yf = data[:,6]
 
 
-fig, ax = plt.subplots()
-ax.scatter(xf, yf, marker="*")
-ax.hist
+plt.figure()
+plt.scatter(xf, yf, marker="*")
+plt.title('Dispersion')
+
+plt.figure()
+plt.hist(xf)
+plt.title('Distribucion en x')
+
+plt.figure()
+plt.hist(yf)
+plt.title('Distribucion en y')
+
+
 plt.show()
