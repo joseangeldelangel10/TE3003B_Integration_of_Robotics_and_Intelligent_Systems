@@ -1,56 +1,91 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-name_csv = 'our_sim.csv'
+class Stats():
 
-df = pd.read_csv(name_csv)
-
-data = df.values
-
-xf = [[],[],[]]
-yf = [[],[],[]]
-thf = [[],[],[]]
-
-for i in range(len(data)):
-    if data[i,5] == 1:
-        xf[0].append(data[i,4])
-        yf[0].append(data[i,6])
-    elif data[i,5] == 2:
-        xf[1].append(data[i,4])
-        yf[1].append(data[i,6])
-    elif data[i,5] == 3:
-        xf[2].append(data[i,4])
-        yf[2].append(data[i,6])
-    elif abs(data[i,3] - 1.57079633) < 0.01:
-        thf[0].append(data[i,2])
-    elif abs(data[i,3] - 3.14159265358979) < 0.01:
-        thf[1].append(data[i,2])
-    elif abs(data[i,3] + 1.57079633) < 0.01:
-        thf[2].append(data[i,2])
+    def __init__(self,name_csv='our_sim.csv'):
         
-plt.figure()
-plt.scatter(xf[0], yf[0], marker="*", c="blue")
-plt.scatter(xf[1], yf[1], marker="*", c="red")
-plt.scatter(xf[2], yf[2], marker="*",c ="green")
-plt.title('Dispersion')
+        self.name_csv = 'our_sim.csv'
+        self.df = pd.read_csv(name_csv)
+        self.data = self.df.values
 
-plt.figure()
-plt.hist(xf[0])
-plt.hist(xf[1])
-plt.hist(xf[2])
-plt.title('Histograma en x')
+        self.xf = [[],[],[]]
+        self.yf = [[],[],[]]
+        self.thf = [[],[],[]]
 
-plt.figure()
-plt.hist(yf[0])
-plt.hist(yf[1])
-plt.hist(yf[2])
-plt.title('Histograma en y')
+        self.mux = []
+        self.muy = []
+        self.muth = []
 
-plt.figure()
-plt.hist(thf[0])
-plt.hist(thf[1])
-plt.hist(thf[2])
-plt.title('Histograma en theta')
+        self.sigmax = []
+        self.sigmay = []
+        self.sigmath = []
 
 
-plt.show()
+    def download_values(self):
+
+        for i in range(len(self.data)):
+            if self.data[i,5] == 1:
+                self.xf[0].append(self.data[i,4])
+                self.yf[0].append(self.data[i,6])
+            elif self.data[i,5] == 2:
+                self.xf[1].append(self.data[i,4])
+                self.yf[1].append(self.data[i,6])
+            elif self.data[i,5] == 3:
+                self.xf[2].append(self.data[i,4])
+                self.yf[2].append(self.data[i,6])
+            elif abs(self.data[i,3] - 1.57079633) < 0.01:
+                self.thf[0].append(self.data[i,2])
+            elif abs(self.data[i,3] - 3.14159265358979) < 0.01:
+                self.thf[1].append(self.data[i,2])
+            elif abs(self.data[i,3] + 1.57079633) < 0.01:
+                self.thf[2].append(self.data[i,2])
+
+    def statisic_values(self):
+        for i in range(3):
+            
+            self.mux = None
+            self.muy = None
+            self.muth = None
+
+            self.sigmax = None
+            self.sigmay = None
+            self.sigmath = None
+        
+
+    def plot_figures(self):
+
+        plt.figure()
+        plt.scatter(self.xf[0], self.yf[0], marker="*", c="blue")
+        plt.scatter(self.xf[1], self.yf[1], marker="*", c="red")
+        plt.scatter(self.xf[2], self.yf[2], marker="*",c ="green")
+        plt.title('Dispersion')
+
+        plt.figure()
+        plt.hist(self.xf[0])
+        plt.hist(self.xf[1])
+        plt.hist(self.xf[2])
+        plt.title('Histograma en x')
+
+        plt.figure()
+        plt.hist(self.yf[0])
+        plt.hist(self.yf[1])
+        plt.hist(self.yf[2])
+        plt.title('Histograma en y')
+
+        plt.figure()
+        plt.hist(self.thf[0])
+        plt.hist(self.thf[1])
+        plt.hist(self.thf[2])
+        plt.title('Histograma en theta')
+        plt.show()
+
+    def main(self):
+        self.download_values()
+        self.plot_figures()
+
+if __name__ == '__main__':
+
+    stat1stexperiment = Stats()
+    stat1stexperiment.main()
+    
