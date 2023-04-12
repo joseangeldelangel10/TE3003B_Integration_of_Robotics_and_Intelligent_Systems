@@ -91,51 +91,19 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-<<<<<<< HEAD
       Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: true
-=======
-      Enabled: true
-      Frame Timeout: 15
-      Frames:
-        All Enabled: false
-        base_frame:
-          Value: false
-        chassis:
-          Value: false
-        left_wheel:
-          Value: false
-        map:
-          Value: true
-        puzzlebot_frame:
-          Value: true
-        right_wheel:
-          Value: false
->>>>>>> 4b0ec8493c1d60046103e42244198c6ec02d2026
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-<<<<<<< HEAD
         {}
       Update Interval: 0
       Value: false
-=======
-        map:
-          base_frame:
-            puzzlebot_frame:
-              chassis:
-                left_wheel:
-                  {}
-                right_wheel:
-                  {}
-      Update Interval: 0
-      Value: true
->>>>>>> 4b0ec8493c1d60046103e42244198c6ec02d2026
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
