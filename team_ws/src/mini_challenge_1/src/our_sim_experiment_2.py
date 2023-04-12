@@ -7,10 +7,12 @@ from point2PointController import Point2PointController
 from geometry_msgs.msg import Twist, Pose2D, Pose
 from nav_msgs.msg import Odometry
 from mini_challenge_1.srv import *
+import numpy as np
 
 class PuzzlebotP2PExperiment():
     def __init__(self):        
         self.p2p_contr = Point2PointController()
+        self.p2p_contr.goal = (0.0, 0.0, np.pi/2)
         self.experiment_pose_sub = None
         self.csv_file_name = None
         self.data_saved = False
