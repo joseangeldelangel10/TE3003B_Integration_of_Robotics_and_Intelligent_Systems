@@ -3,9 +3,9 @@ import pandas as pd
 
 class Stats():
 
-    def __init__(self,name_csv='our_sim.csv'):
+    def __init__(self,name_csv='physical.csv'):
         
-        self.name_csv = 'our_sim.csv'
+        self.name_csv = name_csv
         self.df = pd.read_csv(name_csv)
         self.data = self.df.values
 
