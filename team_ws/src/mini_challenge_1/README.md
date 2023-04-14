@@ -8,6 +8,8 @@
 
 This packege includes nodes, services and other files to simulate the Manchester Robotics puzzlebot and to execute experiments with the real robot and simulation.
 
+## Simulation files
+
 | Simulation files |
 |---------------------------|
 | **Python nodes:**           |
@@ -22,3 +24,26 @@ This packege includes nodes, services and other files to simulate the Manchester
 | **Other files:**           |
 | [- meshes/*](meshes)                   |
 | [- rviz_config/*](rviz_config)              |
+| [- urdf/puzzlebot.xacro](urdf/puzzlebot.xacro)              |
+
+## Navigation files
+
+| Navigation files |
+|---------------------------|
+| **Python nodes:**           |
+| [- odometry.py](src/odometry.py)    |
+| [- point2PointController.py](src/point2PointController.py)    |
+| **Service files:**           |
+| [- ResetOdometry.srv](srv/ResetOdometry.srv)  |
+| **Other files:**           |
+| None                   |
+
+## Experiments files
+
+| Experiments files |
+|---------------------------|
+| **Python nodes:**           |
+| [- our_sim_experiment_2.py](src/our_sim_experiment_2.py)    |
+| [- generate_stats.py](experiments_data/generate_stats.py)    |
+| **Other files:**           |
+| [- experiments data](experiments_data/)                   |
