@@ -12,7 +12,7 @@ import numpy as np
 class PuzzlebotP2PExperiment():
     def __init__(self):        
         self.p2p_contr = Point2PointController()
-        self.p2p_contr.goal = (0.0, 0.0, -np.pi/2)
+        self.p2p_contr.goal = (0.0, 0.0, -np.pi)
         self.experiment_pose_sub = None
         self.csv_file_name = None
         self.data_saved = False
