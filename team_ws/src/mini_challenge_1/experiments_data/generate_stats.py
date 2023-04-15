@@ -3,11 +3,14 @@ import pandas as pd
 
 class Stats():
 
-    def __init__(self,name_csv='physical.csv'):
+    def __init__(self,name_csv='open_loop_experiments/our_sim.csv'):
         
         self.name_csv = name_csv
         self.df = pd.read_csv(name_csv)
-        self.data = self.df.values
+        self.datadf = self.df.values
+        self.exp = self.df.iloc[[]]
+        print(self.exp)
+        
 
         self.xf = [[],[],[]]
         self.yf = [[],[],[]]
@@ -21,7 +24,7 @@ class Stats():
         self.sigmay = []
         self.sigmath = []
 
-
+    """
     def download_values(self):
 
         for i in range(len(self.data)):
@@ -79,13 +82,14 @@ class Stats():
         plt.hist(self.thf[2])
         plt.title('Histograma en theta')
         plt.show()
-
+    
     def main(self):
         self.download_values()
         self.plot_figures()
+    """
 
 if __name__ == '__main__':
 
     stat1stexperiment = Stats()
-    stat1stexperiment.main()
+    #stat1stexperiment.main()
     
