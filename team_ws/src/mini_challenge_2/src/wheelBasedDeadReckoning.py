@@ -37,10 +37,12 @@ class OdometryNode():
         self.puzzlebot_twist = None
         self.first_time_with_twist = True
         self.last_sampling_time = None        
-        self.puzzlebot_wheel_rad = 5.0 # TODO give this the right wheel rad 
-        self.puzzlebot_wheel_to_wheel_dist = 20.0 # TODO give this the right wheel to wheel_dist
+        self.puzzlebot_wheel_rad = 0.057 # radius
+        self.puzzlebot_wheel_to_wheel_dist = 0.192 # length
         self.puzzlebot_wr = None
         self.puzzlebot_wl = None
+        self.v = 0.0
+        self.w = 0.0
         
         # ______________ init covariance variables ______________
         self.covariance_matrix = None
@@ -124,12 +126,19 @@ class OdometryNode():
                         self.covariance_matrix[2,0:2].tolist() + [0.0]*3 + [self.covariance_matrix[2,2]]                                         
                     )
                     # _________ end of filling puzzlebot covariance data ______________
+                    
+                    
+                    # _________ wheels' odometry ______________
+                    #publicadores nuevos? v y w
+                    self.v = (self.puzzlebot_wheel_rad/2)*self.puzzlebot_wr + (self.puzzlebot_wheel_rad/2)*self.puzzlebot_wl
+                    self.w = (self.puzzlebot_wheel_rad/self.puzzlebot_wheel_to_wheel_dist)*self.puzzlebot_wr - (self.puzzlebot_wheel_rad/self.puzzlebot_wheel_to_wheel_dist)*self.puzzlebot_wl
+                    # _________ end of wheels' odometry ______________
 
 
                     # _________ filling puzzlebot state data ______________
-                    self.puzzlebot_estimated_pose.pose.pose.position.x += self.puzzlebot_twist.linear.x*(np.cos(self.puzzlebot_estimated_rot))*delta_t
-                    self.puzzlebot_estimated_pose.pose.pose.position.y += self.puzzlebot_twist.linear.x*(np.sin(self.puzzlebot_estimated_rot))*delta_t
-                    self.puzzlebot_estimated_rot += self.puzzlebot_twist.angular.z*delta_t
+                    self.puzzlebot_estimated_pose.pose.pose.position.x += self.v*(np.cos(self.puzzlebot_estimated_rot))*delta_t
+                    self.puzzlebot_estimated_pose.pose.pose.position.y += self.v*(np.sin(self.puzzlebot_estimated_rot))*delta_t
+                    self.puzzlebot_estimated_rot += self.w*delta_t
                     self.puzzlebot_estimated_rot_quaternion = quaternion_from_euler(0.0, 0.0, self.puzzlebot_estimated_rot)
                     self.puzzlebot_estimated_pose.pose.pose.orientation.x = self.puzzlebot_estimated_rot_quaternion[0]
                     self.puzzlebot_estimated_pose.pose.pose.orientation.y = self.puzzlebot_estimated_rot_quaternion[1]
