@@ -7,14 +7,52 @@ class Stats():
         
         self.name_csv = name_csv
         self.df = pd.read_csv(name_csv)
-        self.datadf = self.df.values
-        self.exp = self.df.iloc[[]]
-        print(self.exp)
-        
+        if name_csv == 'open_loop_experiments/our_sim.csv':
+            self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.2) <= 0.1]
+            self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
+            self.exp3lineal = self.df.loc[abs(self.df["x_f"]-0.6) <= 0.1]
+            self.exp1ang = self.df.loc[abs(self.df["th_f"]-0.6) <= 0.1]
+            self.exp2ang = self.df.loc[abs(self.df["th_f"]-1.2) <= 0.1]
+            self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
+        elif name_csv == 'open_loop_experiments/physical.csv':
+            self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
+            self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.8) <= 0.1]
+            self.exp3lineal = self.df.loc[abs(self.df["x_f"]-1.3) <= 0.1]
+            self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
+            self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
+            self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
+        elif name_csv == 'open_loop_experiments/mr_sim.csv':
+            self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
+            self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
+            self.exp3lineal = self.df.loc[abs(self.df["x_f"]-0.6) <= 0.1]
+            self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
+            self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
+            self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
+        elif name_csv == 'closed_loop_experiments/our_sim.csv':
+            self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
+            self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
+            self.exp3lineal = self.df.loc[abs(self.df["x_f"]-0.6) <= 0.1]
+            self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
+            self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
+            self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
+        elif name_csv == 'closed_loop_experiments/physical.csv':
+            self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
+            self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
+            self.exp3lineal = self.df.loc[abs(self.df["x_f"]-0.6) <= 0.1]
+            self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
+            self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
+            self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
+        elif name_csv == 'closed_loop_experiments/mr_sim.csv':
+            self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
+            self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
+            self.exp3lineal = self.df.loc[abs(self.df["x_f"]-0.6) <= 0.1]
+            self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
+            self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
+            self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
 
-        self.xf = [[],[],[]]
-        self.yf = [[],[],[]]
-        self.thf = [[],[],[]]
+
+        print(self.exp3lineal)
+        
 
         self.mux = []
         self.muy = []
