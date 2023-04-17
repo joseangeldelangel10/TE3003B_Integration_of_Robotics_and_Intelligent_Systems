@@ -45,16 +45,19 @@ class OdometryNode():
         # ______________ init covariance variables ______________
         self.covariance_matrix = None
         self.puzzlebot_model_jacobian = None        
+        self.nabla_w_k = None
+        self.sigma_delta_k = None
+        self.q_k = None
         rp = rospkg.RosPack()
         this_pkg_path = rp.get_path('mini_challenge_2')
         cov_constants_file_name = os.path.join(this_pkg_path, "src", "constants", "covariance_prop_constants.json")
         cov_constants_file = open(cov_constants_file_name)
         cov_constants = json.load(cov_constants_file)        
-        self.covar_kr = cov_constants["k1"]
-        self.covar_kl = cov_constants["k2"]
+        self.covar_kr = cov_constants["kr"]
+        self.covar_kl = cov_constants["kl"]
 
         # ______________ init rate ______________
-        self.rate = rospy.Rate(20.0)            
+        self.rate = rospy.Rate(5.0)            
     
     def reset_odometry(self, req):
         self.puzzlebot_estimated_pose = Odometry()                
@@ -70,10 +73,10 @@ class OdometryNode():
         return ResetOdometryResponse(True)
 
     def puzzlebot_wr_callback(self, msg):
-        self.puzzlebot_wr = msg.data
+        self.puzzlebot_wr = msg.data        
 
     def puzzlebot_wl_callback(self, msg):
-        self.puzzlebot_wl = msg.data 
+        self.puzzlebot_wl = msg.data         
 
     def twist_callback(self, msg):
         self.puzzlebot_twist = msg
@@ -104,17 +107,22 @@ class OdometryNode():
                          [0.0, 1.0, delta_t* self.puzzlebot_twist.linear.x* np.cos(self.puzzlebot_estimated_rot) ],
                          [0.0, 0.0, 1.0]] 
                     )
-                    nabla_w_k = (1/2)*self.puzzlebot_wheel_rad*delta_t*np.array(
+                    print("delta t is: {d}".format(d = delta_t))
+                    multiplier = (1.0/2.0)*self.puzzlebot_wheel_rad*delta_t
+                    self.nabla_w_k = multiplier*np.array(
                         [[np.cos(self.puzzlebot_estimated_rot), np.cos(self.puzzlebot_estimated_rot)],
                          [np.sin(self.puzzlebot_estimated_rot), np.sin(self.puzzlebot_estimated_rot)],
                          [(2/self.puzzlebot_wheel_to_wheel_dist), -(2/self.puzzlebot_wheel_to_wheel_dist)]]
                     )
-                    sigma_delta_k = np.array(
+                    self.sigma_delta_k = np.array(
                         [[self.covar_kr*abs(self.puzzlebot_wr), 0.0],
                          [0.0, self.covar_kl*abs(self.puzzlebot_wl)]]
                     )
-                    q_k = np.matmul( np.matmul( nabla_w_k , sigma_delta_k ), nabla_w_k.T )
-                    self.covariance_matrix = np.matmul( np.matmul(self.puzzlebot_model_jacobian,self.covariance_matrix), (self.puzzlebot_model_jacobian.T)) + q_k
+                    #print("sigma delta k: {m}".format(m = self.sigma_delta_k))
+                    #print("nabla w k: {m}".format(m = self.nabla_w_k))
+                    self.q_k = np.matmul( np.matmul( self.nabla_w_k , self.sigma_delta_k ), self.nabla_w_k.T )
+                    #self.q_k = np.ones((3,3))*0.1
+                    self.covariance_matrix = np.matmul( np.matmul(self.puzzlebot_model_jacobian,self.covariance_matrix), (self.puzzlebot_model_jacobian.T)) + self.q_k
                     self.puzzlebot_estimated_pose.pose.covariance = (
                         self.covariance_matrix[0,0:2].tolist() + [0.0]*3 + [self.covariance_matrix[0,2]] +
                         self.covariance_matrix[1,0:2].tolist() + [0.0]*3 + [self.covariance_matrix[1,2]] +
