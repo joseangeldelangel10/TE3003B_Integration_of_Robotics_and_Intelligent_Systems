@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 class Stats():
 
-    def __init__(self,name_csv='open_loop_experiments/our_sim.csv'):
+    def __init__(self,name_csv='open_loop_experiments/physical.csv'):
         
         self.name_csv = name_csv
         self.df = pd.read_csv(name_csv)
@@ -20,39 +21,43 @@ class Stats():
             self.exp3lineal = self.df.loc[abs(self.df["x_f"]-1.3) <= 0.1]
             self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
             self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
-            self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
+            self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.8) <= 0.1]
         elif name_csv == 'open_loop_experiments/mr_sim.csv':
+            """
             self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
             self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
             self.exp3lineal = self.df.loc[abs(self.df["x_f"]-0.6) <= 0.1]
             self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
             self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
             self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
+            """
+            pass
         elif name_csv == 'closed_loop_experiments/our_sim.csv':
-            self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
-            self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
-            self.exp3lineal = self.df.loc[abs(self.df["x_f"]-0.6) <= 0.1]
-            self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
-            self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
-            self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
+            self.exp1lineal = self.df.loc[abs(self.df["x_f"]-1) <= 0.1]
+            self.exp2lineal = self.df.loc[abs(self.df["x_f"]-2) <= 0.1]
+            self.exp3lineal = self.df.loc[abs(self.df["x_f"]-3) <= 0.1]
+            self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.57) <= 0.1]
+            self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.14) <= 0.1]
+            self.exp3ang = self.df.loc[abs(self.df["th_f"]+1.57) <= 0.1]
         elif name_csv == 'closed_loop_experiments/physical.csv':
-            self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
-            self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
-            self.exp3lineal = self.df.loc[abs(self.df["x_f"]-0.6) <= 0.1]
-            self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
-            self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
-            self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
+            self.exp1lineal = self.df.loc[abs(self.df["x_f"]-1) <= 0.1]
+            self.exp2lineal = self.df.loc[abs(self.df["x_f"]-2) <= 0.2]
+            self.exp3lineal = self.df.loc[abs(self.df["x_f"]-3) <= 0.3]
         elif name_csv == 'closed_loop_experiments/mr_sim.csv':
+            """
             self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
             self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
             self.exp3lineal = self.df.loc[abs(self.df["x_f"]-0.6) <= 0.1]
             self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
             self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
             self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
+            """
+            pass
 
 
-        print(self.exp3lineal)
-        
+        self.xf = [[np.array(self.exp1lineal["x_f"])],[np.array(self.exp2lineal["x_f"])],[np.array(self.exp3lineal["x_f"])]]
+        self.yf = [[np.array(self.exp1lineal["y_f"])],[np.array(self.exp2lineal["y_f"])],[np.array(self.exp3lineal["y_f"])]]
+        self.thf = [[np.array(self.exp1ang["th_f"])],[np.array(self.exp2ang["th_f"])],[np.array(self.exp3ang["th_f"])]]
 
         self.mux = []
         self.muy = []
@@ -61,26 +66,6 @@ class Stats():
         self.sigmax = []
         self.sigmay = []
         self.sigmath = []
-
-    """
-    def download_values(self):
-
-        for i in range(len(self.data)):
-            if self.data[i,5] == 1:
-                self.xf[0].append(self.data[i,4])
-                self.yf[0].append(self.data[i,6])
-            elif self.data[i,5] == 2:
-                self.xf[1].append(self.data[i,4])
-                self.yf[1].append(self.data[i,6])
-            elif self.data[i,5] == 3:
-                self.xf[2].append(self.data[i,4])
-                self.yf[2].append(self.data[i,6])
-            elif abs(self.data[i,3] - 1.57079633) < 0.01:
-                self.thf[0].append(self.data[i,2])
-            elif abs(self.data[i,3] - 3.14159265358979) < 0.01:
-                self.thf[1].append(self.data[i,2])
-            elif abs(self.data[i,3] + 1.57079633) < 0.01:
-                self.thf[2].append(self.data[i,2])
 
     def statisic_values(self):
         for i in range(3):
@@ -122,12 +107,10 @@ class Stats():
         plt.show()
     
     def main(self):
-        self.download_values()
         self.plot_figures()
-    """
 
 if __name__ == '__main__':
 
     stat1stexperiment = Stats()
-    #stat1stexperiment.main()
+    stat1stexperiment.main()
     
