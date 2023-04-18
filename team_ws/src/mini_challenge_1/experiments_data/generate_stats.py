@@ -3,8 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 import matplotlib.transforms as transforms
-from scipy.stats import norm
-import statistics as stats
+
 
 class Stats():
 
@@ -91,23 +90,7 @@ class Stats():
             self.sigmath = None
 
     def confidence_ellipse(self,x, y, ax, n_std=2.0, facecolor='none', **kwargs):
-        """
-        Create a plot of the covariance confidence ellipse of 'x' and 'y'
-        Parameters
-        ----------
-        x, y : array_like, shape (n, )
-            Input data.
-        ax : matplotlib.axes.Axes
-            The axes object to draw the ellipse into.
-        n_std : float
-            The number of standard deviations to determine the ellipse's radiuses.
-        Returns
-        -------
-        matplotlib.patches.Ellipse
-        Other parameters
-        ----------------
-        kwargs : '~matplotlib.patches.Patch' properties
-        """
+        
         if x.size != y.size:
             raise ValueError("x and y must be the same size")
 
