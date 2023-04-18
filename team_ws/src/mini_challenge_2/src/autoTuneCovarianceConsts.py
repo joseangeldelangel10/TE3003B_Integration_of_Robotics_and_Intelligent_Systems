@@ -6,6 +6,7 @@ import os
 from geometry_msgs.msg import Twist, Pose2D, Pose
 from nav_msgs.msg import Odometry
 from mini_challenge_1.srv import *
+from mini_challenge_2.srv import *
 import numpy as np
 import json
 import random
@@ -13,7 +14,7 @@ import random
 class CovarianceConstantsAutoTuner():
     def __init__(self):        
         rospy.init_node('auto_tune_covariance_constants')
-        self.epochs = 20
+        self.epochs = 10
         self.experiments_linear_vel_ang_vel_and_exec_time = [
             (0.2, 0.0, 2.0),
             (0.2, 0.0, 4.0),
@@ -38,7 +39,7 @@ class CovarianceConstantsAutoTuner():
 
         self.rate = rospy.Rate(20.0)
 
-    def publish_vel(self, linear_vel, angular_vel):
+    def publish_vel(self, linear_vel, angular_vel):        
         self.cmd_vel_msg.linear.x = linear_vel
         self.cmd_vel_msg.angular.z = angular_vel
         self.cmd_vel_pub.publish(self.cmd_vel_msg)  
@@ -48,19 +49,29 @@ class CovarianceConstantsAutoTuner():
         this_pkg_path = rp.get_path('mini_challenge_2')
         cov_constants_file_name = os.path.join(this_pkg_path, "src", "constants", "covariance_prop_constants.json")
         cov_constants_file = open(cov_constants_file_name, "r")
-        cov_constants = json.load(cov_constants_file)        
+        cov_constants = json.load(cov_constants_file)
+        cov_constants_file.close()        
         return (cov_constants["kr"], cov_constants["kl"])
     
-    def rewrite_covariance_constants(self, new_kr, new_kl):
+    def rewrite_covariance_constants(self, new_kr, new_kl, error):        
+        if new_kr is np.nan:
+            raise Exception("REACHED A NAN VALUE")
         rp = rospkg.RosPack()
         this_pkg_path = rp.get_path('mini_challenge_2')
         cov_constants_file_name = os.path.join(this_pkg_path, "src", "constants", "covariance_prop_constants.json")
-        cov_constants_file = open(cov_constants_file_name, "r")
+        cov_constants_file = open(cov_constants_file_name, "r")        
         cov_constants = json.load(cov_constants_file)    
+        least_err = cov_constants["least_error"]
+        cov_constants_file.close()
         cov_constants["kr"] = new_kr
         cov_constants["kl"] = new_kl
+        if error is not None and least_err > np.log(abs(error)):
+            cov_constants["least_error"] = np.log(abs(error))
+            cov_constants["kr_le"] = new_kr
+            cov_constants["kl_le"] = new_kl
         cov_constants_file_w = open(cov_constants_file_name, "w")
-        json.dump(cov_constants, cov_constants_file_w)                
+        json.dump(cov_constants, cov_constants_file_w)
+        cov_constants_file.close()                        
 
     def reset_puzzlebot_sim(self):
         rospy.wait_for_service('reset_puzzlebot_sim')
@@ -85,16 +96,16 @@ class CovarianceConstantsAutoTuner():
         try:
             get_pbot_cov_mat_on_sim = rospy.ServiceProxy('get_puzzlebot_covariance_mat_on_sim', GetPuzzlebotCovarianceMatOnSim)
             response = get_pbot_cov_mat_on_sim()
-            return response.success
+            return response.covariance_mat.data
         except rospy.ServiceException:
             print("Get puzzlebot covariance matix_on_simulation service call failed")  
 
-    def get_puzzlebot_covariance_mat(self):
+    def get_puzzlebot_covariance_mat(self, experiments_file, t, linear):
         rospy.wait_for_service('get_puzzlebot_covariance_mat')
         try:
             get_pbot_cov_mat = rospy.ServiceProxy('get_puzzlebot_covariance_mat', getPuzzlebotCovarianceMat)
             response = get_pbot_cov_mat(experiments_file,t,linear)
-            return response.covariance_mat
+            return response.covariance_mat.data
         except rospy.ServiceException:
             print("Get puzzlebot covariance matrix service call failed")
 
@@ -104,43 +115,57 @@ class CovarianceConstantsAutoTuner():
                 linear_vel, ang_vel, exec_time = self.experiments_linear_vel_ang_vel_and_exec_time[self.experiment_index]                                        
                 if self.first_time:
                     self.inital_time = rospy.get_time()
+                    self.first_time = False
                 else:
-                    if (rospy.get_time() - self.inital_time) < exec_time:
+                    if (rospy.get_time() - self.inital_time) < exec_time:                        
                         self.publish_vel(linear_vel, ang_vel)
                     else:
                         self.publish_vel(0.0, 0.0)
+                        print("experiment_index is {i}".format(i = self.experiment_index))
                         if self.experiment_index >= (len(self.experiments_linear_vel_ang_vel_and_exec_time) -1):
-                            experiment_cov_matrix = None # TODO change this when service is done 
-                            sim_cov_matrix = None # TODO change this when service is done
+                            if linear_vel != 0.0:
+                                experiment_cov_matrix = np.array( self.get_puzzlebot_covariance_mat("open_loop_experiments/physical.csv",exec_time, linear=True) ) 
+                            else:
+                                experiment_cov_matrix = np.array( self.get_puzzlebot_covariance_mat("open_loop_experiments/physical.csv",exec_time, linear=False) ) 
+                            sim_cov_matrix = np.array( self.get_puzzlebot_covariance_mat_on_sim() )
                             diff_mat = experiment_cov_matrix - sim_cov_matrix
+                            print("diff mat is {d}".format(d=diff_mat))
                             self.current_err +=  (diff_mat**2).sum()
 
                             self.current_kr, self.current_kl = self.get_covariance_constants()
                             if self.previous_err is None:                                                        
                                 new_kr = self.current_kr + random.uniform(-0.2, 0.2)
                                 new_kl = self.current_kl + random.uniform(-0.2, 0.2)
-                                self.rewrite_covariance_constants(new_kr, new_kl)
+                                self.rewrite_covariance_constants(new_kr, new_kl, self.current_err)
                             else:
                                 kr_error_derivative = (self.current_err - self.previous_err)/(self.current_kr - self.previous_kr)
                                 kl_error_derivative = (self.current_err - self.previous_err)/(self.current_kl - self.previous_kl)
                                 new_kr = self.current_kr - self.learning_rate*kr_error_derivative
-                                new_kl = self.current_kl - self.learning_rate*kl_error_derivative
-                                self.rewrite_covariance_constants(new_kr, new_kl)
+                                new_kl = self.current_kl - self.learning_rate*kl_error_derivative                                
+                                self.rewrite_covariance_constants(new_kr, new_kl, self.current_err)
                             self.previous_err = self.current_err
                             self.previous_kr, self.previous_kl = (self.current_kr, self.current_kl)
                             self.current_err = 0.0
                             self.first_time = True
                             self.inital_time = None
                             self.experiment_index = 0
+                            rospy.sleep(1.5)
+                            self.reset_puzzlebot_sim()
+                            self.reset_odometry()
                             break
                         else:
-                            experiment_cov_matrix = None # TODO change this when service is done 
-                            sim_cov_matrix = None # TODO change this when service is done
+                            if linear_vel != 0.0:
+                                experiment_cov_matrix = np.array( self.get_puzzlebot_covariance_mat("open_loop_experiments/physical.csv",exec_time, linear=True) ) 
+                            else:
+                                experiment_cov_matrix = np.array( self.get_puzzlebot_covariance_mat("open_loop_experiments/physical.csv",exec_time, linear=False) ) 
+                            sim_cov_matrix = np.array( self.get_puzzlebot_covariance_mat_on_sim() )                            
                             diff_mat = experiment_cov_matrix - sim_cov_matrix
                             self.current_err +=  (diff_mat**2).sum()
+                            self.first_time = True
+                            self.inital_time = None
                             self.experiment_index += 1
-                        #if self.previous_kr is None and self.previous_kl is None:
-                        # TODO implement autotuning logic
+                            self.reset_puzzlebot_sim()
+                            self.reset_odometry()                                                
                 self.rate.sleep()        
         
 

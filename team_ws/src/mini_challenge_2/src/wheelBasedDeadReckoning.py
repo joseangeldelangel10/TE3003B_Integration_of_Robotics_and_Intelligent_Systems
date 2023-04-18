@@ -73,7 +73,7 @@ class OdometryNode():
         self.covariance_mat_width_layout.stride = 3
 
         # ______________ init rate ______________
-        self.rate = rospy.Rate(5.0)            
+        self.rate = rospy.Rate(20.0)            
     
     def get_covariance_mat(self, req):
         self.get_covariance_mat_result.layout.dim = [self.covariance_mat_height_layout, self.covariance_mat_width_layout]        
@@ -161,7 +161,7 @@ class OdometryNode():
                     self.puzzlebot_estimated_pose.pose.covariance = (
                         self.covariance_matrix[0,0:2].tolist() + [0.0]*3 + [self.covariance_matrix[0,2]] +
                         self.covariance_matrix[1,0:2].tolist() + [0.0]*3 + [self.covariance_matrix[1,2]] +
-                        [0.0]*2 + [0.2] + [0.0]*3 +
+                        [0.0]*2 + [0.0002] + [0.0]*3 +
                         [0.0]*6 +
                         [0.0]*6 +
                         self.covariance_matrix[2,0:2].tolist() + [0.0]*3 + [self.covariance_matrix[2,2]]                                         
