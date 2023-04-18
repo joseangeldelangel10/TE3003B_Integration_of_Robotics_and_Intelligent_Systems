@@ -90,8 +90,23 @@ class OdometryNode():
         self.puzzlebot_twist = None
         self.first_time_with_twist = True
         self.last_sampling_time = None
-        rospy.loginfo("ODOMETRY RESET")
-        # TODO reset covariance when odmetry is reseted
+        self.puzzlebot_wr = None
+        self.puzzlebot_wl = None
+        self.v = 0.0
+        self.w = 0.0                
+        self.covariance_matrix = np.zeros((3,3))
+        self.puzzlebot_model_jacobian = None        
+        self.nabla_w_k = None
+        self.sigma_delta_k = None
+        self.q_k = None
+        rp = rospkg.RosPack()
+        this_pkg_path = rp.get_path('mini_challenge_2')
+        cov_constants_file_name = os.path.join(this_pkg_path, "src", "constants", "covariance_prop_constants.json")
+        cov_constants_file = open(cov_constants_file_name)
+        cov_constants = json.load(cov_constants_file)        
+        self.covar_kr = cov_constants["kr"]
+        self.covar_kl = cov_constants["kl"]
+        rospy.loginfo("ODOMETRY RESET")        
         return ResetOdometryResponse(True)
 
     def puzzlebot_wr_callback(self, msg):
