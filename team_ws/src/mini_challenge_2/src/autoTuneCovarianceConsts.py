@@ -65,8 +65,8 @@ class CovarianceConstantsAutoTuner():
         cov_constants_file.close()
         cov_constants["kr"] = new_kr
         cov_constants["kl"] = new_kl
-        if error is not None and least_err > np.log(abs(error)):
-            cov_constants["least_error"] = np.log(abs(error))
+        if error is not None and least_err > np.log(error):
+            cov_constants["least_error"] = np.log(error)
             cov_constants["kr_le"] = new_kr
             cov_constants["kl_le"] = new_kl
         cov_constants_file_w = open(cov_constants_file_name, "w")
