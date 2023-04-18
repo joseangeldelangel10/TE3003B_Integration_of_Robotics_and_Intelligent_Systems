@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 import matplotlib.transforms as transforms
+from scipy.stats import norm
+import statistics as stats
 
 class Stats():
 
@@ -88,7 +90,7 @@ class Stats():
             self.sigmay = None
             self.sigmath = None
 
-    def confidence_ellipse(x,y,cov, ax, n_std=2.0, facecolor='none', **kwargs):
+    def confidence_ellipse(self,x, y, ax, n_std=2.0, facecolor='none', **kwargs):
         """
         Create a plot of the covariance confidence ellipse of 'x' and 'y'
         Parameters
@@ -105,25 +107,30 @@ class Stats():
         Other parameters
         ----------------
         kwargs : '~matplotlib.patches.Patch' properties
-        
+        """
         if x.size != y.size:
             raise ValueError("x and y must be the same size")
-        """
-        pearson = (cov[0][1])/(np.sqrt(cov[0][0] * cov[1][1]))
+
+        cov = np.cov(x, y)
+        pearson = cov[0, 1]/np.sqrt(cov[0, 0] * cov[1, 1])
         # Using a special case to obtain the eigenvalues of this
         # two-dimensionl dataset.
         ell_radius_x = np.sqrt(1 + pearson)
         ell_radius_y = np.sqrt(1 - pearson)
-        ellipse = Ellipse((0, 0),width=ell_radius_x * 2,height=ell_radius_y * 2,facecolor=facecolor,**kwargs)
+        ellipse = Ellipse((0, 0),
+            width=ell_radius_x * 2,
+            height=ell_radius_y * 2,
+            facecolor=facecolor,
+            **kwargs)
 
         # Calculating the stdandard deviation of x from
         # the squareroot of the variance and multiplying
         # with the given number of standard deviations.
-        scale_x = np.sqrt(cov[0][0]) * n_std
+        scale_x = np.sqrt(cov[0, 0]) * n_std
         mean_x = np.mean(x)
 
         # calculating the stdandard deviation of y ...
-        scale_y = np.sqrt(cov[1][1]) * n_std
+        scale_y = np.sqrt(cov[1, 1]) * n_std
         mean_y = np.mean(y)
 
         transf = transforms.Affine2D() \
@@ -133,48 +140,41 @@ class Stats():
 
         ellipse.set_transform(transf + ax.transData)
         return ax.add_patch(ellipse)
-        
-
+    
     def plot_figures(self):
 
         fig, ax = plt.subplots()
 
-        plt.scatter(self.xf1,self.yf1,marker="*", c="blue")
-        cova = np.cov(self.xf1, self.yf1)
-        self.confidence_ellipse(self.xf1, self.yf1, cova, ax, edgecolor='blue')
-        
+        ax.scatter(self.xf1,self.yf1,marker="*", c="blue")
+        self.confidence_ellipse(np.array(self.xf1), np.array(self.yf1), ax, edgecolor='blue')
+
+        ax.scatter(self.xf2,self.yf2,marker="*", c="red")
+        self.confidence_ellipse(np.array(self.xf2), np.array(self.yf2), ax, edgecolor='red')
+
+        ax.scatter(self.xf3,self.yf3,marker="*", c="green")
+        self.confidence_ellipse(np.array(self.xf3), np.array(self.yf3), ax, edgecolor='green')
+            
+        plt.figure()
+        plt.hist(self.xf1)
+        plt.hist(self.xf2)
+        plt.hist(self.xf3)
+        plt.title('Histograma en los 3 experimentos lineales en x')
+
+
+        plt.figure()
+        plt.hist(self.yf1)
+        plt.hist(self.yf2)
+        plt.hist(self.yf3)
+        plt.title('Histograma en los 3 experimentos lineales en y')
+
+        plt.figure()
+        plt.hist(self.thf1)
+        plt.hist(self.thf2)
+        plt.hist(self.thf3)
+        plt.title('Histograma en los 3 experimentos lineales en theta')
 
         plt.show()
 
-        """
-
-        plt.scatter(self.xf[1], self.yf[1], marker="*", c="red")
-        self.confidence_ellipse(self.xf[1], self.yf[1], ax, edgecolor='blue')
-
-        plt.scatter(self.xf[2], self.yf[2], marker="*",c ="green")
-        self.confidence_ellipse(self.xf[2], self.yf[2], ax, edgecolor='blue')
-    
-        
-        plt.figure()
-        plt.hist(self.xf[0])
-        plt.hist(self.xf[1])
-        plt.hist(self.xf[2])
-        plt.title('Histograma en x')
-
-        plt.figure()
-        plt.hist(self.yf[0])
-        plt.hist(self.yf[1])
-        plt.hist(self.yf[2])
-        plt.title('Histograma en y')
-
-        plt.figure()
-        plt.hist(self.thf[0])
-        plt.hist(self.thf[1])
-        plt.hist(self.thf[2])
-        plt.title('Histograma en theta')
-        plt.show()
-
-        """
     
     def main(self):
         self.plot_figures()
