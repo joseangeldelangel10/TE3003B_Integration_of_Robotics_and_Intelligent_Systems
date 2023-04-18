@@ -2,11 +2,12 @@
 
 import rospy
 import numpy as np
-from std_msgs.msg import Float32
+from std_msgs.msg import Float32, Float64MultiArray, MultiArrayDimension
 from geometry_msgs.msg import Twist, Pose2D
 from nav_msgs.msg import Odometry
 from tf.transformations import quaternion_from_euler
 from mini_challenge_1.srv import *
+from mini_challenge_2.srv import *
 import rospkg
 import os
 import json
@@ -24,6 +25,8 @@ class OdometryNode():
         self.wl_sub = rospy.Subscriber('/wl', Float32, self.puzzlebot_wl_callback)        
         self.puzzlebot_odom_pub = rospy.Publisher('/odom', Odometry, queue_size=1)        
         self.reset_puzzlebot_service_result = rospy.Service("reset_odometry", ResetOdometry, self.reset_odometry)
+        
+        self.get_covariance_mat_server = rospy.Service("get_puzzlebot_covariance_mat_on_sim", GetPuzzlebotCovarianceMatOnSim, self.get_covariance_mat)        
         
         # ______________ fill in publisher messages ______________
         self.initial_x, self.initial_y, self.initial_theta = (initial_x, initial_y, initial_theta)        
@@ -45,7 +48,7 @@ class OdometryNode():
         self.w = 0.0
         
         # ______________ init covariance variables ______________
-        self.covariance_matrix = None
+        self.covariance_matrix = np.zeros((3,3))
         self.puzzlebot_model_jacobian = None        
         self.nabla_w_k = None
         self.sigma_delta_k = None
@@ -58,9 +61,26 @@ class OdometryNode():
         self.covar_kr = cov_constants["kr"]
         self.covar_kl = cov_constants["kl"]
 
+        # ______________ covariance mat service variables ______________
+        self.get_covariance_mat_result = Float64MultiArray()
+        self.covariance_mat_height_layout = MultiArrayDimension()
+        self.covariance_mat_width_layout = MultiArrayDimension()
+        self.covariance_mat_height_layout.label = "height"
+        self.covariance_mat_height_layout.size = 3
+        self.covariance_mat_height_layout.stride = 3*3
+        self.covariance_mat_width_layout.label = "width"
+        self.covariance_mat_width_layout.size = 3
+        self.covariance_mat_width_layout.stride = 3
+
         # ______________ init rate ______________
         self.rate = rospy.Rate(5.0)            
     
+    def get_covariance_mat(self, req):
+        self.get_covariance_mat_result.layout.dim = [self.covariance_mat_height_layout, self.covariance_mat_width_layout]        
+        self.get_covariance_mat_result.layout.data_offset = 0
+        self.get_covariance_mat_result.data = self.covariance_matrix.reshape((3*3,)) 
+        return GetPuzzlebotCovarianceMatOnSimResponse(self.get_covariance_mat_result)
+
     def reset_odometry(self, req):
         self.puzzlebot_estimated_pose = Odometry()                
         self.fill_odometry_header()
@@ -94,8 +114,7 @@ class OdometryNode():
             if self.puzzlebot_twist is not None and self.puzzlebot_wr is not None and self.puzzlebot_wl is not None:
                 if self.first_time_with_twist:
                     self.first_time_with_twist = False
-                    self.last_sampling_time = rospy.get_time()
-                    self.covariance_matrix = np.zeros((3,3))
+                    self.last_sampling_time = rospy.get_time()                    
                     rospy.loginfo("Odometry initialized")
                 else:
                     current_time = rospy.get_time()
@@ -108,8 +127,7 @@ class OdometryNode():
                         [[1.0, 0.0, -delta_t* self.puzzlebot_twist.linear.x* np.sin(self.puzzlebot_estimated_rot) ],
                          [0.0, 1.0, delta_t* self.puzzlebot_twist.linear.x* np.cos(self.puzzlebot_estimated_rot) ],
                          [0.0, 0.0, 1.0]] 
-                    )
-                    print("delta t is: {d}".format(d = delta_t))
+                    )                    
                     multiplier = (1.0/2.0)*self.puzzlebot_wheel_rad*delta_t
                     self.nabla_w_k = multiplier*np.array(
                         [[np.cos(self.puzzlebot_estimated_rot), np.cos(self.puzzlebot_estimated_rot)],

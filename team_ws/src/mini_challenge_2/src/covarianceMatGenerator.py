@@ -43,9 +43,21 @@ class CovarianceMatrixGenerator():
         if req.experiments_file == "":
             df = pd.read_csv(self.csv_file_name)
         else:
-            df = pd.read_csv(req.experiments_file)                
-        df = df[df["t_f"] == 6.0]
-        df = df[df["th_f"] <= 0.7]        
+            df = pd.read_csv(req.experiments_file)
+
+        if req.linear:
+            df = df[df["ang_vel"] == 0.0]
+        else:
+            df = df[df["linear_vel"] == 0.0]
+
+        if req.t == 0.0:
+            if req.linear:
+                df = df[df["t_f"] == 6.0]
+            else:
+                df = df[df["t_f"] == 3.0]
+        else:
+            df = df[df["t_f"] == req.t]                                
+            
         df = df[["x_f", "y_f", "th_f"]]
         covariance_mat = np.cov(df.to_numpy() , rowvar=False)
                 

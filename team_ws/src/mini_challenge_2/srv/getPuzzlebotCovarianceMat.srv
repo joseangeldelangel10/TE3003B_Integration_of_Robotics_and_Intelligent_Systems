@@ -1,3 +1,5 @@
 string experiments_file
+float64 t
+bool linear   # if true get the mat for experiments where robot moves on x axis, else get the mat for experiments where ang_vel 
 ---
 std_msgs/Float64MultiArray covariance_mat
