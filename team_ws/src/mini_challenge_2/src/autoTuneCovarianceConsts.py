@@ -61,7 +61,25 @@ class CovarianceConstantsAutoTuner():
             response = reset_odometry()
             return response.success
         except rospy.ServiceException:
-            print("reset odom service call failed")        
+            print("reset odom service call failed")   
+
+    def get_puzzlebot_covariance_mat_on_sim(self):
+        rospy.wait_for_service('get_puzzlebot_covariance_mat_on_sim')
+        try:
+            get_pbot_cov_mat_on_sim = rospy.ServiceProxy('get_puzzlebot_covariance_mat_on_sim', GetPuzzlebotCovarianceMatOnSim)
+            response = get_pbot_cov_mat_on_sim()
+            return response.success
+        except rospy.ServiceException:
+            print("Get puzzlebot covariance matix_on_simulation service call failed")  
+
+    def get_puzzlebot_covariance_mat(self):
+        rospy.wait_for_service('get_puzzlebot_covariance_mat')
+        try:
+            get_pbot_cov_mat = rospy.ServiceProxy('get_puzzlebot_covariance_mat', getPuzzlebotCovarianceMat)
+            response = get_pbot_cov_mat(experiments_file,t,linear)
+            return response.covariance_mat
+        except rospy.ServiceException:
+            print("Get puzzlebot covariance matrix service call failed")
 
     def main(self):
         while not rospy.is_shutdown():
