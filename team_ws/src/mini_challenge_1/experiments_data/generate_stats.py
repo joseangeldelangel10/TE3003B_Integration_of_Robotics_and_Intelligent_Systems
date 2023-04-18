@@ -1,6 +1,8 @@
-import matplotlib.pyplot as plt
-import pandas as pd
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.patches import Ellipse
+import matplotlib.transforms as transforms
 
 class Stats():
 
@@ -55,9 +57,15 @@ class Stats():
             pass
 
 
-        self.xf = [[np.array(self.exp1lineal["x_f"])],[np.array(self.exp2lineal["x_f"])],[np.array(self.exp3lineal["x_f"])]]
-        self.yf = [[np.array(self.exp1lineal["y_f"])],[np.array(self.exp2lineal["y_f"])],[np.array(self.exp3lineal["y_f"])]]
-        self.thf = [[np.array(self.exp1ang["th_f"])],[np.array(self.exp2ang["th_f"])],[np.array(self.exp3ang["th_f"])]]
+        self.xf1 = np.array(self.exp1lineal["x_f"])
+        self.xf2 = np.array(self.exp2lineal["x_f"])
+        self.xf3 = np.array(self.exp3lineal["x_f"])
+        self.yf1 = np.array(self.exp1lineal["y_f"])
+        self.yf2 = np.array(self.exp2lineal["y_f"])
+        self.yf3 = np.array(self.exp3lineal["y_f"])
+        self.thf1 = np.array(self.exp1ang["th_f"])
+        self.thf2 = np.array(self.exp2ang["th_f"])
+        self.thf3 = np.array(self.exp3ang["th_f"])
 
         self.mux = []
         self.muy = []
@@ -66,6 +74,8 @@ class Stats():
         self.sigmax = []
         self.sigmay = []
         self.sigmath = []
+
+        self.cov = None
 
     def statisic_values(self):
         for i in range(3):
@@ -77,16 +87,74 @@ class Stats():
             self.sigmax = None
             self.sigmay = None
             self.sigmath = None
+
+    def confidence_ellipse(x,y,cov, ax, n_std=2.0, facecolor='none', **kwargs):
+        """
+        Create a plot of the covariance confidence ellipse of 'x' and 'y'
+        Parameters
+        ----------
+        x, y : array_like, shape (n, )
+            Input data.
+        ax : matplotlib.axes.Axes
+            The axes object to draw the ellipse into.
+        n_std : float
+            The number of standard deviations to determine the ellipse's radiuses.
+        Returns
+        -------
+        matplotlib.patches.Ellipse
+        Other parameters
+        ----------------
+        kwargs : '~matplotlib.patches.Patch' properties
+        
+        if x.size != y.size:
+            raise ValueError("x and y must be the same size")
+        """
+        pearson = (cov[0][1])/(np.sqrt(cov[0][0] * cov[1][1]))
+        # Using a special case to obtain the eigenvalues of this
+        # two-dimensionl dataset.
+        ell_radius_x = np.sqrt(1 + pearson)
+        ell_radius_y = np.sqrt(1 - pearson)
+        ellipse = Ellipse((0, 0),width=ell_radius_x * 2,height=ell_radius_y * 2,facecolor=facecolor,**kwargs)
+
+        # Calculating the stdandard deviation of x from
+        # the squareroot of the variance and multiplying
+        # with the given number of standard deviations.
+        scale_x = np.sqrt(cov[0][0]) * n_std
+        mean_x = np.mean(x)
+
+        # calculating the stdandard deviation of y ...
+        scale_y = np.sqrt(cov[1][1]) * n_std
+        mean_y = np.mean(y)
+
+        transf = transforms.Affine2D() \
+            .rotate_deg(45) \
+            .scale(scale_x, scale_y) \
+            .translate(mean_x, mean_y)
+
+        ellipse.set_transform(transf + ax.transData)
+        return ax.add_patch(ellipse)
         
 
     def plot_figures(self):
 
-        plt.figure()
-        plt.scatter(self.xf[0], self.yf[0], marker="*", c="blue")
-        plt.scatter(self.xf[1], self.yf[1], marker="*", c="red")
-        plt.scatter(self.xf[2], self.yf[2], marker="*",c ="green")
-        plt.title('Dispersion')
+        fig, ax = plt.subplots()
 
+        plt.scatter(self.xf1,self.yf1,marker="*", c="blue")
+        cova = np.cov(self.xf1, self.yf1)
+        self.confidence_ellipse(self.xf1, self.yf1, cova, ax, edgecolor='blue')
+        
+
+        plt.show()
+
+        """
+
+        plt.scatter(self.xf[1], self.yf[1], marker="*", c="red")
+        self.confidence_ellipse(self.xf[1], self.yf[1], ax, edgecolor='blue')
+
+        plt.scatter(self.xf[2], self.yf[2], marker="*",c ="green")
+        self.confidence_ellipse(self.xf[2], self.yf[2], ax, edgecolor='blue')
+    
+        
         plt.figure()
         plt.hist(self.xf[0])
         plt.hist(self.xf[1])
@@ -105,6 +173,8 @@ class Stats():
         plt.hist(self.thf[2])
         plt.title('Histograma en theta')
         plt.show()
+
+        """
     
     def main(self):
         self.plot_figures()
