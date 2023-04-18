@@ -11,21 +11,21 @@ class Stats():
         
         self.name_csv = name_csv
         self.df = pd.read_csv(name_csv)
-        if name_csv == 'open_loop_experiments/our_sim.csv':
+        if self.name_csv == 'open_loop_experiments/our_sim.csv':
             self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.2) <= 0.1]
             self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
             self.exp3lineal = self.df.loc[abs(self.df["x_f"]-0.6) <= 0.1]
             self.exp1ang = self.df.loc[abs(self.df["th_f"]-0.6) <= 0.1]
             self.exp2ang = self.df.loc[abs(self.df["th_f"]-1.2) <= 0.1]
             self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
-        elif name_csv == 'open_loop_experiments/physical.csv':
+        elif self.name_csv == 'open_loop_experiments/physical.csv':
             self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
             self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.8) <= 0.1]
             self.exp3lineal = self.df.loc[abs(self.df["x_f"]-1.3) <= 0.1]
             self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.6) <= 0.1]
             self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.1) <= 0.1]
             self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.8) <= 0.1]
-        elif name_csv == 'open_loop_experiments/mr_sim.csv':
+        elif self.name_csv == 'open_loop_experiments/mr_sim.csv':
             """
             self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
             self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
@@ -35,18 +35,18 @@ class Stats():
             self.exp3ang = self.df.loc[abs(self.df["th_f"]-4.7) <= 0.1]
             """
             pass
-        elif name_csv == 'closed_loop_experiments/our_sim.csv':
+        elif self.name_csv == 'closed_loop_experiments/our_sim.csv':
             self.exp1lineal = self.df.loc[abs(self.df["x_f"]-1) <= 0.1]
             self.exp2lineal = self.df.loc[abs(self.df["x_f"]-2) <= 0.1]
             self.exp3lineal = self.df.loc[abs(self.df["x_f"]-3) <= 0.1]
             self.exp1ang = self.df.loc[abs(self.df["th_f"]-1.57) <= 0.1]
             self.exp2ang = self.df.loc[abs(self.df["th_f"]-3.14) <= 0.1]
             self.exp3ang = self.df.loc[abs(self.df["th_f"]+1.57) <= 0.1]
-        elif name_csv == 'closed_loop_experiments/physical.csv':
+        elif self.name_csv == 'closed_loop_experiments/physical.csv':
             self.exp1lineal = self.df.loc[abs(self.df["x_f"]-1) <= 0.1]
             self.exp2lineal = self.df.loc[abs(self.df["x_f"]-2) <= 0.2]
             self.exp3lineal = self.df.loc[abs(self.df["x_f"]-3) <= 0.3]
-        elif name_csv == 'closed_loop_experiments/mr_sim.csv':
+        elif self.name_csv == 'closed_loop_experiments/mr_sim.csv':
             """
             self.exp1lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
             self.exp2lineal = self.df.loc[abs(self.df["x_f"]-0.4) <= 0.1]
@@ -57,26 +57,25 @@ class Stats():
             """
             pass
 
+        if self.name_csv == 'open_loop_experiments/our_sim.csv' or self.name_csv == 'open_loop_experiments/physical.csv' or self.name_csv == 'closed_loop_experiments/our_sim.csv':
+            self.xf1 = np.array(self.exp1lineal["x_f"])
+            self.xf2 = np.array(self.exp2lineal["x_f"])
+            self.xf3 = np.array(self.exp3lineal["x_f"])
+            self.yf1 = np.array(self.exp1lineal["y_f"])
+            self.yf2 = np.array(self.exp2lineal["y_f"])
+            self.yf3 = np.array(self.exp3lineal["y_f"])
+            self.thf1 = np.array(self.exp1ang["th_f"])
+            self.thf2 = np.array(self.exp2ang["th_f"])
+            self.thf3 = np.array(self.exp3ang["th_f"])
+        else:
+            self.xf1 = np.array(self.exp1lineal["x_f"])
+            self.xf2 = np.array(self.exp2lineal["x_f"])
+            self.xf3 = np.array(self.exp3lineal["x_f"])
+            self.yf1 = np.array(self.exp1lineal["y_f"])
+            self.yf2 = np.array(self.exp2lineal["y_f"])
+            self.yf3 = np.array(self.exp3lineal["y_f"])
 
-        self.xf1 = np.array(self.exp1lineal["x_f"])
-        self.xf2 = np.array(self.exp2lineal["x_f"])
-        self.xf3 = np.array(self.exp3lineal["x_f"])
-        self.yf1 = np.array(self.exp1lineal["y_f"])
-        self.yf2 = np.array(self.exp2lineal["y_f"])
-        self.yf3 = np.array(self.exp3lineal["y_f"])
-        self.thf1 = np.array(self.exp1ang["th_f"])
-        self.thf2 = np.array(self.exp2ang["th_f"])
-        self.thf3 = np.array(self.exp3ang["th_f"])
 
-        self.mux = []
-        self.muy = []
-        self.muth = []
-
-        self.sigmax = []
-        self.sigmay = []
-        self.sigmath = []
-
-        self.cov = None
 
     def statisic_values(self):
         for i in range(3):
@@ -90,7 +89,7 @@ class Stats():
             self.sigmath = None
 
     def confidence_ellipse(self,x, y, ax, n_std=2.0, facecolor='none', **kwargs):
-        
+
         if x.size != y.size:
             raise ValueError("x and y must be the same size")
 
@@ -150,11 +149,13 @@ class Stats():
         plt.hist(self.yf3)
         plt.title('Histograma en los 3 experimentos lineales en y')
 
-        plt.figure()
-        plt.hist(self.thf1)
-        plt.hist(self.thf2)
-        plt.hist(self.thf3)
-        plt.title('Histograma en los 3 experimentos lineales en theta')
+        if self.name_csv == 'open_loop_experiments/our_sim.csv' or self.name_csv == 'open_loop_experiments/physical.csv' or self.name_csv == 'closed_loop_experiments/our_sim.csv':
+
+            plt.figure()
+            plt.hist(self.thf1)
+            plt.hist(self.thf2)
+            plt.hist(self.thf3)
+            plt.title('Histograma en los 3 experimentos lineales en theta')
 
         plt.show()
 
@@ -164,6 +165,6 @@ class Stats():
 
 if __name__ == '__main__':
 
-    stat1stexperiment = Stats()
+    stat1stexperiment = Stats('closed_loop_experiments/physical.csv')
     stat1stexperiment.main()
     
