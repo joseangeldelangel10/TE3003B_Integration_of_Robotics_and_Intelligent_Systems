@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
+import random as rm
 import numpy as np
 from std_msgs.msg import Float32, Float64MultiArray, MultiArrayDimension
 from geometry_msgs.msg import Twist, Pose2D
@@ -159,12 +160,12 @@ class OdometryNode():
                     #self.q_k = np.ones((3,3))*0.1
                     self.covariance_matrix = np.matmul( np.matmul(self.puzzlebot_model_jacobian,self.covariance_matrix), (self.puzzlebot_model_jacobian.T)) + self.q_k
                     self.puzzlebot_estimated_pose.pose.covariance = (
-                        self.covariance_matrix[0,0:2].tolist() + [0.0]*3 + [self.covariance_matrix[0,2]] +
-                        self.covariance_matrix[1,0:2].tolist() + [0.0]*3 + [self.covariance_matrix[1,2]] +
-                        [0.0]*2 + [0.0002] + [0.0]*3 +
-                        [0.0]*6 +
-                        [0.0]*6 +
-                        self.covariance_matrix[2,0:2].tolist() + [0.0]*3 + [self.covariance_matrix[2,2]]                                         
+                        self.covariance_matrix[0,0:2].tolist() + [0.0] * 3 + [self.covariance_matrix[0,2]] +
+                        self.covariance_matrix[1,0:2].tolist() + [0.0] * 3 + [self.covariance_matrix[1,2]] +
+                        [0.0] * 6 +
+                        [0.0] * 6 +
+                        [0.0] * 6 +
+                        self.covariance_matrix[2,0:2].tolist() + [0.0] * 3 + [self.covariance_matrix[2,2]]                                         
                     )
                     # _________ end of filling puzzlebot covariance data ______________
                     
