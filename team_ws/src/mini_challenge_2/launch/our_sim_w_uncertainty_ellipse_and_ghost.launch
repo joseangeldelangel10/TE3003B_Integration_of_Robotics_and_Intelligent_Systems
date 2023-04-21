@@ -17,5 +17,8 @@
     <node name="odom_ghost" pkg="mini_challenge_2" type="wheelBasedDeadReckoning_Ghost.py" output="screen"/>
     <node name="coordinate_transform_ghost" pkg="mini_challenge_2" type="coordinateTransformGhost.py" output="screen"/>
 
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mini_challenge_2)/rviz_config/rviz_config.rviz"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mini_challenge_2)/rviz_config/rviz_config_w_ghost.rviz"/>
+
+    <include file="$(find puzzlebot_world)/launch/puzzlebot_simple_world.launch" />
+
 </launch>
