@@ -152,11 +152,8 @@ class OdometryNode():
                     self.sigma_delta_k = np.array(
                         [[self.covar_kr*abs(self.puzzlebot_wr), 0.0],
                          [0.0, self.covar_kl*abs(self.puzzlebot_wl)]]
-                    )
-                    #print("sigma delta k: {m}".format(m = self.sigma_delta_k))
-                    #print("nabla w k: {m}".format(m = self.nabla_w_k))
-                    self.q_k = np.matmul( np.matmul( self.nabla_w_k , self.sigma_delta_k ), self.nabla_w_k.T )
-                    #self.q_k = np.ones((3,3))*0.1
+                    )                    
+                    self.q_k = np.matmul( np.matmul( self.nabla_w_k , self.sigma_delta_k ), self.nabla_w_k.T )                    
                     self.covariance_matrix = np.matmul( np.matmul(self.puzzlebot_model_jacobian,self.covariance_matrix), (self.puzzlebot_model_jacobian.T)) + self.q_k
                     self.puzzlebot_estimated_pose.pose.covariance = (
                         self.covariance_matrix[0,0:2].tolist() + [0.0]*3 + [self.covariance_matrix[0,2]] +
