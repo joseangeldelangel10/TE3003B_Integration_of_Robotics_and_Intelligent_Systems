@@ -165,6 +165,6 @@ class Stats():
 
 if __name__ == '__main__':
 
-    stat1stexperiment = Stats('closed_loop_experiments/physical.csv')
+    stat1stexperiment = Stats('open_loop_experiments/physical.csv')
     stat1stexperiment.main()
     
