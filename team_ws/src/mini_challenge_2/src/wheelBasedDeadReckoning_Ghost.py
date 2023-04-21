@@ -22,9 +22,7 @@ class OdometryNode():
         self.wr_sub = rospy.Subscriber('/wr', Float32, self.puzzlebot_wr_callback)
         self.wl_sub = rospy.Subscriber('/wl', Float32, self.puzzlebot_wl_callback)        
         self.puzzlebot_odom_pub = rospy.Publisher('/odom/ghost', Odometry, queue_size=1)        
-        self.reset_puzzlebot_service_result = rospy.Service("reset_odometry", ResetOdometry, self.reset_odometry)
-        
-        self.get_covariance_mat_server = rospy.Service("get_puzzlebot_covariance_mat_on_sim_ghost", GetPuzzlebotCovarianceMatOnSim, self.get_covariance_mat)        
+        self.reset_puzzlebot_service_result = rospy.Service("reset_odometry", ResetOdometry, self.reset_odometry)        
         
         # ______________ fill in publisher messages ______________
         self.initial_x, self.initial_y, self.initial_theta = (initial_x, initial_y, initial_theta)        

@@ -1,0 +1,21 @@
+
+<launch>        
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find mini_challenge_1)/urdf/puzzlebot.xacro'" />
+    <param name="robot_description_ghost" command="$(find xacro)/xacro --inorder '$(find mini_challenge_1)/urdf/puzzlebot_ghost.xacro'" />
+
+    <!--<node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>-->
+
+    <node name="differential_drive_model" pkg="mini_challenge_1" type="differentialDriveModel.py" output="screen"/>
+    <node name="solver" pkg="mini_challenge_1" type="solver.py" output="screen"/>
+    <node name="transform" pkg="mini_challenge_1" type="transform.py" output="screen"/>
+    <node name="coordinate_transform" pkg="mini_challenge_1" type="coordinateTransform.py" output="screen"/>
+    
+    <node name="odom" pkg="mini_challenge_2" type="wheelBasedDeadReckoning.py" output="screen"/>
+
+    <node name="odom_ghost" pkg="mini_challenge_2" type="wheelBasedDeadReckoning_Ghost.py" output="screen"/>
+    <node name="coordinate_transform_ghost" pkg="mini_challenge_2" type="coordinateTransformGhost.py" output="screen"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mini_challenge_2)/rviz_config/rviz_config.rviz"/>
+</launch>
