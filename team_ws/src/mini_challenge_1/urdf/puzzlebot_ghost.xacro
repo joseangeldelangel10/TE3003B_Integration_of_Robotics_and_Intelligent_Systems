@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!-- PuzzleBot differential drive -->
+<robot name="puzzlebot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <material name="ghost_color">
+        <color rgba="1 1 1 0.1"/>
+    </material>
+
+	<!-- ================ URDF VARIABLES ================ -->
+	<xacro:property name="PI" value="3.1415926535897931"/>
+	
+	<!-- ******   Base-Link   ****** -->
+	<link name="map">
+	</link>
+
+	<link name="base_link_ghost">
+		<pose>0 0 0 0 0 0</pose>
+		<visual>	
+            <material name="ghost_color"/>				
+			<origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+			<geometry>
+				<mesh filename="file://$(find mini_challenge_1)/meshes/MCR2_1000_13_Chassis.stl"/>
+			</geometry> 			
+		</visual>
+	</link>
+	
+	<!-- ================ CHASIS ================ -->
+	<joint name="base_link_to_chassis_ghost" type="fixed">
+		<parent link="map"/>
+		<child link="base_link_ghost"/>
+	</joint>
+
+	<link name="right_wheel_ghost">
+		<pose>0 0 0 0 0 0</pose>
+		<visual>
+            <material name="ghost_color"/>
+			<origin xyz="0 0 0" rpy="-${PI/2} 0 0" />
+			<geometry>	      
+				<mesh filename="file://$(find mini_challenge_1)/meshes/MCR2_1000_1_1_Wheel_Coupler_2.stl"/>	    	
+			</geometry>
+		</visual>
+	</link>
+
+	<!-- ================ RIGHT WHEEL ================ -->
+	<joint name="base_to_right_w_ghost" type="continuous">
+		<parent link="base_link_ghost" /> 
+		<child link="right_wheel_ghost" />
+		<origin xyz="0.05 -0.09 0.0" />
+		<axis xyz="0 1 0" rpy="0 0 0" />
+	</joint>
+
+
+    <link name="left_wheel_ghost">
+		<pose>0 0 0 0 0 0</pose>
+		<visual>
+            <material name="ghost_color"/>
+			<origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+			<geometry>	      
+				<mesh filename="file://$(find mini_challenge_1)/meshes/MCR2_1000_1_1_Wheel_Coupler_2.stl"/>	    	
+			</geometry>
+		</visual>
+	</link>
+
+	<!-- ================ RIGHT WHEEL ================ -->
+	<joint name="base_to_left_w_ghost" type="continuous">
+		<parent link="base_link_ghost" /> 
+		<child link="left_wheel_ghost" />
+		<origin xyz="0.05 0.09 0.0" />
+		<axis xyz="0 1 0" rpy="0 0 0" />
+	</joint>
+	
+	
+	
+
+<!---->
+</robot>

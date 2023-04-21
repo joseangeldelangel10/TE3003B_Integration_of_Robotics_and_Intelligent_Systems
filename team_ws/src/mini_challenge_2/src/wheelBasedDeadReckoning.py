@@ -22,8 +22,8 @@ class OdometryNode():
         # ______________ init node publishers, subscribers and services ______________
         rospy.init_node('odometry')        
         self.twist_sub = rospy.Subscriber('/cmd_vel', Twist, self.twist_callback)
-        self.wr_sub = rospy.Subscriber('/wr', Float32, self.puzzlebot_wr_callback)
-        self.wl_sub = rospy.Subscriber('/wl', Float32, self.puzzlebot_wl_callback)        
+        self.wr_sub = rospy.Subscriber('/wr/qt', Float32, self.puzzlebot_wr_callback)
+        self.wl_sub = rospy.Subscriber('/wl/qt', Float32, self.puzzlebot_wl_callback)        
         self.puzzlebot_odom_pub = rospy.Publisher('/odom', Odometry, queue_size=1)        
         self.reset_puzzlebot_service_result = rospy.Service("reset_odometry", ResetOdometry, self.reset_odometry)
         
