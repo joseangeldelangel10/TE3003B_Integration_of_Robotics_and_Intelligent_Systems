@@ -178,4 +178,4 @@ General requirements. Please be aware that a set of requirements especific for e
   #### Session 1:
   * Q&A Session.
   #### Session 2:
-  * Grading.
+  * Grading. 
