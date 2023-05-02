@@ -27,7 +27,7 @@ class Bug0():
         rospy.init_node("bug_0_controller")
         rospy.Subscriber("/odom", Odometry, self.odom_callback)                
         
-        self.scan_listener = rospy.Subscriber('/laser/scan', LaserScan,self.scan_callback)
+        self.scan_listener = rospy.Subscriber('/scan', LaserScan,self.scan_callback)
                 
         self.vel_pub = rospy.Publisher("/cmd_vel", Twist, queue_size=1)        
         self.vel_msg = Twist()
@@ -156,5 +156,5 @@ class Bug0():
             self.rate.sleep()          
 
 if __name__ == "__main__":
-    bug_0 = Bug0(5.0,5.0,0.6)
+    bug_0 = Bug0(0.0,10.0,0.6)
     bug_0.main()
