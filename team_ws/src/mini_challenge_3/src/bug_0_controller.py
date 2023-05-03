@@ -37,7 +37,7 @@ class Bug0():
                 
         self.current_position_xy_2d = (None, None)
         self.scan = None
-        self.currente_angle = None
+        self.current_angle = None
         self.displaced_angle = 0.0
                      
         self.angular_error_treshold = 0.05
