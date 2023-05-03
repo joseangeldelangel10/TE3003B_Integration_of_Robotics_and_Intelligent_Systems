@@ -53,7 +53,7 @@ class Bug0():
         self.w_max = 1.0
 
 
-        self.state = "go_to_point"
+        self.state = "go_to_point"        
 
         self.rate = rospy.Rate(20)
 
@@ -73,11 +73,13 @@ class Bug0():
         self.current_position_xy_2d = ( data.pose.pose.position.x , data.pose.pose.position.y )                             
         self.current_angle = nav_functions.calculate_yaw_angle_deg( data.pose.pose.orientation )
 
-    def turn_left(self, angle_to_rotate = 0.174533):
+    def turn_left(self, p2p_target_angle, angle_to_rotate = 0.174533):
         
-        if self.last_turn_time == None and self.state == "turn_left":
+        if self.get_laser_value_at_angle(p2p_target_angle) > self.wall_distance:
+                self.state = "go_to_point"
+                self.displaced_angle = 0.0
+        elif self.last_turn_time == None and self.state == "turn_left":
             self.last_turn_time = rospy.get_time()
-
         else:    
             if self.displaced_angle < angle_to_rotate:                
                 linear_x = 0.0
@@ -104,11 +106,17 @@ class Bug0():
             else:
                 self.vel_msg.linear.x = nav_functions.saturate_signal(self.go2point_linear_kp*distance_error, 0.05)
 
-    def right_hand_rule_controller(self):
+    def get_laser_value_at_angle(self, angle_in_rads):
+        angle_index = round( (angle_in_rads*2*math.pi)/len(self.scan.ranges) )
+        return self.scan.ranges[int(angle_index)]
+
+    def right_hand_rule_controller(self, p2p_target_angle):
         
         if self.scan != None:
-            if self.scan_ranges[0] < self.wall_distance:
-                self.state = "turn_left"
+            if self.get_laser_value_at_angle(p2p_target_angle) > self.wall_distance:
+                self.state = "go_to_point"
+            elif self.scan_ranges[0] <= self.wall_distance:
+                self.state = "turn_left"                
             else:
                 # TODO complete linear_x and angular_z vals
                 dist_at_0 = self.scan.ranges[len(self.scan.ranges) // (3.0/4.0)]
@@ -130,8 +138,8 @@ class Bug0():
                     angular_z = -1.0 #turn_right
 
                 self.vel_msg.angular.z = angular_z
-                self.vel_msg.linear.x = linear_x                            
-
+                self.vel_msg.linear.x = linear_x
+                
     def main(self):
         while not rospy.is_shutdown():            
             self.vel_msg.linear.x = 0.0
@@ -145,7 +153,7 @@ class Bug0():
                 if self.state == "go_to_point":
                     self.go_to_point_controller(angle_error, distance_error)
                 elif self.state == "follow_wall":
-                    self.right_hand_rule_controller()  
+                    self.right_hand_rule_controller(target_angle)  
                 elif self.state == "turn_left":
                     self.turn_left() 
                 elif self.state == "arrived":
