@@ -40,22 +40,24 @@ class Bug0():
         self.current_angle = None
         self.displaced_angle = 0.0
                      
-        self.angular_error_treshold = 0.2
+        self.angular_error_treshold = 0.3
         self.distance_error_treshold = 0.08                    
 
         self.go2point_angular_kp = 0.2
-        self.go2point_linear_kp = 0.2
+        self.go2point_linear_kp = 0.3
 
         self.wall_kp_follow = 0.8
         self.wall_kp_avoid = 0.5
 
-        self.v_max = 0.6
+        self.v_max = 1.0
         self.w_max = 0.6
 
 
         self.state = "go_to_point"        
 
         self.rate = rospy.Rate(20)
+
+        self.last_turn_time = None
 
 
 
