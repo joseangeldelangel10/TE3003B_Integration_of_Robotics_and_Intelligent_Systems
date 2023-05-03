@@ -49,7 +49,7 @@ class Bug0():
         self.wall_kp_follow = 0.8
         self.wall_kp_avoid = 0.5
 
-        self.v_max = 0.3
+        self.v_max = 0.6
         self.w_max = 0.6
 
 
@@ -156,7 +156,7 @@ class Bug0():
                 elif self.state == "follow_wall":
                     self.right_hand_rule_controller(target_angle)  
                 elif self.state == "turn_left":
-                    self.turn_left() 
+                    self.turn_left(target_angle) 
                 elif self.state == "arrived":
                     print("ia llegue")
                     exit             
