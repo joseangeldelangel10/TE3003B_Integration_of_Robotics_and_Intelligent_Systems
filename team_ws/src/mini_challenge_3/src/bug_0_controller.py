@@ -40,17 +40,17 @@ class Bug0():
         self.current_angle = None
         self.displaced_angle = 0.0
                      
-        self.angular_error_treshold = 0.05
-        self.distance_error_treshold = 0.05                    
+        self.angular_error_treshold = 0.2
+        self.distance_error_treshold = 0.08                    
 
-        self.go2point_angular_kp = 1.0
-        self.go2point_linear_kp = 1.0
+        self.go2point_angular_kp = 0.2
+        self.go2point_linear_kp = 0.2
 
-        self.wall_kp_follow = 1.0
-        self.wall_kp_avoid = 1.0
+        self.wall_kp_follow = 0.8
+        self.wall_kp_avoid = 0.5
 
-        self.v_max = 1.0
-        self.w_max = 1.0
+        self.v_max = 0.3
+        self.w_max = 0.6
 
 
         self.state = "go_to_point"        
@@ -99,12 +99,12 @@ class Bug0():
         if distance_error <= self.distance_error_treshold:                                                            
             self.state = "arrived"
         elif abs(angle_error) > self.angular_error_treshold:                                    
-            self.vel_msg.angular.z = nav_functions.saturate_signal(self.go2point_angular_kp*angle_error, 0.05) 
+            self.vel_msg.angular.z = nav_functions.saturate_signal(self.go2point_angular_kp*angle_error, self.w_max) 
         elif distance_error > self.distance_error_treshold:  
             if self.scan.ranges[0] <= self.wall_distance:
                 self.state = "turn_left"
             else:
-                self.vel_msg.linear.x = nav_functions.saturate_signal(self.go2point_linear_kp*distance_error, 0.05)
+                self.vel_msg.linear.x = nav_functions.saturate_signal(self.go2point_linear_kp*distance_error, self.v_max)
 
     def get_laser_value_at_angle(self, angle_in_rads):
         angle_index = round( (angle_in_rads*2*math.pi)/len(self.scan.ranges) )
@@ -141,6 +141,7 @@ class Bug0():
                 self.vel_msg.linear.x = linear_x
                 
     def main(self):
+        print("main inited node running")
         while not rospy.is_shutdown():            
             self.vel_msg.linear.x = 0.0
             self.vel_msg.angular.z = 0.0
