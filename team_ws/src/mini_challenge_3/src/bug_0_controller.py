@@ -43,13 +43,14 @@ class Bug0():
         self.angular_error_treshold = 0.3
         self.distance_error_treshold = 0.08                    
 
-        self.go2point_angular_kp = 0.2
+        self.go2point_angular_kp = 0.08
         self.go2point_linear_kp = 0.3
 
-        self.wall_kp_follow = 0.8
-        self.wall_kp_avoid = 0.5
+        self.wall_kp_follow = 0.6
+        self.wall_kp_avoid = -4.5
 
         self.v_max = 1.0
+        self.v_max_wall = 0.2
         self.w_max = 0.6
 
 
@@ -75,9 +76,11 @@ class Bug0():
         self.current_position_xy_2d = ( data.pose.pose.position.x , data.pose.pose.position.y )                             
         self.current_angle = nav_functions.calculate_yaw_angle_deg( data.pose.pose.orientation )
 
-    def turn_left(self, p2p_target_angle, angle_to_rotate = 0.174533):
+    def turn_left(self, p2p_target_angle, angle_to_rotate = 0.872665):
         
-        if self.get_laser_value_at_angle(p2p_target_angle) > self.wall_distance:
+        if (self.get_laser_value_at_angle(p2p_target_angle) > 4.0*self.wall_distance and 
+            ((p2p_target_angle > 0.0 and p2p_target_angle < np.pi/2.0) or 
+             (p2p_target_angle > np.pi*(3.0/2.0) and p2p_target_angle < 2.0*np.pi)  )):
                 self.state = "go_to_point"
                 self.displaced_angle = 0.0
         elif self.last_turn_time == None and self.state == "turn_left":
@@ -115,24 +118,26 @@ class Bug0():
     def right_hand_rule_controller(self, p2p_target_angle):
         
         if self.scan != None:
-            if self.get_laser_value_at_angle(p2p_target_angle) > self.wall_distance:
+            if (self.get_laser_value_at_angle(p2p_target_angle) > 4.0*self.wall_distance and 
+            ((p2p_target_angle > 0.0 and p2p_target_angle < np.pi/2.0) or 
+             (p2p_target_angle > np.pi*(3.0/2.0) and p2p_target_angle < 2.0*np.pi)  )):
                 self.state = "go_to_point"
-            elif self.scan_ranges[0] <= self.wall_distance:
+            elif self.scan.ranges[0] <= self.wall_distance:
                 self.state = "turn_left"                
             else:
                 # TODO complete linear_x and angular_z vals
-                dist_at_0 = self.scan.ranges[len(self.scan.ranges) // (3.0/4.0)]
-                dist_at_45 = self.scan.ranges[len(self.scan.ranges) // (7.0/8.0)]
+                dist_at_0 = self.scan.ranges[int(len(self.scan.ranges) * (3.0/4.0))]
+                dist_at_45 = self.scan.ranges[int(len(self.scan.ranges) * (7.0/8.0))]
                 l3 = np.sqrt( (dist_at_0**2.0) + (dist_at_45**2.0) - 2.0*dist_at_0*dist_at_45*(np.sqrt(2.0)/2.0) )
                 y1 = np.arcsin((dist_at_45*(np.sqrt(2.0)/2.0))/l3)
                 ang_err = y1 - np.pi/2.0            
                 angular_z = self.wall_kp_follow*ang_err
-                relative_euclidean_distance_to_wall = dist_at_0 - self.wall_dist
+                relative_euclidean_distance_to_wall = dist_at_0 - self.wall_distance
 
-                if abs(angular_z) < 0.8: # TODO consider changing this condition or stating this tresh at init
-                    if relative_euclidean_distance_to_wall <= (self.wall_dist/2):
+                if abs(ang_err) < 0.3: # TODO consider changing this condition or stating this tresh at init
+                    if relative_euclidean_distance_to_wall <= (self.wall_distance/2):
                         angular_z += self.wall_kp_avoid*relative_euclidean_distance_to_wall
-                    linear_x = self.v_max                
+                    linear_x = self.v_max_wall               
                 else:                
                     linear_x = 0.0
 
@@ -144,7 +149,8 @@ class Bug0():
                 
     def main(self):
         print("main inited node running")
-        while not rospy.is_shutdown():            
+        while not rospy.is_shutdown():
+            print(self.state)         
             self.vel_msg.linear.x = 0.0
             self.vel_msg.angular.z = 0.0
             if self.current_angle != None and self.scan != None:
