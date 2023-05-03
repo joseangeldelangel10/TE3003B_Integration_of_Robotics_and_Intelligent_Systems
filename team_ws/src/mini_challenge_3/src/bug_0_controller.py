@@ -40,7 +40,7 @@ class Bug0():
         self.current_angle = None
         self.displaced_angle = 0.0
                      
-        self.angular_error_treshold = 0.3
+        self.angular_error_treshold = 0.3    
         self.distance_error_treshold = 0.08                    
 
         self.go2point_angular_kp = 0.08
