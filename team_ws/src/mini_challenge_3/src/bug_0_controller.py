@@ -46,18 +46,24 @@ class Bug0():
         self.go2point_angular_kp = 0.08
         self.go2point_linear_kp = 0.3
 
-        self.wall_kp_follow = 0.6366
-        self.wall_kp_avoid = 1.3666
+        self.wall_kp_follow = 40.0
+        self.wall_kp_avoid = 0.3
+        #self.wall_kd_avoid = -0.08
+        #self.previous_wall_avoid_error = None
 
-        self.v_max = 1.0
-        self.v_max_wall = 0.2
+        self.v_max = 0.4
+        self.v_max_wall = 0.4
         self.w_max = 0.6
 
         self.puzzlebot_passing_diameter = 0.60 # meters
 
-        self.state = "go_to_point"        
+        self.state = "go_to_point"
 
-        self.rate = rospy.Rate(20)
+        self.turn_left_go_to_point_state_counter = 0
+        self.follow_wall_start_time = None       
+
+        self.rate_val = 20.0
+        self.rate = rospy.Rate(self.rate_val)        
 
         self.last_turn_time = None
 
@@ -77,12 +83,9 @@ class Bug0():
         self.current_position_xy_2d = ( data.pose.pose.position.x , data.pose.pose.position.y )                             
         self.current_angle = nav_functions.calculate_yaw_angle_deg( data.pose.pose.orientation )
 
-    def turn_left(self, p2p_target_angle, angle_to_rotate = 0.872665):
+    def turn_left(self, p2p_target_angle, angle_to_rotate = np.pi/2.0):
         
-        if self.target_path_is_clear(p2p_target_angle):
-                self.state = "go_to_point"
-                self.displaced_angle = 0.0
-        elif self.last_turn_time == None and self.state == "turn_left":
+        if self.last_turn_time == None and self.state == "turn_left":
             self.last_turn_time = rospy.get_time()
         else:    
             if self.displaced_angle < angle_to_rotate:                
@@ -95,6 +98,7 @@ class Bug0():
                 self.last_turn_time = current_time
             else:
                 self.state = "follow_wall"
+                self.follow_wall_start_time = rospy.get_time()                
                 self.displaced_angle = 0.0        
                 self.last_turn_time = None            
 
@@ -154,7 +158,7 @@ class Bug0():
         target_direction = nav_functions.angle_to_only_possitive_deg(p2p_target_angle - self.current_angle)        
         values_at_target = self.get_values_at_target(target_direction, wall_dist_fov)        
         
-        target_is_clear = ( (min(values_at_target) >= 2.0*self.wall_distance) and 
+        target_is_clear = ( (min(values_at_target) >= 2.25*self.wall_distance) and 
         ((target_direction > 0.0 and target_direction < 90.0) or 
         ((target_direction > 270.0) and target_direction < 360.0)) )
 
@@ -163,12 +167,13 @@ class Bug0():
     def obstacle_in_front(self):
         wall_dist_fov = 2.0*( np.pi/2.0 - np.arctan(self.wall_distance/(self.puzzlebot_passing_diameter/2)) )                
         values_in_front = self.get_values_at_target(0.0, wall_dist_fov)
-        return min(values_in_front) <= self.wall_distance
-
+        side_dists_to_obstacle = self.get_values_at_target(315.0, 30.0)
+        return min(values_in_front) <= self.wall_distance or min(side_dists_to_obstacle) <= self.wall_distance/2.0
+    
     def right_hand_rule_controller(self, p2p_target_angle):
         
         if self.scan != None:                       
-            if self.target_path_is_clear(p2p_target_angle):
+            if self.target_path_is_clear(p2p_target_angle) and (rospy.get_time() - self.follow_wall_start_time) >= 1.0:
                 self.state = "go_to_point"
             elif self.obstacle_in_front():
                 self.state = "turn_left"                
@@ -179,20 +184,41 @@ class Bug0():
                 l3 = np.sqrt( (dist_at_0**2.0) + (dist_at_10**2.0) - 2.0*dist_at_0*dist_at_10*(np.cos( 0.174533 )) )
                 y1 = np.arcsin((dist_at_10*( np.sin(0.174533) ))/l3)
                 ang_err = np.pi/2.0 - y1                            
-                #dist_to_wall = min( self.scan.ranges[self.get_laser_index_from_angle(180.0) : -1] )
-                dist_to_wall = dist_at_0
+                dist_to_wall = min( self.get_values_at_target(270.0, 90.0) )
+                if dist_to_wall == np.inf:
+                    dist_to_wall = 12.0
+                #dist_to_wall = dist_at_0
                 relative_euclidean_distance_to_wall = self.wall_distance - dist_to_wall
 
+                """
                 if abs(ang_err) < 0.3 and abs(relative_euclidean_distance_to_wall) < 0.1: # TODO consider changing this condition or stating this tresh at init
                     angular_z = 0.0
                 else:
-                    angular_z = self.wall_kp_follow*ang_err
-                    angular_z += self.wall_kp_avoid*relative_euclidean_distance_to_wall
-                    
-                if dist_at_0 >= 1.2 or ang_err < (-np.pi/4.0):
+                    if abs(relative_euclidean_distance_to_wall) >= 0.1:                    
+                        # start comment
+                        if self.previous_wall_avoid_error is None:
+                            wall_dist_error_derivative = 0.0
+                            self.previous_wall_avoid_error = relative_euclidean_distance_to_wall                        
+                        else:                        
+                            wall_dist_error_derivative = (relative_euclidean_distance_to_wall - self.previous_wall_avoid_error)
+                            self.previous_wall_avoid_error = relative_euclidean_distance_to_wall
+                        # end comment
+                        #angular_z = self.wall_kp_follow*ang_err
+                        angular_z = self.wall_kp_avoid*relative_euclidean_distance_to_wall
+                    elif abs(ang_err) >= 0.3:
+                        angular_z = self.wall_kp_follow*ang_err
+                """
+                angular_z = nav_functions.saturate_signal( self.wall_kp_avoid*relative_euclidean_distance_to_wall, self.w_max )
+                if self.wall_kp_follow*ang_err != 0:
+                    linear_x = nav_functions.saturate_signal( 1/(self.wall_kp_follow* abs(ang_err)), self.v_max_wall )
+                    if linear_x <= self.v_max_wall/2.0:
+                        linear_x = self.v_max_wall/2.0
+                else:
+                    linear_x = self.v_max_wall
+
+                if dist_at_0 >= 1.2 or ang_err < (-np.pi/2.0)*(1.0/3.0):
                     angular_z = -(self.v_max_wall/self.wall_distance)
-                
-                linear_x = self.v_max_wall
+                    linear_x = self.v_max_wall                            
 
                 self.vel_msg.angular.z = angular_z
                 self.vel_msg.linear.x = linear_x
@@ -223,5 +249,5 @@ class Bug0():
             self.rate.sleep()          
 
 if __name__ == "__main__":
-    bug_0 = Bug0(-3.0,4.0,0.5)
+    bug_0 = Bug0(0.0,3.5,0.5)
     bug_0.main()
