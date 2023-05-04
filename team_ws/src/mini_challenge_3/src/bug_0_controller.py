@@ -98,9 +98,10 @@ class Bug0():
                 self.last_turn_time = None            
 
     def go_to_point_controller(self, angle_error, distance_error):        
+        front_scan_val = self.get_mean_laser_value_at_fov(0.0, 30.0)        
         if distance_error <= self.distance_error_treshold:                                                            
             self.state = "arrived"
-        elif self.scan.ranges[0] <= self.wall_distance:
+        elif front_scan_val <= self.wall_distance:
                 self.state = "turn_left"
         elif abs(angle_error) > self.angular_error_treshold:                                    
             self.vel_msg.angular.z = nav_functions.saturate_signal(self.go2point_angular_kp*angle_error, self.w_max) 
@@ -108,7 +109,7 @@ class Bug0():
             self.vel_msg.linear.x = nav_functions.saturate_signal(self.go2point_linear_kp*distance_error, self.v_max)    
     
     def get_laser_index_from_angle(self, angle_in_deg):        
-        angle_index = round( (angle_in_deg*360.0)/len(self.scan.ranges) )
+        angle_index = round( (angle_in_deg*len(self.scan.ranges))/360.0 )
         return int(angle_index)
     
     def get_mean_laser_value_at_fov(self, fov_center, fov_range, infinite_substitute = 10.0):
@@ -116,40 +117,38 @@ class Bug0():
         if fov_range > 180.0:
             Exception("fov is too large")
         
-        if fov_center - (fov_range/2) < 0.0:
-            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(nav_functions.angle_to_only_possitive_deg(fov_center - (fov_range/2))) : ]
-            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( fov_center + (fov_range/2) ) + 1]
+        if fov_center - (fov_range/2.0) < 0.0:
+            lower_boundary = nav_functions.angle_to_only_possitive_deg(fov_center - (fov_range/2.0))            
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(lower_boundary) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( fov_center + (fov_range/2.0) ) + 1]
             values_at_fov = np.array(values_at_fov_1 + values_at_fov_2 )
-        elif fov_center + (fov_range/2) < 360.0:
-            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(fov_center - (fov_range/2)) : ]
-            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( (fov_center + (fov_range/2))//360.0 ) + 1]
+        elif fov_center + (fov_range/2.0) > 360.0:
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(fov_center - (fov_range/2.0)) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( (fov_center + (fov_range/2.0))%360.0 ) + 1]
             values_at_fov = np.array(values_at_fov_1 + values_at_fov_2 )
         else:
-            values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )
-            
-        
-        values_at_fov[values_at_fov == np.inf] = infinite_substitute        
-        return values_at_fov.mean()
+            values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )        
+        return values_at_fov.mean()/1.2 # since values do not appear to represent the real meters
     
     def get_values_at_target(self, fov_center, fov_range):
         #values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )
         if fov_range > 180.0:
             Exception("fov is too large")
         
-        if fov_center - (fov_range/2) < 0.0:
-            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(nav_functions.angle_to_only_possitive_deg(fov_center - (fov_range/2))) : ]
-            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( fov_center + (fov_range/2) ) + 1]
+        if fov_center - (fov_range/2.0) < 0.0:
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(nav_functions.angle_to_only_possitive_deg(fov_center - (fov_range/2.0))) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( fov_center + (fov_range/2.0) ) + 1]
             values_at_fov = values_at_fov_1 + values_at_fov_2
-        elif fov_center + (fov_range/2) < 360.0:
-            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(fov_center - (fov_range/2)) : ]
-            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( (fov_center + (fov_range/2))//360.0 ) + 1]
+        elif fov_center + (fov_range/2.0) > 360.0:
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(fov_center - (fov_range/2.0)) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( (fov_center + (fov_range/2.0))%360.0 ) + 1]
             values_at_fov = values_at_fov_1 + values_at_fov_2
         else:
             values_at_fov = self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ]
-                    
+        
         return values_at_fov
     
-    def target_path_is_clear(self, p2p_target_angle, target_fov = 30.0):        
+    def target_path_is_clear(self, p2p_target_angle, target_fov = 60.0):        
         target_direction = nav_functions.angle_to_only_possitive_deg(p2p_target_angle - self.current_angle)        
         values_at_target = self.get_values_at_target(target_direction, target_fov)
         print("min_values_at_target_is " + str(min(values_at_target)))
@@ -167,9 +166,10 @@ class Bug0():
     def right_hand_rule_controller(self, p2p_target_angle):
         
         if self.scan != None:
+            front_scan_val = self.get_mean_laser_value_at_fov(0.0, 30.0)            
             if self.target_path_is_clear(p2p_target_angle):
                 self.state = "go_to_point"
-            elif self.scan.ranges[0] <= self.wall_distance:
+            elif front_scan_val <= self.wall_distance:
                 self.state = "turn_left"                
             else:
                 # TODO complete linear_x and angular_z vals
@@ -187,7 +187,7 @@ class Bug0():
                     angular_z = self.wall_kp_follow*ang_err
                     angular_z += self.wall_kp_avoid*relative_euclidean_distance_to_wall
                     
-                if dist_at_0 >= 1.2:
+                if dist_at_0 >= 1.2 or ang_err < (-np.pi/4.0):
                     angular_z = -(self.v_max_wall/self.wall_distance)
                 
                 linear_x = self.v_max_wall
@@ -221,5 +221,5 @@ class Bug0():
             self.rate.sleep()          
 
 if __name__ == "__main__":
-    bug_0 = Bug0(0.0,10.0,0.6)
+    bug_0 = Bug0(0.0,3.5,0.6)
     bug_0.main()
