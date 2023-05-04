@@ -47,12 +47,13 @@ class Bug0():
         self.go2point_linear_kp = 0.3
 
         self.wall_kp_follow = 0.6366
-        self.wall_kp_avoid = -1.6666
+        self.wall_kp_avoid = 1.3666
 
         self.v_max = 1.0
         self.v_max_wall = 0.2
         self.w_max = 0.6
 
+        self.puzzlebot_passing_diameter = 0.60 # meters
 
         self.state = "go_to_point"        
 
@@ -101,7 +102,7 @@ class Bug0():
         front_scan_val = self.get_mean_laser_value_at_fov(0.0, 30.0)        
         if distance_error <= self.distance_error_treshold:                                                            
             self.state = "arrived"
-        elif front_scan_val <= self.wall_distance:
+        elif self.obstacle_in_front():
                 self.state = "turn_left"
         elif abs(angle_error) > self.angular_error_treshold:                                    
             self.vel_msg.angular.z = nav_functions.saturate_signal(self.go2point_angular_kp*angle_error, self.w_max) 
@@ -112,8 +113,7 @@ class Bug0():
         angle_index = round( (angle_in_deg*len(self.scan.ranges))/360.0 )
         return int(angle_index)
     
-    def get_mean_laser_value_at_fov(self, fov_center, fov_range, infinite_substitute = 10.0):
-        #values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )
+    def get_mean_laser_value_at_fov(self, fov_center, fov_range):        
         if fov_range > 180.0:
             Exception("fov is too large")
         
@@ -128,10 +128,11 @@ class Bug0():
             values_at_fov = np.array(values_at_fov_1 + values_at_fov_2 )
         else:
             values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )        
+        
+        values_at_fov[values_at_fov == np.inf] = 12.0
         return values_at_fov.mean()/1.2 # since values do not appear to represent the real meters
     
-    def get_values_at_target(self, fov_center, fov_range):
-        #values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )
+    def get_values_at_target(self, fov_center, fov_range):        
         if fov_range > 180.0:
             Exception("fov is too large")
         
@@ -148,40 +149,41 @@ class Bug0():
         
         return values_at_fov
     
-    def target_path_is_clear(self, p2p_target_angle, target_fov = 60.0):        
+    def target_path_is_clear(self, p2p_target_angle):
+        wall_dist_fov = 2.0*( np.pi/2.0 - np.arctan(self.wall_distance/(self.puzzlebot_passing_diameter/2)) )        
         target_direction = nav_functions.angle_to_only_possitive_deg(p2p_target_angle - self.current_angle)        
-        values_at_target = self.get_values_at_target(target_direction, target_fov)
-        print("min_values_at_target_is " + str(min(values_at_target)))
-        #distance_at_target = self.get_mean_laser_value_at_fov(fov_center=target_direction, fov_range=target_fov, infinite_substitute=4.0*self.wall_distance)                
-        #distance_at_target = self.scan.ranges[ self.get_laser_index_from_angle(target_direction) ] 
-        #print("distance at target: " + str(distance_at_target) )
-        #print("target angle: " + str(target_direction) )
+        values_at_target = self.get_values_at_target(target_direction, wall_dist_fov)        
         
-        target_is_clear = ( (min(values_at_target) == np.inf) and 
+        target_is_clear = ( (min(values_at_target) >= 2.0*self.wall_distance) and 
         ((target_direction > 0.0 and target_direction < 90.0) or 
         ((target_direction > 270.0) and target_direction < 360.0)) )
 
         return target_is_clear        
+    
+    def obstacle_in_front(self):
+        wall_dist_fov = 2.0*( np.pi/2.0 - np.arctan(self.wall_distance/(self.puzzlebot_passing_diameter/2)) )                
+        values_in_front = self.get_values_at_target(0.0, wall_dist_fov)
+        return min(values_in_front) <= self.wall_distance
 
     def right_hand_rule_controller(self, p2p_target_angle):
         
-        if self.scan != None:
-            front_scan_val = self.get_mean_laser_value_at_fov(0.0, 30.0)            
+        if self.scan != None:                       
             if self.target_path_is_clear(p2p_target_angle):
                 self.state = "go_to_point"
-            elif front_scan_val <= self.wall_distance:
+            elif self.obstacle_in_front():
                 self.state = "turn_left"                
             else:
-                # TODO complete linear_x and angular_z vals
-                dist_at_0 = self.scan.ranges[int(len(self.scan.ranges) * (3.0/4.0))]
-                dist_at_45 = self.scan.ranges[int(len(self.scan.ranges) * (7.0/8.0))]
-                l3 = np.sqrt( (dist_at_0**2.0) + (dist_at_45**2.0) - 2.0*dist_at_0*dist_at_45*(np.sqrt(2.0)/2.0) )
-                y1 = np.arcsin((dist_at_45*(np.sqrt(2.0)/2.0))/l3)
-                ang_err = y1 - np.pi/2.0                            
-                dist_to_wall = min( self.scan.ranges[self.get_laser_index_from_angle(180.0) : -1] )
-                relative_euclidean_distance_to_wall = dist_to_wall - self.wall_distance
+                # TODO complete linear_x and angular_z vals                
+                dist_at_0 = self.scan.ranges[self.get_laser_index_from_angle(270.0)]
+                dist_at_10 = self.scan.ranges[self.get_laser_index_from_angle(280.0)]
+                l3 = np.sqrt( (dist_at_0**2.0) + (dist_at_10**2.0) - 2.0*dist_at_0*dist_at_10*(np.cos( 0.174533 )) )
+                y1 = np.arcsin((dist_at_10*( np.sin(0.174533) ))/l3)
+                ang_err = np.pi/2.0 - y1                            
+                #dist_to_wall = min( self.scan.ranges[self.get_laser_index_from_angle(180.0) : -1] )
+                dist_to_wall = dist_at_0
+                relative_euclidean_distance_to_wall = self.wall_distance - dist_to_wall
 
-                if abs(ang_err) < 0.3: # TODO consider changing this condition or stating this tresh at init
+                if abs(ang_err) < 0.3 and abs(relative_euclidean_distance_to_wall) < 0.1: # TODO consider changing this condition or stating this tresh at init
                     angular_z = 0.0
                 else:
                     angular_z = self.wall_kp_follow*ang_err
@@ -221,5 +223,5 @@ class Bug0():
             self.rate.sleep()          
 
 if __name__ == "__main__":
-    bug_0 = Bug0(0.0,3.5,0.6)
+    bug_0 = Bug0(-3.0,4.0,0.5)
     bug_0.main()
