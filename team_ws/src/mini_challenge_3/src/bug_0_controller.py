@@ -112,29 +112,53 @@ class Bug0():
         return int(angle_index)
     
     def get_mean_laser_value_at_fov(self, fov_center, fov_range, infinite_substitute = 10.0):
-        values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )
-        """
-        if fov_center - (fov_range/2) >= 0.0:
-            values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )
-        else:
+        #values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )
+        if fov_range > 180.0:
+            Exception("fov is too large")
+        
+        if fov_center - (fov_range/2) < 0.0:
             values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(nav_functions.angle_to_only_possitive_deg(fov_center - (fov_range/2))) : ]
             values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( fov_center + (fov_range/2) ) + 1]
             values_at_fov = np.array(values_at_fov_1 + values_at_fov_2 )
-        """
+        elif fov_center + (fov_range/2) < 360.0:
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(fov_center - (fov_range/2)) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( (fov_center + (fov_range/2))//360.0 ) + 1]
+            values_at_fov = np.array(values_at_fov_1 + values_at_fov_2 )
+        else:
+            values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )
+            
+        
         values_at_fov[values_at_fov == np.inf] = infinite_substitute        
         return values_at_fov.mean()
     
-    def target_path_is_clear(self, p2p_target_angle, target_fov = 30.0):
-        #values_at_target = self.scan.ranges[ self.get_laser_index_from_angle(p2p_target_angle-(target_fov/2.0)) : self.get_laser_index_from_angle(p2p_target_angle+(target_fov/2.0)) ]
-        #distance_at_target = sum(values_at_target)/len(values_at_target)        
+    def get_values_at_target(self, fov_center, fov_range):
+        #values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )
+        if fov_range > 180.0:
+            Exception("fov is too large")
         
+        if fov_center - (fov_range/2) < 0.0:
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(nav_functions.angle_to_only_possitive_deg(fov_center - (fov_range/2))) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( fov_center + (fov_range/2) ) + 1]
+            values_at_fov = values_at_fov_1 + values_at_fov_2
+        elif fov_center + (fov_range/2) < 360.0:
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(fov_center - (fov_range/2)) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( (fov_center + (fov_range/2))//360.0 ) + 1]
+            values_at_fov = values_at_fov_1 + values_at_fov_2
+        else:
+            values_at_fov = self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ]
+                    
+        return values_at_fov
+    
+    def target_path_is_clear(self, p2p_target_angle, target_fov = 30.0):        
         target_direction = nav_functions.angle_to_only_possitive_deg(p2p_target_angle - self.current_angle)        
-        distance_at_target = self.get_mean_laser_value_at_fov(fov_center=target_direction, fov_range=target_fov, infinite_substitute=4.0*self.wall_distance)        
+        values_at_target = self.get_values_at_target(target_direction, target_fov)
+        print("min_values_at_target_is " + str(min(values_at_target)))
+        #distance_at_target = self.get_mean_laser_value_at_fov(fov_center=target_direction, fov_range=target_fov, infinite_substitute=4.0*self.wall_distance)                
         #distance_at_target = self.scan.ranges[ self.get_laser_index_from_angle(target_direction) ] 
-        print("distance at target: " + str(distance_at_target) )
-        print("target angle: " + str(target_direction) )
+        #print("distance at target: " + str(distance_at_target) )
+        #print("target angle: " + str(target_direction) )
         
-        target_is_clear = ( (distance_at_target >= 4.0*self.wall_distance) and 
+        target_is_clear = ( (min(values_at_target) == np.inf) and 
         ((target_direction > 0.0 and target_direction < 90.0) or 
         ((target_direction > 270.0) and target_direction < 360.0)) )
 
