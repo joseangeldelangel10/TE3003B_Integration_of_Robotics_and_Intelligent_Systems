@@ -21,10 +21,10 @@ from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
 
 
-class Bug0():
+class Bug2():
     def __init__(self, targetx, targety, wall_distance):
         
-        rospy.init_node("bug_0_controller")
+        rospy.init_node("bug_2_controller")
         rospy.Subscriber("/odom", Odometry, self.odom_callback)                
         
         self.scan_listener = rospy.Subscriber('/scan', LaserScan,self.scan_callback)
@@ -34,29 +34,44 @@ class Bug0():
 
         self.target_postition_xy_2d = (targetx, targety)
         self.wall_distance = wall_distance
+
+        self.line_A = None
+        self.line_B = None
+        self.line_C = None
                 
         self.current_position_xy_2d = (None, None)
         self.scan = None
-        self.currente_angle = None
+        self.current_angle = None
         self.displaced_angle = 0.0
                      
-        self.angular_error_treshold = 0.05
-        self.distance_error_treshold = 0.05                    
+        self.angular_error_treshold = 0.3    
+        self.distance_error_treshold = 0.08                    
 
-        self.go2point_angular_kp = 1.0
-        self.go2point_linear_kp = 1.0
+        self.go2point_angular_kp = 0.08
+        self.go2point_linear_kp = 0.3
 
-        self.wall_kp_follow = 1.0
-        self.wall_kp_avoid = 1.0
+        self.wall_kp_follow = 40.0
+        self.wall_kp_avoid = 0.3
+        #self.wall_kd_avoid = -0.08
+        #self.previous_wall_avoid_error = None
 
-        self.v_max = 1.0
-        self.w_max = 1.0
+        self.v_max = 0.4
+        self.v_max_wall = 0.4
+        self.w_max = 0.6
 
+        self.puzzlebot_passing_diameter = 0.60 # meters
 
-        self.state = "go_to_point"        
+        self.state = "go_to_point"
 
-        self.rate = rospy.Rate(20)
+        self.turn_left_go_to_point_state_counter = 0
+        self.follow_wall_start_time = None       
 
+        self.rate_val = 20.0
+        self.rate = rospy.Rate(self.rate_val)        
+
+        self.last_turn_time = None
+
+        self.distance_already_calculated = False
 
 
     def scan_callback(self, msg):
@@ -73,12 +88,23 @@ class Bug0():
         self.current_position_xy_2d = ( data.pose.pose.position.x , data.pose.pose.position.y )                             
         self.current_angle = nav_functions.calculate_yaw_angle_deg( data.pose.pose.orientation )
 
-    def turn_left(self, p2p_target_angle, angle_to_rotate = 0.174533):
+    def calculate_intial_line(self, currentx = 0.0, currenty = 0.0):
+        if (self.target_postition_xy_2d is not (None, None)):
+            deltax = self.target_postition_xy_2d[0] - currentx
+            deltay = self.target_postition_xy_2d[1] - currenty
+            self.line_A = deltay
+            self.line_B = -(deltax)
+            self.line_C = (deltax*self.target_postition_xy_2d[1] - deltay*self.target_postition_xy_2d[0])
+            print(self.line_A,self.line_B,self.line_C)
+
+    def calculate_distance_from_current_position_to_line(self):
+        numerator = abs(self.line_A*self.current_position_xy_2d[0] + self.line_B*self.current_position_xy_2d[1] + self.line_C)
+        denominator = np.sqrt(self.line_A**2 + self.line_B**2)
+        return numerator/denominator
+    
+    def turn_left(self, p2p_target_angle, angle_to_rotate = np.pi/2.0):
         
-        if self.get_laser_value_at_angle(p2p_target_angle) > self.wall_distance:
-                self.state = "go_to_point"
-                self.displaced_angle = 0.0
-        elif self.last_turn_time == None and self.state == "turn_left":
+        if self.last_turn_time == None and self.state == "turn_left":
             self.last_turn_time = rospy.get_time()
         else:    
             if self.displaced_angle < angle_to_rotate:                
@@ -91,71 +117,159 @@ class Bug0():
                 self.last_turn_time = current_time
             else:
                 self.state = "follow_wall"
+                self.follow_wall_start_time = rospy.get_time()                
                 self.displaced_angle = 0.0        
                 self.last_turn_time = None            
 
-    def go_to_point_controller(self, angle_error, distance_error):
-        
+    def go_to_point_controller(self, angle_error, distance_error):        
+        front_scan_val = self.get_mean_laser_value_at_fov(0.0, 30.0)        
         if distance_error <= self.distance_error_treshold:                                                            
             self.state = "arrived"
-        elif abs(angle_error) > self.angular_error_treshold:                                    
-            self.vel_msg.angular.z = nav_functions.saturate_signal(self.go2point_angular_kp*angle_error, 0.05) 
-        elif distance_error > self.distance_error_treshold:  
-            if self.scan.ranges[0] <= self.wall_distance:
+        elif self.obstacle_in_front():
                 self.state = "turn_left"
-            else:
-                self.vel_msg.linear.x = nav_functions.saturate_signal(self.go2point_linear_kp*distance_error, 0.05)
+        elif abs(angle_error) > self.angular_error_treshold:                                    
+            self.vel_msg.angular.z = nav_functions.saturate_signal(self.go2point_angular_kp*angle_error, self.w_max) 
+        elif distance_error > self.distance_error_treshold:              
+            self.vel_msg.linear.x = nav_functions.saturate_signal(self.go2point_linear_kp*distance_error, self.v_max)    
+    
+    def get_laser_index_from_angle(self, angle_in_deg):        
+        angle_index = round( (angle_in_deg*len(self.scan.ranges))/360.0 )
+        return int(angle_index)
+    
+    def get_mean_laser_value_at_fov(self, fov_center, fov_range):        
+        if fov_range > 180.0:
+            Exception("fov is too large")
+        
+        if fov_center - (fov_range/2.0) < 0.0:
+            lower_boundary = nav_functions.angle_to_only_possitive_deg(fov_center - (fov_range/2.0))            
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(lower_boundary) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( fov_center + (fov_range/2.0) ) + 1]
+            values_at_fov = np.array(values_at_fov_1 + values_at_fov_2 )
+        elif fov_center + (fov_range/2.0) > 360.0:
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(fov_center - (fov_range/2.0)) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( (fov_center + (fov_range/2.0))%360.0 ) + 1]
+            values_at_fov = np.array(values_at_fov_1 + values_at_fov_2 )
+        else:
+            values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )        
+        
+        values_at_fov[values_at_fov == np.inf] = 12.0
+        return values_at_fov.mean()/1.2 # since values do not appear to represent the real meters
+    
+    def get_values_at_target(self, fov_center, fov_range):        
+        if fov_range > 180.0:
+            Exception("fov is too large")
+        
+        if fov_center - (fov_range/2.0) < 0.0:
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(nav_functions.angle_to_only_possitive_deg(fov_center - (fov_range/2.0))) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( fov_center + (fov_range/2.0) ) + 1]
+            values_at_fov = values_at_fov_1 + values_at_fov_2
+        elif fov_center + (fov_range/2.0) > 360.0:
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(fov_center - (fov_range/2.0)) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( (fov_center + (fov_range/2.0))%360.0 ) + 1]
+            values_at_fov = values_at_fov_1 + values_at_fov_2
+        else:
+            values_at_fov = self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ]
+        
+        return values_at_fov
+    
+    def target_path_is_clear(self, p2p_target_angle):
+        wall_dist_fov = 2.0*( np.pi/2.0 - np.arctan(self.wall_distance/(self.puzzlebot_passing_diameter/2)) )        
+        target_direction = nav_functions.angle_to_only_possitive_deg(p2p_target_angle - self.current_angle)        
+        values_at_target = self.get_values_at_target(target_direction, wall_dist_fov)        
+        
+        target_is_clear = ( (min(values_at_target) >= 2.25*self.wall_distance) and 
+        ((target_direction > 0.0 and target_direction < 90.0) or 
+        ((target_direction > 270.0) and target_direction < 360.0)) )
 
-    def get_laser_value_at_angle(self, angle_in_rads):
-        angle_index = round( (angle_in_rads*2*math.pi)/len(self.scan.ranges) )
-        return self.scan.ranges[int(angle_index)]
-
+        return target_is_clear        
+    
+    def obstacle_in_front(self):
+        wall_dist_fov = 2.0*( np.pi/2.0 - np.arctan(self.wall_distance/(self.puzzlebot_passing_diameter/2)) )                
+        values_in_front = self.get_values_at_target(0.0, wall_dist_fov)
+        side_dists_to_obstacle = self.get_values_at_target(315.0, 30.0)
+        return min(values_in_front) <= self.wall_distance or min(side_dists_to_obstacle) <= self.wall_distance/2.0
+    
     def right_hand_rule_controller(self, p2p_target_angle):
         
-        if self.scan != None:
-            if self.get_laser_value_at_angle(p2p_target_angle) > self.wall_distance:
+        if self.scan != None:                       
+            if (self.calculate_distance_from_current_position_to_line() <= 0.1) and ((rospy.get_time() - self.follow_wall_start_time) >= 1.0):
                 self.state = "go_to_point"
-            elif self.scan_ranges[0] <= self.wall_distance:
+            elif self.obstacle_in_front():
                 self.state = "turn_left"                
             else:
-                # TODO complete linear_x and angular_z vals
-                dist_at_0 = self.scan.ranges[len(self.scan.ranges) // (3.0/4.0)]
-                dist_at_45 = self.scan.ranges[len(self.scan.ranges) // (7.0/8.0)]
-                l3 = np.sqrt( (dist_at_0**2.0) + (dist_at_45**2.0) - 2.0*dist_at_0*dist_at_45*(np.sqrt(2.0)/2.0) )
-                y1 = np.arcsin((dist_at_45*(np.sqrt(2.0)/2.0))/l3)
-                ang_err = y1 - np.pi/2.0            
-                angular_z = self.wall_kp_follow*ang_err
-                relative_euclidean_distance_to_wall = dist_at_0 - self.wall_dist
+                # TODO complete linear_x and angular_z vals                
+                dist_at_0 = self.scan.ranges[self.get_laser_index_from_angle(270.0)]
+                dist_at_10 = self.scan.ranges[self.get_laser_index_from_angle(280.0)]
+                l3 = np.sqrt( (dist_at_0**2.0) + (dist_at_10**2.0) - 2.0*dist_at_0*dist_at_10*(np.cos( 0.174533 )) )
+                y1 = np.arcsin((dist_at_10*( np.sin(0.174533) ))/l3)
+                ang_err = np.pi/2.0 - y1                            
+                dist_to_wall = min( self.get_values_at_target(270.0, 90.0) )
+                if dist_to_wall == np.inf:
+                    dist_to_wall = 12.0
+                #dist_to_wall = dist_at_0
+                relative_euclidean_distance_to_wall = self.wall_distance - dist_to_wall
 
-                if abs(angular_z) < 0.8: # TODO consider changing this condition or stating this tresh at init
-                    if relative_euclidean_distance_to_wall <= (self.wall_dist/2):
-                        angular_z += self.wall_kp_avoid*relative_euclidean_distance_to_wall
-                    linear_x = self.v_max                
-                else:                
-                    linear_x = 0.0
+                """
+                if abs(ang_err) < 0.3 and abs(relative_euclidean_distance_to_wall) < 0.1: # TODO consider changing this condition or stating this tresh at init
+                    angular_z = 0.0
+                else:
+                    if abs(relative_euclidean_distance_to_wall) >= 0.1:                    
+                        # start comment
+                        if self.previous_wall_avoid_error is None:
+                            wall_dist_error_derivative = 0.0
+                            self.previous_wall_avoid_error = relative_euclidean_distance_to_wall                        
+                        else:                        
+                            wall_dist_error_derivative = (relative_euclidean_distance_to_wall - self.previous_wall_avoid_error)
+                            self.previous_wall_avoid_error = relative_euclidean_distance_to_wall
+                        # end comment
+                        #angular_z = self.wall_kp_follow*ang_err
+                        angular_z = self.wall_kp_avoid*relative_euclidean_distance_to_wall
+                    elif abs(ang_err) >= 0.3:
+                        angular_z = self.wall_kp_follow*ang_err
+                """
+                angular_z = nav_functions.saturate_signal( self.wall_kp_avoid*relative_euclidean_distance_to_wall, self.w_max )
+                if self.wall_kp_follow*ang_err != 0:
+                    linear_x = nav_functions.saturate_signal( 1/(self.wall_kp_follow* abs(ang_err)), self.v_max_wall )
+                    if linear_x <= self.v_max_wall/2.0:
+                        linear_x = self.v_max_wall/2.0
+                else:
+                    linear_x = self.v_max_wall
 
-                if dist_at_0 >= 1.2:
-                    angular_z = -1.0 #turn_right
+                if dist_at_0 >= 1.2 or ang_err < (-np.pi/2.0)*(1.0/3.0):
+                    angular_z = -(self.v_max_wall/self.wall_distance)
+                    linear_x = self.v_max_wall                            
 
                 self.vel_msg.angular.z = angular_z
                 self.vel_msg.linear.x = linear_x
                 
     def main(self):
-        while not rospy.is_shutdown():            
+        print("main inited node running")
+        while not rospy.is_shutdown():
+
+            print(self.state)
+
+            if not(self.distance_already_calculated):
+                self.distance_already_calculated = True
+                self.calculate_intial_line()
+
             self.vel_msg.linear.x = 0.0
             self.vel_msg.angular.z = 0.0
+
             if self.current_angle != None and self.scan != None:
+
                 target_vector_minus_robot_vector = ( self.target_postition_xy_2d[0] - self.current_position_xy_2d[0],
                                                      self.target_postition_xy_2d[1] - self.current_position_xy_2d[1]  )
+                
                 target_angle = nav_functions.rad2deg(math.atan2( target_vector_minus_robot_vector[1],target_vector_minus_robot_vector[0]))                
                 angle_error = nav_functions.calculate_angular_error_considering_upper_boundary_lag(target_angle, self.current_angle, "deg", (0.0,360.0))                
-                distance_error = nav_functions.euclidean_distance_single_point_2d( target_vector_minus_robot_vector )                          
+                distance_error = nav_functions.euclidean_distance_single_point_2d( target_vector_minus_robot_vector ) 
+
                 if self.state == "go_to_point":
                     self.go_to_point_controller(angle_error, distance_error)
                 elif self.state == "follow_wall":
                     self.right_hand_rule_controller(target_angle)  
                 elif self.state == "turn_left":
-                    self.turn_left() 
+                    self.turn_left(target_angle) 
                 elif self.state == "arrived":
                     print("ia llegue")
                     exit             
@@ -164,5 +278,5 @@ class Bug0():
             self.rate.sleep()          
 
 if __name__ == "__main__":
-    bug_0 = Bug0(0.0,10.0,0.6)
-    bug_0.main()
+    bug_2 = Bug2(-2.0,7.0,0.5)
+    bug_2.main()
