@@ -34,6 +34,7 @@ class Bug0():
 
         self.target_postition_xy_2d = (targetx, targety)
         self.wall_distance = wall_distance
+        print("Target is :", self.target_postition_xy_2d)
                 
         self.current_position_xy_2d = (None, None)
         self.scan = None
@@ -249,5 +250,5 @@ class Bug0():
             self.rate.sleep()          
 
 if __name__ == "__main__":
-    bug_0 = Bug0(0.0,3.5,0.5)
+    bug_0 = Bug0(-3.0,-5.0,0.5)
     bug_0.main()

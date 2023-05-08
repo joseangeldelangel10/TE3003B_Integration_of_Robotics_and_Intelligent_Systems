@@ -33,6 +33,7 @@ class Bug2():
         self.vel_msg = Twist()
 
         self.target_postition_xy_2d = (targetx, targety)
+        print("Target is :", self.target_postition_xy_2d)
         self.wall_distance = wall_distance
 
         self.line_A = None
@@ -278,5 +279,5 @@ class Bug2():
             self.rate.sleep()          
 
 if __name__ == "__main__":
-    bug_2 = Bug2(-2.0,7.0,0.5)
+    bug_2 = Bug2(-3.0,-5.0,0.5)
     bug_2.main()

@@ -1,7 +1,6 @@
 <launch>        
 
-    <include file="$(find puzzlebot_world)/launch/puzzlebot_obstacle_world.launch" />
-    <!-- <node name="bug_0_controller" pkg="mini_challenge_3" type="bug_0_controller.py" output="screen"/> -->
+    <include file="$(find puzzlebot_world)/launch/2Bug0Bug2_obstacles.launch" />
     <node name="wheel_odometry" pkg="mini_challenge_3" type="wheel_odometry.py" output="screen"/>
     <node name="coordinate_transform" pkg="mini_challenge_3" type="coordinateTransform.py" output="screen"/>
     
