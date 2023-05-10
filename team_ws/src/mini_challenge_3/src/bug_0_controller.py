@@ -250,5 +250,5 @@ class Bug0():
             self.rate.sleep()          
 
 if __name__ == "__main__":
-    bug_0 = Bug0(-3.0,-5.0,0.5)
+    bug_0 = Bug0(0.5,6.0,0.5)
     bug_0.main()

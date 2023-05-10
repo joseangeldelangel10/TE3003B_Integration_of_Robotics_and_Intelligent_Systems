@@ -1,0 +1,19 @@
+
+<launch>        
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find mini_challenge_1)/urdf/puzzlebot.xacro'" />
+
+    <node name="differential_drive_model" pkg="mini_challenge_1" type="differentialDriveModel.py" output="screen"/>
+    <node name="solver" pkg="mini_challenge_1" type="solver.py" output="screen"/>
+    <node name="transform" pkg="mini_challenge_1" type="transform.py" output="screen"/>
+
+    <!-- <node name="wheel_odometry" pkg="mini_challenge_3" type="wheel_odometry.py" output="screen"/> -->
+    <node name="coordinate_transform" pkg="mini_challenge_3" type="coordinateTransform.py" output="screen"/>
+    
+    <node name="odom" pkg="mini_challenge_2" type="wheelBasedDeadReckoning.py" output="screen"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mini_challenge_3)/rviz_config/rviz_config.rviz"/>
+
+    <include file="$(find puzzlebot_world)/launch/puzzlebot_obstacle_world.launch" />
+
+</launch>

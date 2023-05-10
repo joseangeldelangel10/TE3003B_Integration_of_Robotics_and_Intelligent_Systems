@@ -21,8 +21,8 @@ class Solver:
         self.puzzlebot_vel_on_base_frame_th = None
         self.first_time_with_twist = True
 
-        self.wl_sub = rospy.Subscriber('/wl/qt', Float32, self.wl_callback)
-        self.wr_sub = rospy.Subscriber('/wr/qt', Float32, self.wr_callback)
+        self.wl_sub = rospy.Subscriber('/wl', Float32, self.wl_callback)
+        self.wr_sub = rospy.Subscriber('/wr', Float32, self.wr_callback)
         self.left_wheel_angle_pub = rospy.Publisher('/left_wheel_angle', Float32, queue_size=1)
         self.right_wheel_angle_pub = rospy.Publisher('/right_wheel_angle', Float32, queue_size=1)
         self.left_wheel_angle, self.right_wheel_angle = inicial_left_wheel_angle, inicial_right_wheel_angle

@@ -21,9 +21,8 @@ class OdometryNode():
         
         # ______________ init node publishers, subscribers and services ______________
         rospy.init_node('odometry')        
-        self.twist_sub = rospy.Subscriber('/cmd_vel', Twist, self.twist_callback)
-        self.wr_sub = rospy.Subscriber('/wr/qt', Float32, self.puzzlebot_wr_callback)
-        self.wl_sub = rospy.Subscriber('/wl/qt', Float32, self.puzzlebot_wl_callback)        
+        self.wr_sub = rospy.Subscriber('/wr', Float32, self.puzzlebot_wr_callback)
+        self.wl_sub = rospy.Subscriber('/wl', Float32, self.puzzlebot_wl_callback)        
         self.puzzlebot_odom_pub = rospy.Publisher('/odom', Odometry, queue_size=1)        
         self.reset_puzzlebot_service_result = rospy.Service("reset_odometry", ResetOdometry, self.reset_odometry)
         
@@ -38,7 +37,7 @@ class OdometryNode():
         
         # ______________ init nav variables ______________
         self.puzzlebot_estimated_rot_quaternion = None
-        self.puzzlebot_twist = None
+        self.puzzlebot_twist = Twist()
         self.first_time_with_twist = True
         self.last_sampling_time = None        
         self.puzzlebot_wheel_rad = 0.057 # radius
@@ -88,7 +87,7 @@ class OdometryNode():
         self.puzzlebot_estimated_pose.pose.pose.position.x, self.puzzlebot_estimated_pose.pose.pose.position.y = (self.initial_x, self.initial_y)        
         self.puzzlebot_estimated_rot = self.initial_theta
         self.puzzlebot_estimated_rot_quaternion = None
-        self.puzzlebot_twist = None
+        self.puzzlebot_twist = Twist()
         self.first_time_with_twist = True
         self.last_sampling_time = None
         self.puzzlebot_wr = None
@@ -116,9 +115,6 @@ class OdometryNode():
     def puzzlebot_wl_callback(self, msg):
         self.puzzlebot_wl = msg.data         
 
-    def twist_callback(self, msg):
-        self.puzzlebot_twist = msg
-
     def fill_odometry_header(self):
         self.puzzlebot_estimated_pose.header.stamp = rospy.Time.now()
         self.puzzlebot_estimated_pose.header.frame_id = "map"
@@ -127,7 +123,7 @@ class OdometryNode():
 
     def main(self):
         while not rospy.is_shutdown():
-            if self.puzzlebot_twist is not None and self.puzzlebot_wr is not None and self.puzzlebot_wl is not None:
+            if self.puzzlebot_wr is not None and self.puzzlebot_wl is not None:
                 if self.first_time_with_twist:
                     self.first_time_with_twist = False
                     self.last_sampling_time = rospy.get_time()                    
@@ -137,11 +133,16 @@ class OdometryNode():
                     delta_t = (current_time - self.last_sampling_time)
                     self.fill_odometry_header()
                     
+                     # _________ wheels' odometry ______________
+                    #publicadores nuevos? v y w
+                    self.v = (self.puzzlebot_wheel_rad/2)*self.puzzlebot_wr + (self.puzzlebot_wheel_rad/2)*self.puzzlebot_wl
+                    self.w = (self.puzzlebot_wheel_rad/self.puzzlebot_wheel_to_wheel_dist)*self.puzzlebot_wr - (self.puzzlebot_wheel_rad/self.puzzlebot_wheel_to_wheel_dist)*self.puzzlebot_wl
+                    # _________ end of wheels' odometry ______________
 
                     # _________ filling puzzlebot covariance data ______________                    
                     self.puzzlebot_model_jacobian = np.array(
-                        [[1.0, 0.0, -delta_t* self.puzzlebot_twist.linear.x* np.sin(self.puzzlebot_estimated_rot) ],
-                         [0.0, 1.0, delta_t* self.puzzlebot_twist.linear.x* np.cos(self.puzzlebot_estimated_rot) ],
+                        [[1.0, 0.0, -delta_t* self.v* np.sin(self.puzzlebot_estimated_rot) ],
+                         [0.0, 1.0, delta_t* self.v* np.cos(self.puzzlebot_estimated_rot) ],
                          [0.0, 0.0, 1.0]] 
                     )                    
                     multiplier = (1.0/2.0)*self.puzzlebot_wheel_rad*delta_t
@@ -183,6 +184,8 @@ class OdometryNode():
                     self.puzzlebot_estimated_pose.pose.pose.orientation.y = self.puzzlebot_estimated_rot_quaternion[1]
                     self.puzzlebot_estimated_pose.pose.pose.orientation.z = self.puzzlebot_estimated_rot_quaternion[2]
                     self.puzzlebot_estimated_pose.pose.pose.orientation.w = self.puzzlebot_estimated_rot_quaternion[3]
+                    self.puzzlebot_twist.linear.x = self.v
+                    self.puzzlebot_twist.angular.z = self.w
                     self.puzzlebot_estimated_pose.twist.twist = self.puzzlebot_twist
                     # _________ end of filling puzzlebot pose data ______________
 

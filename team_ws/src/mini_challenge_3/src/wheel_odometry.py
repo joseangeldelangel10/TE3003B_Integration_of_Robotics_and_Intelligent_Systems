@@ -48,7 +48,7 @@ class WheelOdometry():
 
     def fill_odometry_header(self):
         self.puzzlebot_estimated_pose.header.stamp = rospy.Time.now()
-        self.puzzlebot_estimated_pose.header.frame_id = "world"
+        self.puzzlebot_estimated_pose.header.frame_id = "map"
         self.puzzlebot_estimated_pose.child_frame_id = "base_link"
 
     def main(self):

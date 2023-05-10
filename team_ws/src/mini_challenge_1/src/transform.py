@@ -9,8 +9,8 @@ class Transform:
     def __init__(self, length =  0.192, radius = 0.057):
         rospy.init_node('transform')
         self.twist_sub = rospy.Subscriber('/cmd_vel', Twist, self.twist_callback)
-        self.wl_pub = rospy.Publisher('/wl/qt', Float32, queue_size=1)
-        self.wr_pub = rospy.Publisher('/wr/qt', Float32, queue_size=1)
+        self.wl_pub = rospy.Publisher('/wl', Float32, queue_size=1)
+        self.wr_pub = rospy.Publisher('/wr', Float32, queue_size=1)
 
         self.wr = Float32()
         self.wl = Float32()
