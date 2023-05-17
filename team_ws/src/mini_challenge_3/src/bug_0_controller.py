@@ -47,7 +47,7 @@ class Bug0():
         self.go2point_linear_kp = 0.3
 
         self.wall_kp_follow = 30.0
-        self.wall_kp_avoid = 1
+        self.wall_kp_avoid = 1.5
         #self.wall_kd_avoid = -0.08
         #self.previous_wall_avoid_error = None
 
@@ -66,8 +66,6 @@ class Bug0():
         self.rate = rospy.Rate(self.rate_val)        
 
         self.last_turn_time = None
-
-
 
     def scan_callback(self, msg):
         self.scan = msg    
@@ -175,17 +173,17 @@ class Bug0():
             return value
         
     def set_turn_angle(self):
-        angle_apperture = 10.0
+        angle_apperture = 30.0
         right_angle = 360.0 - angle_apperture
         dist_at_90 = self.scan.ranges[self.get_laser_index_from_angle(0.0)]
-        dist_at_80 = self.scan.ranges[self.get_laser_index_from_angle(right_angle)]
+        dist_at_60 = self.scan.ranges[self.get_laser_index_from_angle(right_angle)]
         rad_apperture = np.deg2rad(angle_apperture)
-        izquierda = self.check_inf(dist_at_90**2 + dist_at_80**2)
-        derecha = self.check_inf(2.0*dist_at_90*dist_at_80*math.cos(rad_apperture))
+        izquierda = self.check_inf(dist_at_90**2 + dist_at_60**2)
+        derecha = self.check_inf(2.0*dist_at_90*dist_at_60*math.cos(rad_apperture))
         print ("izquierda: ", izquierda, " derecha: ", derecha)
         abajo = math.sqrt( izquierda - derecha)
         print ("abajo: ", abajo)
-        angle = math.asin((dist_at_80*math.sin(rad_apperture))/abajo) 
+        angle = math.asin((dist_at_60*math.sin(rad_apperture))/abajo) 
         print ("angle: ", np.rad2deg(angle))
         return angle
 
@@ -198,21 +196,18 @@ class Bug0():
                 self.angle_to_rotate = self.set_turn_angle()
                 self.state = "turn_left"                
             else:
-                print("using RHRC")
+                #print("using RHRC")
                 dist_at_0 = self.scan.ranges[self.get_laser_index_from_angle(270.0)]
                 dist_at_10 = self.scan.ranges[self.get_laser_index_from_angle(280.0)]
-                dist_at_90 = self.scan.ranges[self.get_laser_index_from_angle(0.0)]
                 l3 = np.sqrt( (dist_at_0**2) + (dist_at_10**2) - 2.0*dist_at_0*dist_at_10*(np.cos( 0.174533 )) )
                 y1 = np.arcsin((dist_at_10*( np.sin(0.174533) ))/l3)
                 ang_err = np.pi/2.0 - y1                            
-                dist_to_wall = min( self.get_values_at_target(270.0, 90.0) )
-                if dist_to_wall == np.inf:
-                    dist_to_wall = 12.0
+                dist_to_wall = self.check_inf(min( self.get_values_at_target(270.0, 90.0) ))
                 relative_euclidean_distance_to_wall = self.wall_distance - dist_to_wall
-
-                angular_z = nav_functions.saturate_signal( self.wall_kp_avoid*relative_euclidean_distance_to_wall, self.w_max )
+                print ("relative: ", relative_euclidean_distance_to_wall)
+                angular_z = nav_functions.saturate_signal( self.wall_kp_avoid*relative_euclidean_distance_to_wall, 0.1 )
                 if self.wall_kp_follow*ang_err != 0:
-                    print("normal")
+                    print("normal: ", angular_z)
                     linear_x = nav_functions.saturate_signal( 1/(self.wall_kp_follow* abs(ang_err)), self.v_max_wall )
                     if linear_x <= self.v_max_wall/2.0:
                         linear_x = self.v_max_wall/2.0
@@ -220,18 +215,29 @@ class Bug0():
                     linear_x = self.v_max_wall
 
                 if dist_at_0 >= 1.2 or ang_err < (-np.pi/2.0)*(1.0/3.0):
-                    print("girando")
-                    angular_z = -(0.2/self.wall_distance)
-                    linear_x = 0.12    
-      
+                    self.state = "rotating"    
 
                 self.vel_msg.angular.z = angular_z
                 self.vel_msg.linear.x = linear_x
-                
+
+    def hard_rotate(self, p2p_target_angle):
+        dist_at_0 = self.check_inf(self.scan.ranges[self.get_laser_index_from_angle(270.0)])
+        if self.target_path_is_clear(p2p_target_angle) and (rospy.get_time() - self.follow_wall_start_time) >= 1.0:
+            self.state = "go_to_point"
+        elif dist_at_0 <= self.wall_distance:
+            self.state = "follow_wall"
+        elif self.obstacle_in_front():
+            self.angle_to_rotate = self.set_turn_angle()
+            self.state = "turn_left"
+        else:
+            self.vel_msg.angular.z = -0.3/(self.wall_distance+0.1)
+            self.vel_msg.linear.x = 0.3
+    
+
     def main(self):
         print("main inited node running")
         while not rospy.is_shutdown():
-            print(self.state)         
+            #print(self.state)         
             self.vel_msg.linear.x = 0.0
             self.vel_msg.angular.z = 0.0
             if self.current_angle != None and self.scan != None:
@@ -244,6 +250,8 @@ class Bug0():
                     self.go_to_point_controller(angle_error, distance_error)
                 elif self.state == "follow_wall":
                     self.right_hand_rule_controller(target_angle)  
+                elif self.state == "rotating":
+                    self.hard_rotate(target_angle)
                 elif self.state == "turn_left":
                     self.turn_left(self.angle_to_rotate) 
                 elif self.state == "arrived":
@@ -254,5 +262,5 @@ class Bug0():
             self.rate.sleep()          
 
 if __name__ == "__main__":
-    bug_0 = Bug0(0.0,3.5,0.5)
+    bug_0 = Bug0(1.0,4.5,0.5)
     bug_0.main()
