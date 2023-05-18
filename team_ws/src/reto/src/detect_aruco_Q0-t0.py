@@ -4,8 +4,10 @@ import rospy
 import numpy as np
 import cv2
 import math
+from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Image, LaserScan
 from geometry_msgs.msg import Pose
+from std_msgs.msg import String, Int8, Header
 
 
 class ArucoDetector():
@@ -18,25 +20,32 @@ class ArucoDetector():
         self.arucoParams = cv2.aruco.DetectorParameters()
         self.arucoDetector = cv2.aruco.ArucoDetector(self.arucoDict, self.arucoParams)
 
-        self.imge_ocv = np.zeros((self.image_size.height, self.image_size.width, 3), dtype=np.uint8)
-        self.depth_image_zed_ocv = np.zeros((self.image_size.height, self.image_size.width), dtype=np.uint8)
-        self.point_cloud_ocv = np.zeros((self.image_size.height, self.image_size.width), dtype=np.uint8)
-        self.displayed_image_ocv = np.zeros((self.image_size.height, self.image_size.width, 3), dtype=np.uint8)
-        self.arucos_mask = np.zeros((self.image_size.height, self.image_size.width, 3), dtype = np.uint8)
-        self.arucos_mask_with_distance = np.zeros((self.image_size.height, self.image_size.width), dtype = np.float64)
-
         # ________ ros atributes initialization ______        
         self.image_pub = rospy.Publisher("/image_detecting", Image, queue_size = 1)
-        self.image_aruco_mask = rospy.Publisher("/image_arucos_mask", Image, queue_size = 1)
-        self.image_aruco_mask_distance = rospy.Publisher("arucos_mask_with_distance", Image, queue_size = 1)        
+        self.odom_sub = rospy.Subscriber('/odom', Odometry, self.odom_calback)
+        self.scan_sub = rospy.Subscriber('/scan', LaserScan,self.scan_callback)
 
         #__________ image ______________
         self.curr_signs_image_msg = Image()
         self.curr_signs_image_msg_2 = Image()
         self.curr_signs_image_msg_3 = Image()
 
+        #___________ color ______________
+        self.green = (0, 255, 0)
 
-    def draw_arucos(sel, image, corners):
+        #___________ video initialization _______________
+        self.vid = cv2.VideoCapture(0)
+        self.displayed_image_ocv = np.zeros(5, dtype=np.uint8)
+        
+
+    def scan_callback(self, msg):
+        pass
+
+    def odom_calback(self, msg):
+        pass
+
+
+    def draw_arucos(self, image, corners):
         # verify *at least* one ArUco marker was detected
         if len(corners) > 0:
 			# loop over the detected ArUCo corners
@@ -55,10 +64,10 @@ class ArucoDetector():
                 topLeft = (int(topLeft[0]), int(topLeft[1]))
 
 				# draw the bounding box of the ArUCo detection
-                image = cv2.line(image, topLeft, topRight, (0, 255, 0), 2)
-                image = cv2.line(image, topRight, bottomRight, (0, 255, 0), 2)
-                image = cv2.line(image, bottomRight, bottomLeft, (0, 255, 0), 2)
-                image = cv2.line(image, bottomLeft, topLeft, (0, 255, 0), 2)
+                image = cv2.line(image, topLeft, topRight, self.green, 2)
+                image = cv2.line(image, topRight, bottomRight, self.green, 2)
+                image = cv2.line(image, bottomRight, bottomLeft, self.green, 2)
+                image = cv2.line(image, bottomLeft, topLeft, self.green, 2)
         return image
 
     def get_arucos_info_in_image(self, image):
@@ -124,59 +133,28 @@ class ArucoDetector():
     def euclidean_distance(self, tuple):
         return math.sqrt(tuple[0]**2 + tuple[1]**2 + tuple[2]**2)
 
-    def get_closest_point(self, point_list):
-        # TODO - implement this functions logic
-        euclidean_distances = list(map(self.euclidean_distance, point_list))
-        positions_and_euclidean_distances = list(zip(point_list, euclidean_distances))
-        positions_and_euclidean_distances.sort(key = lambda x:x[1])
-
-        return positions_and_euclidean_distances[0][0]
-
-        
-
-
-    def tuple_position_2_ros_position(self, tuple_point):
-        ros_point = Point()
-        ros_point.x = tuple_point[0]
-        ros_point.y = tuple_point[1]
-        ros_point.z = tuple_point[2]
-        return ros_point
-
     def main(self):
         while not rospy.is_shutdown():
-            self.arucos_mask = np.zeros((self.image_size.height, self.image_size.width, 3), dtype = np.int8)
-            self.arucos_mask_with_distance = np.zeros((self.image_size.height, self.image_size.width), dtype = np.float64)
-            if self.zed_camera.grab(self.zed_runtime_parameters) == sl.ERROR_CODE.SUCCESS:
-                # Retrieve left image
-                self.zed_camera.retrieve_image(self.image_zed, sl.VIEW.LEFT, sl.MEM.CPU, self.image_size)
-                # Retrieve depth map. Depth is aligned on the left image
-                self.zed_camera.retrieve_image(self.depth_image_zed, sl.VIEW.DEPTH, sl.MEM.CPU, self.image_size)
-                # Retrieve colored point cloud. Point cloud is aligned on the left image.
-                self.zed_camera.retrieve_measure(self.point_cloud, sl.MEASURE.DEPTH, sl.MEM.CPU, self.image_size)
-                self.image_ocv = self.image_zed.get_data()
-                self.image_ocv = self.image_ocv[:,:,:-1]
-                self.depth_image_ocv = self.depth_image_zed.get_data()
-                self.point_cloud_ocv = self.point_cloud.get_data()
+            
+            _, self.frame = self.vid.read()
 
-                aruco_corners, aruco_ids = self.get_arucos_info_in_image(self.image_ocv)
-                self.displayed_image_ocv = self.image_ocv.copy()
-                if len(aruco_corners) > 0:
-                    self.displayed_image_ocv = self.draw_arucos(self.displayed_image_ocv, aruco_corners)                
-                    aruco_centers = list(map(self.get_aruco_midpoint, aruco_corners))
+            aruco_corners, aruco_ids = self.get_arucos_info_in_image(self.frame)
+            print (aruco_ids)
+            self.displayed_image_ocv = self.frame.copy()
+            if len(aruco_corners) > 0:
+                self.displayed_image_ocv = self.draw_arucos(self.displayed_image_ocv, aruco_corners)                
+                
+                #aruco_centers = list(map(self.get_aruco_midpoint, aruco_corners))
 
-                    centers_meters = list(map(self.transform_aruco_midpoint_to_metric_system, aruco_centers))           
-                    closest_aruco_position = self.get_closest_point(centers_meters)
+                #centers_meters = list(map(self.transform_aruco_midpoint_to_metric_system, aruco_centers))           
+                #closest_aruco_position = self.get_closest_point(centers_meters)
 
-                    #closest_aruco_position = self.transform_aruco_midpoint_to_metric_system(closest_aruco_position)                
-                    self.closest_aruco_position_publisher.publish( self.tuple_position_2_ros_position(closest_aruco_position))
+                #closest_aruco_position = self.transform_aruco_midpoint_to_metric_system(closest_aruco_position)                
 
-                self.curr_signs_image_msg = self.cv2_to_imgmsg(self.displayed_image_ocv, encoding = "bgr8")
-                self.image_pub.publish(self.curr_signs_image_msg)
-                self.curr_signs_image_msg_2 = self.cv2_to_imgmsg(self.arucos_mask, encoding = "bgr8")
-                self.image_aruco_mask.publish(self.curr_signs_image_msg_2)
-
-                """ self.curr_signs_image_msg_3 = self.cv2_to_imgmsg(self.arucos_mask_with_distance, encoding = "bgr8")
-                self.image_aruco_mask_distance.publish(self.curr_signs_image_msg_3) """ 
+            self.curr_signs_image_msg = self.cv2_to_imgmsg(self.displayed_image_ocv, encoding = "bgr8")
+            self.image_pub.publish(self.curr_signs_image_msg)
+        self.vid.release()
+        cv2.destroyAllWindows()    
 
 if __name__ == "__main__":
     aruco_detector = ArucoDetector()
