@@ -24,6 +24,7 @@ class ArucoDetector():
         self.image_pub = rospy.Publisher("/image_detecting", Image, queue_size = 1)
         self.odom_sub = rospy.Subscriber('/odom', Odometry, self.odom_calback)
         self.scan_sub = rospy.Subscriber('/scan', LaserScan,self.scan_callback)
+        self.image_sub = rospy.Subscriber("/camera/image_raw", Image, self.image_callback)
 
         #__________ image ______________
         self.curr_signs_image_msg = Image()
@@ -34,9 +35,13 @@ class ArucoDetector():
         self.green = (0, 255, 0)
 
         #___________ video initialization _______________
-        self.vid = cv2.VideoCapture(0)
         self.displayed_image_ocv = np.zeros(5, dtype=np.uint8)
+        self.image = None
+        self.ocv_image = None
         
+
+    def image_callback(self, msg):
+        self.image = msg
 
     def scan_callback(self, msg):
         pass
@@ -74,9 +79,6 @@ class ArucoDetector():
         # detect ArUco markers in the input frame
         (corners, ids, rejected) = self.arucoDetector.detectMarkers(image)    
         return (corners, ids)
-
-    def midpoint_equation(self, p1, p2):
-        return ( (p1[0]+p2[0])/2, (p1[1]+p2[1])/2 )
 
     def get_aruco_midpoint(self, rectangle_corners):
         """ function that returns the x,y,z cordinates of the aruco's midpoint """
@@ -129,30 +131,35 @@ class ArucoDetector():
             return self.curr_signs_image_msg
         else:            
             raise Exception("Error while convering cv image to ros message") 
-            
+    
+    def imgmsg_to_cv2(self, ros_image):
+        if (ros_image.encoding == "bgr8" or ros_image.encoding == "rgb8") and ros_image.is_bigendian == 0:
+            cv_img = np.array(list(ros_image.data), dtype= np.uint8)
+            cv_img = np.reshape(cv_img, (ros_image.height, ros_image.step))
+            cv_img = np.reshape(cv_img, (ros_image.height, ros_image.width, int(ros_image.step/ros_image.width) ) )
+        else:
+            cv_img = None
+            raise Exception("Error while convering ros image message to a cv image")                  
+        return cv_img
+
+
     def euclidean_distance(self, tuple):
         return math.sqrt(tuple[0]**2 + tuple[1]**2 + tuple[2]**2)
 
     def main(self):
         while not rospy.is_shutdown():
-            
-            _, self.frame = self.vid.read()
-
-            aruco_corners, aruco_ids = self.get_arucos_info_in_image(self.frame)
-            print (aruco_ids)
-            self.displayed_image_ocv = self.frame.copy()
-            if len(aruco_corners) > 0:
-                self.displayed_image_ocv = self.draw_arucos(self.displayed_image_ocv, aruco_corners)                
+            if self.image != None:  
+                self.ocv_image = self.imgmsg_to_cv2(self.image)
+                aruco_corners, aruco_ids = self.get_arucos_info_in_image(self.ocv_image)
+                print (aruco_ids)
+                self.displayed_image_ocv = self.ocv_image.copy()
+                if len(aruco_corners) > 0:
+                    self.displayed_image_ocv = self.draw_arucos(self.displayed_image_ocv, aruco_corners)                
+                    
                 
-                #aruco_centers = list(map(self.get_aruco_midpoint, aruco_corners))
 
-                #centers_meters = list(map(self.transform_aruco_midpoint_to_metric_system, aruco_centers))           
-                #closest_aruco_position = self.get_closest_point(centers_meters)
-
-                #closest_aruco_position = self.transform_aruco_midpoint_to_metric_system(closest_aruco_position)                
-
-            self.curr_signs_image_msg = self.cv2_to_imgmsg(self.displayed_image_ocv, encoding = "bgr8")
-            self.image_pub.publish(self.curr_signs_image_msg)
+                self.curr_signs_image_msg = self.cv2_to_imgmsg(self.displayed_image_ocv, encoding = "bgr8")
+                self.image_pub.publish(self.curr_signs_image_msg)
         self.vid.release()
         cv2.destroyAllWindows()    
 
