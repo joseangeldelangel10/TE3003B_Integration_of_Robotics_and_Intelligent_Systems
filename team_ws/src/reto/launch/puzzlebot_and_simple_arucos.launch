@@ -25,7 +25,7 @@
   </include>
   
   <!--load robot description -->
-   <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find puzzlebot_gazebo)/urdf/puzzlebot.xacro'" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find puzzlebot_gazebo)/urdf/puzzlebot.xacro'" />
     
     <arg name="x" default="0.00"/>
     <arg name="y" default="0.00"/>
@@ -33,7 +33,7 @@
     <arg name="Y" default="-1.57"/>
 
   <!-- <param name="aruco_1_description" file="$(find reto)/models/Aruco_tag0/model.sdf" /> -->
-    <arg name="aruco_1_file" default="$(find reto)/models/Aruco_tag0/model.sdf"/>
+    <arg name="aruco_1_file" default="$(find reto)/models/aruco_box/model.sdf"/>
     
   <node name="puzzlebot_spawn" pkg="gazebo_ros" type="spawn_model"  output="screen"
           args="-urdf -param robot_description -model puzzlebot -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg Y)" />
