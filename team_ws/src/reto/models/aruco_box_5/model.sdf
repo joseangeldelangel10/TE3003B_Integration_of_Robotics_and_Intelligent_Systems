@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
-  <model name='aruco_box'>    
+  <model name='aruco_box_5'> <!-- CHANGE HERE TO NEW ARUCO ID -->   
     <link name='link_0'>
       <inertial>
         <mass>1</mass>
@@ -26,21 +26,20 @@
             <size>0.24 0.24 0.24</size>
           </box>
         </geometry>
-        <material>
-          Gazebo/Red
+        <material>          
           <lighting>1</lighting>
           <script>            
-            <uri>model://aruco_box/materials/scripts</uri>
-            <uri>model://aruco_box/materials/textures</uri>
-            <name>Aruco/Id1</name>
+            <uri>model://aruco_box_5/materials/scripts</uri> <!-- CHANGE HERE TO NEW ARUCO ID -->
+            <uri>model://aruco_box_5/materials/textures</uri> <!-- CHANGE HERE TO NEW ARUCO ID -->
+            <name>Aruco/Id5</name> <!-- CHANGE HERE TO NEW ARUCO ID -->
           </script>
           <shader type='vertex'>
             <normal_map>__default__</normal_map>
           </shader>
-          <ambient>0.3 0.3 0.3 1</ambient>
-          <diffuse>0.7 0.7 0.7 1</diffuse>
-          <specular>0.01 0.01 0.01 1</specular>
-          <emissive>0 0 0 1</emissive>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>1 1 1 1</emissive>
         </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
@@ -54,21 +53,6 @@
             <size>0.24 0.24 0.24</size>
           </box>
         </geometry>
-        <material>
-          <lighting>1</lighting>
-          <script>
-            <uri>model://aruco_box/materials/scripts</uri>
-            <uri>model://aruco_box/materials/textures</uri>
-            <name>Aruco/Id1</name>
-          </script>
-          <shader type='vertex'>
-            <normal_map>__default__</normal_map>
-          </shader>
-          <ambient>0.3 0.3 0.3 1</ambient>
-          <diffuse>0.7 0.7 0.7 1</diffuse>
-          <specular>0.01 0.01 0.01 1</specular>
-          <emissive>0 0 0 1</emissive>
-        </material>
         <surface>
           <friction>
             <ode>
