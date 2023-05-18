@@ -3,8 +3,8 @@
  
   <!-- Set up env variable so plugin and textures are found -->
   <env name="GAZEBO_PLUGIN_PATH" value="$(find puzzlebot_world)/plugins"/> 
-  <env name="GAZEBO_MODEL_PATH" value="$(find puzzlebot_world)/models"/>
-  <env name="GAZEBO_RESOURCE_PATH" value="$(find puzzlebot_world)/models" />
+  <env name="GAZEBO_MODEL_PATH" value="$(find reto)/models"/>
+  <env name="GAZEBO_RESOURCE_PATH" value="$(find reto)/models" />
 
  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
   <arg name="paused" default="false"/>
@@ -15,7 +15,7 @@
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find puzzlebot_world)/worlds/empty_aruco_world.world"/>
+    <arg name="world_name" value="$(find reto)/worlds/empty_aruco_world.world"/>    
     <!-- <arg name="world_name" value="(find puzzlebot_world)/worlds/box.world" /> -->
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
@@ -33,13 +33,15 @@
     <arg name="Y" default="-1.57"/>
 
   <!-- <param name="aruco_1_description" file="$(find reto)/models/Aruco_tag0/model.sdf" /> -->
-    <arg name="aruco_1_file" default="$(find reto)/models/Aruco_tag0/model.sdf"/>
+    <arg name="aruco_1_file" default="$(find reto)/models/aruco_box/model.sdf"/>
     
   <node name="puzzlebot_spawn" pkg="gazebo_ros" type="spawn_model"  output="screen"
           args="-urdf -param robot_description -model puzzlebot -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg Y)" />
   
+  <!--
   <node name="spawn_aruco_1" pkg="gazebo_ros" type="spawn_model"  output="screen"
           args="-file $(arg aruco_1_file) -sdf -x -1.0 -y 1.0 -z 0.12 -R 0.0 -P 1.57 -Y 0.0 -model aruco_1_box"/>
+  -->
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
   </node>
