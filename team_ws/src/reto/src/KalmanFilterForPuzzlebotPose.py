@@ -73,6 +73,21 @@ class KalmanFilterForPuzzlebotPose():
         xk_corrected = xk_pred+ Gk@(yk-(C@xk_pred))  
         Pk_corrected = (np.identity(len(xk_pred))-(Gk@C))@Pk_pred
         return xk_corrected,Pk_corrected
+    
+    def create_kalman_position_message(self,corrected_state_mean, corrected_state_cov):
+        
+        self.kalman_position_message.pose.pose.position.x = corrected_state_mean[0]
+        self.kalman_position_message.pose.pose.position.y = corrected_state_mean[1]
+        self.kalman_position_message.pose.pose.position.z = self.puzzlebot_height/2.0
+                
+        self.puzzlebot_6_times_6_covariance_matrix[0,:2] = corrected_state_cov[0,:2]
+        self.puzzlebot_6_times_6_covariance_matrix[0,5] = corrected_state_cov[0,2]
+        self.puzzlebot_6_times_6_covariance_matrix[5,:2] = corrected_state_cov[2,:2]
+        self.puzzlebot_6_times_6_covariance_matrix[5,5] = corrected_state_cov[2,2]
+        flattened_6_times_6_covariance_matrix = self.puzzlebot_6_times_6_covariance_matrix.reshape((self.puzzlebot_6_times_6_covariance_matrix.shape[0]*self.puzzlebot_6_times_6_covariance_matrix.shape[1],))
+        self.kalman_position_message.pose.covariance = flattened_6_times_6_covariance_matrix.tolist()
+                
+        self.kalman_position_pub.publish(self.kalman_position_message)
                 
     def main(self):        
         while not rospy.is_shutdown():
@@ -82,18 +97,8 @@ class KalmanFilterForPuzzlebotPose():
                                                                         self.relation_matrix_between_output_and_state,
                                                                         self.state_uncertainty_matrix,
                                                                         self.visual_sensor_reading)
-                self.kalman_position_message.pose.pose.position.x = corrected_state_mean[0]
-                self.kalman_position_message.pose.pose.position.y = corrected_state_mean[1]
-                self.kalman_position_message.pose.pose.position.z = self.puzzlebot_height/2.0
                 
-                self.puzzlebot_6_times_6_covariance_matrix[0,:2] = corrected_state_cov[0,:2]
-                self.puzzlebot_6_times_6_covariance_matrix[0,5] = corrected_state_cov[0,2]
-                self.puzzlebot_6_times_6_covariance_matrix[5,:2] = corrected_state_cov[2,:2]
-                self.puzzlebot_6_times_6_covariance_matrix[5,5] = corrected_state_cov[2,2]
-                flattened_6_times_6_covariance_matrix = self.puzzlebot_6_times_6_covariance_matrix.reshape((self.puzzlebot_6_times_6_covariance_matrix.shape[0]*self.puzzlebot_6_times_6_covariance_matrix.shape[1],))
-                self.kalman_position_message.pose.covariance = flattened_6_times_6_covariance_matrix.tolist()
-                
-                self.kalman_position_pub.publish(self.kalman_position_message)
+                self.create_kalman_position_message(corrected_state_mean, corrected_state_cov)
                 
             self.rate.sleep()          
 
