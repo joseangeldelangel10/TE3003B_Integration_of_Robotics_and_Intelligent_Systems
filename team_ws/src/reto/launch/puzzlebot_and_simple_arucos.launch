@@ -57,6 +57,8 @@
 
   <node name="detect_aruco" pkg="reto" type="detect_aruco_Q0-t0.py"/>
 
+  <node name="kalman_filter" pkg="reto" type="KalmanFilterForPuzzlebotPose.py"/>
+
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reto)/rviz_config/rviz_config.rviz"/>
 
 </launch>
