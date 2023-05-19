@@ -31,11 +31,11 @@ class KalmanFilterForPuzzlebotPose():
         #TODO - add the necessary publishers for the node
         self.kalman_position_pub = rospy.Publisher("/kalman_odom", Odometry, queue_size=1)
         self.kalman_position_message = Odometry()
-        self.puzzlebot_6_times_6_covariance_matrix = np.zeros((6,6))
+        self.puzzlebot_6_times_6_covariance_matrix = np.zeros((6,6), dtype=float)
         self.puzzlebot_height = 15.0
 
-        self.relation_matrix_between_output_and_state = np.identity(3) # since the output of the systems equals its state (position) [C]
-        self.state_uncertainty_matrix = np.ones((3,3))*5 # 5 meters in our context equals infinite        
+        self.relation_matrix_between_output_and_state = np.identity(3, dtype=float) # since the output of the systems equals its state (position) [C]
+        self.state_uncertainty_matrix = np.ones((3,3), dtype=float)*5.0 # 5 meters in our context equals infinite        
 
         self.predicted_state = None
         self.predicted_state_covariance = None
@@ -55,21 +55,23 @@ class KalmanFilterForPuzzlebotPose():
         )
 
     def odom_msg_to_state_vector(self, msg):
-        robot_yaw = nav_functions.euler_from_quaternion([msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w])
+        _, _, robot_yaw = nav_functions.euler_from_quaternion([msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w])
         self.predicted_state = np.array(
             [[msg.pose.pose.position.x],
              [msg.pose.pose.position.y],
              [robot_yaw]]
         )
         self.predicted_state_covariance = np.array(
-            [[self.pose.covariance[0], self.pose.covariance[1], self.pose.covariance[5] ],
-             [self.pose.covariance[6], self.pose.covariance[7], self.pose.covariance[11]],
-             [self.pose.covariance[30], self.pose.covariance[31], self.pose.covariance[35]]]
+            [[msg.pose.covariance[0], msg.pose.covariance[1], msg.pose.covariance[5] ],
+             [msg.pose.covariance[6], msg.pose.covariance[7], msg.pose.covariance[11]],
+             [msg.pose.covariance[30], msg.pose.covariance[31], msg.pose.covariance[35]]]
         )
 
     def kalman(self,xk_pred,Pk_pred,C,R,yk):
         #Correction
         Gk = Pk_pred@(C.T)@np.linalg.inv((C@Pk_pred@C.T)+R)
+        #print("GK dtype is: {t}".format(t = Gk))
+        #print("GK shape is: {t}".format(t = Gk.shape))
         xk_corrected = xk_pred+ Gk@(yk-(C@xk_pred))  
         Pk_corrected = (np.identity(len(xk_pred))-(Gk@C))@Pk_pred
         return xk_corrected,Pk_corrected

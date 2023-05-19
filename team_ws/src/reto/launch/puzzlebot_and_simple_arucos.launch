@@ -57,7 +57,7 @@
 
   <node name="detect_aruco" pkg="reto" type="detect_aruco_Q0-t0.py"/>
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mini_challenge_2)/rviz_config/rviz_config_w_ghost.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reto)/rviz_config/rviz_config.rviz"/>
 
 </launch>
 
