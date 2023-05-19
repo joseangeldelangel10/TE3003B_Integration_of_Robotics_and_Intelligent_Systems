@@ -8,6 +8,7 @@ from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Image, LaserScan
 from geometry_msgs.msg import Pose
 from std_msgs.msg import String, Int8, Header
+from nav_functions import *
 
 
 class ArucoDetector():
@@ -19,10 +20,12 @@ class ArucoDetector():
         self.arucoDict = cv2.aruco.getPredefinedDictionary(aruco_dict)
         self.arucoParams = cv2.aruco.DetectorParameters()
         self.arucoDetector = cv2.aruco.ArucoDetector(self.arucoDict, self.arucoParams)
+        self.arucoCoordinates = {"0": (2,2),"1": (2,-2),"2": (-2,-2),"3": (-2,2),"4": (4,4),"5": (4,-4),"6": (-4,-4),"7": (-4,4)}
+        self.arucoBoxDim = 24
 
         # ________ ros atributes initialization ______        
         self.image_pub = rospy.Publisher("/image_detecting", Image, queue_size = 1)
-        self.odom_sub = rospy.Subscriber('/odom', Odometry, self.odom_calback)
+        self.odom_sub = rospy.Subscriber('/odom', Odometry, self.odom_callback)
         self.scan_sub = rospy.Subscriber('/scan', LaserScan,self.scan_callback)
         self.image_sub = rospy.Subscriber("/camera/image_raw", Image, self.image_callback)
 
@@ -38,17 +41,23 @@ class ArucoDetector():
         self.displayed_image_ocv = np.zeros(5, dtype=np.uint8)
         self.image = None
         self.ocv_image = None
+
+        self.scan = None
+
+        self.current_position_xy_2d = None
+        self.current_angle = None
+
         
 
     def image_callback(self, msg):
         self.image = msg
 
     def scan_callback(self, msg):
-        pass
+        self.scan = msg
 
-    def odom_calback(self, msg):
-        pass
-
+    def odom_callback(self, data):
+        self.current_position_xy_2d = ( data.pose.pose.position.x , data.pose.pose.position.y )                             
+        self.current_angle = calculate_yaw_angle_deg( data.pose.pose.orientation )
 
     def draw_arucos(self, image, corners):
         # verify *at least* one ArUco marker was detected
@@ -80,28 +89,24 @@ class ArucoDetector():
         (corners, ids, rejected) = self.arucoDetector.detectMarkers(image)    
         return (corners, ids)
 
+    def get_aruco_angle(self, aruco_midpoint, camera_fov = 1.3962634, image_width = 800.0):
+        """
+        input:
+            aruco_midpoint : tuple with (x_center_px, y_center_px)
+        output:
+            aruco_angle: float with aruco angle in rads
+        """
+        angle = -(camera_fov/image_width)*aruco_midpoint[0] + camera_fov/2
+        return angle
+
+    def midpoint_equation(self, p1, p2):
+        return ( (p1[0]+p2[0])/2, (p1[1]+p2[1])/2 )
+
     def get_aruco_midpoint(self, rectangle_corners):
-        """ function that returns the x,y,z cordinates of the aruco's midpoint """
-        # ______________ initializing and formating data that will be used ______________
-        self.arucos_mask = np.zeros((self.image_size.height, self.image_size.width, 3), dtype = np.uint8)
-        rectangle_corners_for_x_y = rectangle_corners.reshape((4,2))
-        rectangle_corners_for_mask = np.int32(rectangle_corners.reshape((1,4,2)))
-        # ______________ getting the x,y cordinates of the aruco tag (in pixels) ______________
-        x_center, y_center = self.midpoint_equation(rectangle_corners_for_x_y[0,:], rectangle_corners_for_x_y[2,:])
-        # ______________ getting the z cordinate of the aruco tag (in point cloud units) ______________
-        # step one - we filter the point cloud using a mask with only the area of the aruco tag
-        cv2.fillPoly(self.arucos_mask, pts = rectangle_corners_for_mask, color=(255,255,255))  
-        one_channel_arucos_mask = cv2.cvtColor(self.arucos_mask, cv2.COLOR_BGR2GRAY)  /255.0        
-        self.arucos_mask_with_distance = np.nan_to_num(self.point_cloud_ocv)*one_channel_arucos_mask
-        # step two - we get the mean point cloud value on the aruco tag area, to use it as z value
-        tag_area = one_channel_arucos_mask.sum()
-        if tag_area > 0:        
-            z_center = (self.arucos_mask_with_distance/255.0).sum()/tag_area
-        else:
-            z_center = 0.0        
-        # on the next line the minus signs allow us to transform the camera reference frame to a reference frame that
-        # is parallel to the robots reference frame 
-        return (float(z_center), float(-x_center), float(-y_center)) 
+        """ function that returns the x,y cordinates of the aruco's midpoint """                
+        rectangle_corners_for_x_y = rectangle_corners.reshape((4,2))        
+        x_center_px, y_center_px = self.midpoint_equation(rectangle_corners_for_x_y[0,:], rectangle_corners_for_x_y[2,:])        
+        return (x_center_px, y_center_px)
 
     def transform_aruco_midpoint_to_metric_system(self, aruco_midpoint): 
    
@@ -141,27 +146,100 @@ class ArucoDetector():
             cv_img = None
             raise Exception("Error while convering ros image message to a cv image")                  
         return cv_img
-
-
+    
+    def get_laser_index_from_angle(self, angle_in_deg):        
+        angle_index = round( (angle_in_deg*len(self.scan.ranges))/360.0 )
+        return int(angle_index)
+    
     def euclidean_distance(self, tuple):
         return math.sqrt(tuple[0]**2 + tuple[1]**2 + tuple[2]**2)
 
+    def calculate_beta(self, aruco_midpoint_angle):
+        """angle_apperture = 0.15708 # 10 degrees at radius
+        #aruco_midpoint_scan_index = self.get_laser_index_from_angle(self.aruco_midpoint_angle)
+        #second_scan_index = self.get_laser_index_from_angle(self.aruco_midpoint_angle + angle_apperture)
+        aruco_midpoint_scan_index = self.get_laser_index_from_angle(0.706858)
+        second_scan_index = self.get_laser_index_from_angle(0.706858 + angle_apperture)
+        a = aruco_midpoint_scan_index
+        b = second_scan_index
+        a = self.scan.ranges[a]
+        b = self.scan.ranges[b]
+        print ("a: ",a, "b: ",b)
+        beta_complement = np.arcsin((b * np.sin(angle_apperture)) / (np.sqrt(a**2 + b**2 - 2*a*b*np.cos(angle_apperture))))
+        beta = 90 - beta_complement"""
+
+        
+        beta = aruco_midpoint_angle + self.current_angle
+        return beta
+
+    def id2coordinate(self, id):
+        aruco_coordinate = self.arucoCoordinates[str(id)]
+        return aruco_coordinate
+        
+    def get_aruco_area_given_corners(self, unshaped_corners):
+        corners = unshaped_corners.reshape((4,2))
+        corners_for_det = np.concatenate((corners, corners[0,:].reshape((1,2))), axis = 0)
+        det1 = np.linalg.det( corners_for_det[:2,:] )
+        det2 = np.linalg.det( corners_for_det[1:3,:] )
+        det3 = np.linalg.det( corners_for_det[2:4,:] )
+        det4 = np.linalg.det( corners_for_det[3:5,:] )
+        area = (det1 + det2 + det3 + det4)/2.0
+        return area
+    
+    def filter_to_only_biggest_area_aruco(self, aruco_corners, aruco_ids):        
+        aruco_areas = list(map(self.get_aruco_area_given_corners, aruco_corners))
+        aruco_corners_areas_and_ids = list(zip(aruco_areas, aruco_corners, aruco_ids))
+        aruco_corners_areas_and_ids.sort(reverse = True, key = lambda x:x[0])
+        return (aruco_corners_areas_and_ids[0][1], aruco_corners_areas_and_ids[0][2])
+
+
+    def min_possible(self, aruco_id, beta, aruco_angle):
+        aruco_midpoint_scan_index = self.get_laser_index_from_angle(aruco_angle)
+        r = self.scan.ranges[aruco_midpoint_scan_index]
+        aruco = self.id2coordinate(aruco_id)
+        xAr, yAr = aruco
+        a = (xAr-(np.cos(beta)*r)+self.arucoBoxDim/2 , yAr-(np.sin(beta)*r))
+        b = (xAr+(np.sin(beta)*r) , yAr-(np.cos(beta)*r)-self.arucoBoxDim/2)
+        c = (xAr+(np.cos(beta)*r)-self.arucoBoxDim/2 , yAr+(np.sin(beta)*r))
+        d = (xAr-(np.sin(beta)*r) , yAr+(np.cos(beta)*r)+self.arucoBoxDim/2)
+        possibilities = [a, b, c, d]
+        dist = [euclidean_distance_point_to_point_2d(a,aruco),
+                euclidean_distance_point_to_point_2d(b,aruco),
+                euclidean_distance_point_to_point_2d(c,aruco),
+                euclidean_distance_point_to_point_2d(d,aruco)]
+
+        cuadrant = dist.index(min(dist))
+        return possibilities[cuadrant]
+
+        return cuadrante
+
     def main(self):
         while not rospy.is_shutdown():
-            if self.image != None:  
+            if self.image != None and self.scan != None and self.current_angle != None:  
                 self.ocv_image = self.imgmsg_to_cv2(self.image)
-                aruco_corners, aruco_ids = self.get_arucos_info_in_image(self.ocv_image)
-                print (aruco_ids)
+                arucos_corners, arucos_ids = self.get_arucos_info_in_image(self.ocv_image)
                 self.displayed_image_ocv = self.ocv_image.copy()
-                if len(aruco_corners) > 0:
-                    self.displayed_image_ocv = self.draw_arucos(self.displayed_image_ocv, aruco_corners)                
+                
+                if len(arucos_corners) > 0:                                        
+                    aruco_corners, aruco_id = self.filter_to_only_biggest_area_aruco(arucos_corners, arucos_ids)
+                    arucos_corners = [aruco_corners]
+                    self.displayed_image_ocv = self.draw_arucos(self.displayed_image_ocv, arucos_corners)
+
+                    pixel_midpoint = self.get_aruco_midpoint(aruco_corners)
+                    aruco_angle = self.get_aruco_angle(pixel_midpoint)
+                    aruco_angle = rad2deg(aruco_angle)
+                    aruco_angle = angle_to_only_possitive(aruco_angle)
+
+                    beta = self.calculate_beta (aruco_angle) 
+                    x_calc, y_calc = self.min_possible(aruco_id[0], beta, aruco_angle)
+                    print (beta)
+                    print ("x: ", x_calc, "y: ", y_calc)
                     
                 
 
                 self.curr_signs_image_msg = self.cv2_to_imgmsg(self.displayed_image_ocv, encoding = "bgr8")
                 self.image_pub.publish(self.curr_signs_image_msg)
-        self.vid.release()
-        cv2.destroyAllWindows()    
+   
 
 if __name__ == "__main__":
     aruco_detector = ArucoDetector()
