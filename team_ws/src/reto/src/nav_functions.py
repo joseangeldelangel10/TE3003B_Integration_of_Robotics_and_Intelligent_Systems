@@ -69,6 +69,18 @@ def euler_from_quaternion(orientation_list):
     roll, pitch, yaw = r.as_euler('xyz')
     return roll, pitch, yaw
 
+def quaternion_from_euler(roll, pitch, yaw):
+    """
+    Convert euler angles into a quaternion
+    roll is rotation around x in radians (counterclockwise)
+    pitch is rotation around y in radians (counterclockwise)
+    yaw is rotation around z in radians (counterclockwise)
+    """
+
+    r = Rotation.from_euler("xyz",[roll, pitch, yaw])
+    
+    return r.as_quat().tolist()
+
 def saturate_signal(signal, saturation_value):
         if signal > abs(saturation_value):
             result = abs(saturation_value)

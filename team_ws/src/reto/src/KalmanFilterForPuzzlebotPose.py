@@ -21,6 +21,7 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Pose2D
 
 
+
 class KalmanFilterForPuzzlebotPose():
     def __init__(self):
         
@@ -81,6 +82,12 @@ class KalmanFilterForPuzzlebotPose():
         self.kalman_position_message.pose.pose.position.x = corrected_state_mean[0]
         self.kalman_position_message.pose.pose.position.y = corrected_state_mean[1]
         self.kalman_position_message.pose.pose.position.z = self.puzzlebot_height/2.0
+
+        self.puzzlebot_estimated_rot_quaternion = nav_functions.quaternion_from_euler(0.0, 0.0, self.puzzlebot_estimated_rot)
+        self.kalman_position_message.pose.pose.orientation.x = self.puzzlebot_estimated_rot_quaternion[0]
+        self.kalman_position_message.pose.pose.orientation.y = self.puzzlebot_estimated_rot_quaternion[1]
+        self.kalman_position_message.pose.pose.orientation.z = self.puzzlebot_estimated_rot_quaternion[2]
+        self.kalman_position_message.pose.pose.orientation.w = self.puzzlebot_estimated_rot_quaternion[3]
                 
         self.puzzlebot_6_times_6_covariance_matrix[0,:2] = corrected_state_cov[0,:2]
         self.puzzlebot_6_times_6_covariance_matrix[0,5] = corrected_state_cov[0,2]
@@ -88,8 +95,9 @@ class KalmanFilterForPuzzlebotPose():
         self.puzzlebot_6_times_6_covariance_matrix[5,5] = corrected_state_cov[2,2]
         flattened_6_times_6_covariance_matrix = self.puzzlebot_6_times_6_covariance_matrix.reshape((self.puzzlebot_6_times_6_covariance_matrix.shape[0]*self.puzzlebot_6_times_6_covariance_matrix.shape[1],))
         self.kalman_position_message.pose.covariance = flattened_6_times_6_covariance_matrix.tolist()
-                
+        
         self.kalman_position_pub.publish(self.kalman_position_message)
+        print(corrected_state_mean)
                 
     def main(self):        
         while not rospy.is_shutdown():
