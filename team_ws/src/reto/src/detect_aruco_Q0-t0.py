@@ -112,17 +112,6 @@ class ArucoDetector():
         x_center_px, y_center_px = self.midpoint_equation(rectangle_corners_for_x_y[0,:], rectangle_corners_for_x_y[2,:])        
         return (x_center_px, y_center_px)
 
-    def transform_aruco_midpoint_to_metric_system(self, aruco_midpoint): 
-   
-        x_m = (0.25738586)*(aruco_midpoint[0]) + 0.05862189
-
-        x_px_times_y_px = aruco_midpoint[0]*aruco_midpoint[1]
-        y_m = 0.29283879*aruco_midpoint[0] + 0.00050015*aruco_midpoint[1] + 0.00094536*x_px_times_y_px + 0.23096646
-
-        x_px_times_z_px = aruco_midpoint[0]*aruco_midpoint[2]
-        z_m = 0.16725805*aruco_midpoint[0] - 0.00069012*aruco_midpoint[2] + 0.00098029*x_px_times_z_px - 0.04520938         
-        return (x_m, y_m, z_m)
-
     def cv2_to_imgmsg(self, image, encoding = "bgr8"):
         #print("cv2_to_imgmsg image shape is:" + str(image.shape))
         if encoding == "bgr8":
@@ -270,7 +259,13 @@ class ArucoDetector():
                         
                         self.robot_pose_msg.x = x_calc
                         self.robot_pose_msg.y = y_calc
-                        self.robot_pose_msg.theta = self.current_angle                        
+                        self.robot_pose_msg.theta = self.current_angle
+                    else:
+                        print("NO ARUCO, bypassing odom")
+                        x_calc, y_calc = self.current_position_xy_2d
+                        self.robot_pose_msg.x = x_calc
+                        self.robot_pose_msg.y = y_calc
+                        self.robot_pose_msg.theta = self.current_angle
 
                     self.curr_signs_image_msg = self.cv2_to_imgmsg(self.displayed_image_ocv, encoding = "bgr8")
                     self.image_pub.publish(self.curr_signs_image_msg)
