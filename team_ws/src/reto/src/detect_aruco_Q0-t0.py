@@ -21,7 +21,7 @@ class ArucoDetector():
         self.arucoParams = cv2.aruco.DetectorParameters()
         self.arucoDetector = cv2.aruco.ArucoDetector(self.arucoDict, self.arucoParams)
         self.arucoCoordinates = {"0": (2,2),"1": (2,-2),"2": (-2,-2),"3": (-2,2),"4": (4,4),"5": (4,-4),"6": (-4,-4),"7": (-4,4)}
-        self.arucoBoxDim = 24
+        self.arucoBoxDim = 0.24
 
         # ________ ros atributes initialization ______        
         self.image_pub = rospy.Publisher("/image_detecting", Image, queue_size = 1)
@@ -47,7 +47,7 @@ class ArucoDetector():
         self.current_position_xy_2d = None
         self.current_angle = None
 
-        
+        self.rate = rospy.Rate(5.0)        
 
     def image_callback(self, msg):
         self.image = msg
@@ -57,7 +57,9 @@ class ArucoDetector():
 
     def odom_callback(self, data):
         self.current_position_xy_2d = ( data.pose.pose.position.x , data.pose.pose.position.y )                             
-        self.current_angle = calculate_yaw_angle_deg( data.pose.pose.orientation )
+        _, _, yaw = euler_from_quaternion([data.pose.pose.orientation.x, data.pose.pose.orientation.y, data.pose.pose.orientation.z, data.pose.pose.orientation.w])
+        self.current_angle = yaw*(180.0/math.pi)
+        print("current angle {c}".format(c = self.current_angle))
 
     def draw_arucos(self, image, corners):
         # verify *at least* one ArUco marker was detected
@@ -147,9 +149,28 @@ class ArucoDetector():
             raise Exception("Error while convering ros image message to a cv image")                  
         return cv_img
     
-    def get_laser_index_from_angle(self, angle_in_deg):        
-        angle_index = round( (angle_in_deg*len(self.scan.ranges))/360.0 )
+    def get_laser_index_from_angle(self, angle_in_deg):
+        angle_in_deg_only_positive = angle_to_only_possitive_deg(angle_in_deg)        
+        angle_index = round( (angle_in_deg_only_positive*len(self.scan.ranges))/360.0 )
         return int(angle_index)
+    
+    def get_mean_laser_value_at_fov(self, fov_center, fov_range):        
+        if fov_range > 180.0:
+            Exception("fov is too large")
+        
+        if fov_center - (fov_range/2.0) < 0.0:
+            lower_boundary = fov_center - (fov_range/2.0)            
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(lower_boundary) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( fov_center + (fov_range/2.0) ) + 1]
+            values_at_fov = np.array(values_at_fov_1 + values_at_fov_2 )
+        elif fov_center + (fov_range/2.0) > 360.0:
+            values_at_fov_1 = self.scan.ranges[self.get_laser_index_from_angle(fov_center - (fov_range/2.0)) : ]
+            values_at_fov_2 = self.scan.ranges[: self.get_laser_index_from_angle( (fov_center + (fov_range/2.0))%360.0 ) + 1]
+            values_at_fov = np.array(values_at_fov_1 + values_at_fov_2 )
+        else:
+            values_at_fov = np.array( self.scan.ranges[ self.get_laser_index_from_angle(fov_center-(fov_range/2.0)) : self.get_laser_index_from_angle(fov_center+(fov_range/2.0)) + 1 ] )        
+
+        return values_at_fov.mean()
     
     def euclidean_distance(self, tuple):
         return math.sqrt(tuple[0]**2 + tuple[1]**2 + tuple[2]**2)
@@ -167,7 +188,6 @@ class ArucoDetector():
         print ("a: ",a, "b: ",b)
         beta_complement = np.arcsin((b * np.sin(angle_apperture)) / (np.sqrt(a**2 + b**2 - 2*a*b*np.cos(angle_apperture))))
         beta = 90 - beta_complement"""
-
         
         beta = aruco_midpoint_angle + self.current_angle
         return beta
@@ -194,27 +214,26 @@ class ArucoDetector():
 
 
     def min_possible(self, aruco_id, beta, aruco_angle):
-        aruco_midpoint_scan_index = self.get_laser_index_from_angle(aruco_angle)
-        r = self.scan.ranges[aruco_midpoint_scan_index]
+        #aruco_midpoint_scan_index = self.get_laser_index_from_angle(aruco_angle)
+        #r = self.scan.ranges[aruco_midpoint_scan_index]
+        r = self.get_mean_laser_value_at_fov(aruco_angle, 2.0)
         aruco = self.id2coordinate(aruco_id)
         xAr, yAr = aruco
-        a = (xAr-(np.cos(beta)*r)+self.arucoBoxDim/2 , yAr-(np.sin(beta)*r))
-        b = (xAr+(np.sin(beta)*r) , yAr-(np.cos(beta)*r)-self.arucoBoxDim/2)
-        c = (xAr+(np.cos(beta)*r)-self.arucoBoxDim/2 , yAr+(np.sin(beta)*r))
-        d = (xAr-(np.sin(beta)*r) , yAr+(np.cos(beta)*r)+self.arucoBoxDim/2)
+        a = (xAr-(np.cos(beta)*r)-self.arucoBoxDim/2.0 , yAr-(np.sin(beta)*r))
+        b = (xAr+(np.sin(beta)*r) , yAr-(np.cos(beta)*r)-self.arucoBoxDim/2.0)
+        c = (xAr+(np.cos(beta)*r)+self.arucoBoxDim/2.0 , yAr+(np.sin(beta)*r))
+        d = (xAr-(np.sin(beta)*r) , yAr+(np.cos(beta)*r)+self.arucoBoxDim/2.0)
         possibilities = [a, b, c, d]
-        dist = [euclidean_distance_point_to_point_2d(a,aruco),
-                euclidean_distance_point_to_point_2d(b,aruco),
-                euclidean_distance_point_to_point_2d(c,aruco),
-                euclidean_distance_point_to_point_2d(d,aruco)]
+        dist = [euclidean_distance_point_to_point_2d(a,self.current_position_xy_2d),
+                euclidean_distance_point_to_point_2d(b,self.current_position_xy_2d),
+                euclidean_distance_point_to_point_2d(c,self.current_position_xy_2d),
+                euclidean_distance_point_to_point_2d(d,self.current_position_xy_2d)]
 
         cuadrant = dist.index(min(dist))
         return possibilities[cuadrant]
 
-        return cuadrante
-
     def main(self):
-        while not rospy.is_shutdown():
+        while not rospy.is_shutdown():            
             if self.image != None and self.scan != None and self.current_angle != None:  
                 self.ocv_image = self.imgmsg_to_cv2(self.image)
                 arucos_corners, arucos_ids = self.get_arucos_info_in_image(self.ocv_image)
@@ -227,18 +246,20 @@ class ArucoDetector():
 
                     pixel_midpoint = self.get_aruco_midpoint(aruco_corners)
                     aruco_angle = self.get_aruco_angle(pixel_midpoint)
-                    aruco_angle = rad2deg(aruco_angle)
-                    aruco_angle = angle_to_only_possitive(aruco_angle)
+                    aruco_angle = aruco_angle*(180.0/math.pi)
+                    #aruco_angle = angle_to_only_possitive(aruco_angle)
+                    print("aplha value is: {v}".format(v = aruco_angle))
 
                     beta = self.calculate_beta (aruco_angle) 
                     x_calc, y_calc = self.min_possible(aruco_id[0], beta, aruco_angle)
-                    print (beta)
-                    print ("x: ", x_calc, "y: ", y_calc)
+                    print("beta values is {v}".format(v = beta))
+                    print("x: ", x_calc, "y: ", y_calc)
                     
                 
 
                 self.curr_signs_image_msg = self.cv2_to_imgmsg(self.displayed_image_ocv, encoding = "bgr8")
-                self.image_pub.publish(self.curr_signs_image_msg)
+                self.image_pub.publish(self.curr_signs_image_msg)            
+            self.rate.sleep()
    
 
 if __name__ == "__main__":

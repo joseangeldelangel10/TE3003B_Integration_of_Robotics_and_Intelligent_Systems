@@ -30,7 +30,7 @@
     <arg name="x" default="0.00"/>
     <arg name="y" default="0.00"/>
     <arg name="z" default="0.000"/>
-    <arg name="Y" default="-1.57"/>
+    <arg name="Y" default="0.0"/>
 
   <!-- <param name="aruco_1_description" file="$(find reto)/models/Aruco_tag0/model.sdf" /> -->
     <arg name="aruco_1_file" default="$(find reto)/models/aruco_box/model.sdf"/>
