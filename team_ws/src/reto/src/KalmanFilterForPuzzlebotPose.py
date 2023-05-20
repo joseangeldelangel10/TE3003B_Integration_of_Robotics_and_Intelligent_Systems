@@ -26,20 +26,25 @@ class KalmanFilterForPuzzlebotPose():
     def __init__(self):
         
         rospy.init_node("kalman_filter_for_puzzlebot_pose")
-        rospy.Subscriber("/odom", Odometry, self.odom_callback)                
+        rospy.Subscriber("/kalman_prediction_odom", Odometry, self.odom_callback)                
         rospy.Subscriber("/robot_pose_given_aruco_pose", Pose2D, self.visual_robot_pose_callback)
+        #rospy.Subscriber("/kalman_prediction_odom",Odometry, self.kalman_odom_callback)
+
         
         #TODO - add the necessary publishers for the node
-        self.kalman_position_pub = rospy.Publisher("/kalman_odom", Odometry, queue_size=1)
+        #self.kalman_position_pub = rospy.Publisher("/kalman_odom", Odometry, queue_size=1)
+        self.kalman_corrected_odom_pub = rospy.Publisher("/kalman_corrected_odom",Odometry, queue_size=1)
         self.kalman_position_message = Odometry()
-        self.puzzlebot_6_times_6_covariance_matrix = np.zeros((6,6), dtype=float)
+        self.puzzlebot_6_times_6_covariance_matrix = np.zeros((6*6,), dtype=float)
         self.puzzlebot_height = 0.15
 
         self.relation_matrix_between_output_and_state = np.identity(3, dtype=float) # since the output of the systems equals its state (position) [C]
-        self.state_uncertainty_matrix = np.ones((3,3), dtype=float)*5.0 # 5 meters in our context equals infinite        
+        self.state_uncertainty_matrix = np.ones((3,3), dtype=float)*0.8 # 5 meters in our context equals infinite        
 
         self.predicted_state = None
+        self.predicted_state_for_kalman = None
         self.predicted_state_covariance = None
+        self.predicted_state_covariance_for_kalman = None
         self.visual_sensor_reading = None
 
         self.rate_val = 2.0
@@ -47,7 +52,8 @@ class KalmanFilterForPuzzlebotPose():
 
     def odom_callback(self, data):
         self.odom_msg_to_state_vector(data)
-    
+
+   
     def visual_robot_pose_callback(self, msg):
         self.visual_sensor_reading = np.array(
             [[msg.x],
@@ -65,18 +71,17 @@ class KalmanFilterForPuzzlebotPose():
         self.predicted_state_covariance = np.array(
             [[msg.pose.covariance[0], msg.pose.covariance[1], msg.pose.covariance[5] ],
              [msg.pose.covariance[6], msg.pose.covariance[7], msg.pose.covariance[11]],
-             [msg.pose.covariance[30], msg.pose.covariance[31], msg.pose.covariance[35]]]
+             [msg.pose.covariance[30], msg.pose.covariance[31], msg.pose.covariance[35]]],
         )
 
     def kalman(self,xk_pred,Pk_pred,C,R,yk):
-        print("predicted state: \n {s}".format(s = xk_pred))
-        print("sensed state is: \n {s}".format(s = yk))
+        #print("predicted state: \n {s}".format(s = xk_pred))
+        #print("sensed state is: \n {s}".format(s = yk))
         #Correction
-        Gk = Pk_pred@(C.T)@np.linalg.inv((C@Pk_pred@C.T)+R)
-        #print("GK dtype is: {t}".format(t = Gk))
-        #print("GK shape is: {t}".format(t = Gk.shape))
+        Gk = Pk_pred@(C.T)@np.linalg.inv((C@Pk_pred@C.T)+R)        
         xk_corrected = xk_pred+ Gk@(yk-(C@xk_pred))  
-        Pk_corrected = (np.identity(len(xk_pred))-(Gk@C))@Pk_pred
+        Pk_corrected = (np.identity(len(xk_pred), dtype=float)-(Gk@C))@Pk_pred
+        Pk_corrected = np.absolute(Pk_corrected)
         return xk_corrected,Pk_corrected
     
     def fill_odometry_header(self):
@@ -98,15 +103,17 @@ class KalmanFilterForPuzzlebotPose():
         self.kalman_position_message.pose.pose.orientation.z = self.puzzlebot_estimated_rot_quaternion[2]
         self.kalman_position_message.pose.pose.orientation.w = self.puzzlebot_estimated_rot_quaternion[3]
                 
-        self.puzzlebot_6_times_6_covariance_matrix[0,:2] = corrected_state_cov[0,:2]
-        self.puzzlebot_6_times_6_covariance_matrix[0,5] = corrected_state_cov[0,2]
-        self.puzzlebot_6_times_6_covariance_matrix[5,:2] = corrected_state_cov[2,:2]
-        self.puzzlebot_6_times_6_covariance_matrix[5,5] = corrected_state_cov[2,2]
-        flattened_6_times_6_covariance_matrix = self.puzzlebot_6_times_6_covariance_matrix.reshape((self.puzzlebot_6_times_6_covariance_matrix.shape[0]*self.puzzlebot_6_times_6_covariance_matrix.shape[1],))
-        self.kalman_position_message.pose.covariance = flattened_6_times_6_covariance_matrix.tolist()
+        self.puzzlebot_6_times_6_covariance_matrix[0:2] = corrected_state_cov[0,0:2]
+        self.puzzlebot_6_times_6_covariance_matrix[5] = corrected_state_cov[0,2]
+        self.puzzlebot_6_times_6_covariance_matrix[6:8] = corrected_state_cov[1,0:2]
+        self.puzzlebot_6_times_6_covariance_matrix[11] = corrected_state_cov[1,2]
+        self.puzzlebot_6_times_6_covariance_matrix[30:32] = corrected_state_cov[2,0:2]
+        self.puzzlebot_6_times_6_covariance_matrix[35] = corrected_state_cov[2,2]
+        #flattened_6_times_6_covariance_matrix = self.puzzlebot_6_times_6_covariance_matrix.reshape((self.puzzlebot_6_times_6_covariance_matrix.shape[0]*self.puzzlebot_6_times_6_covariance_matrix.shape[1],))
+        self.kalman_position_message.pose.covariance = self.puzzlebot_6_times_6_covariance_matrix.tolist()
         
-        self.kalman_position_pub.publish(self.kalman_position_message)
-        print("corrected_state_is: \n {s}".format(s = corrected_state_mean))
+        self.kalman_corrected_odom_pub.publish(self.kalman_position_message)
+        #print("corrected_state_is: \n {s}".format(s = corrected_state_mean))
                 
     def main(self):        
         while not rospy.is_shutdown():

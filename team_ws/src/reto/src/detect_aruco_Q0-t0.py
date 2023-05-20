@@ -49,6 +49,8 @@ class ArucoDetector():
         self.current_position_xy_2d = None
         self.current_angle = None
 
+        self.bypass_odom = None
+
         self.rate = rospy.Rate(5.0)        
 
     def image_callback(self, msg):
@@ -57,7 +59,8 @@ class ArucoDetector():
     def scan_callback(self, msg):
         self.scan = msg
 
-    def odom_callback(self, data):        
+    def odom_callback(self, data):     
+        self.bypass_odom = data   
         self.current_position_xy_2d = ( data.pose.pose.position.x , data.pose.pose.position.y )                             
         _, _, yaw = euler_from_quaternion([data.pose.pose.orientation.x, data.pose.pose.orientation.y, data.pose.pose.orientation.z, data.pose.pose.orientation.w])
         self.current_angle = yaw
@@ -236,7 +239,9 @@ class ArucoDetector():
                     arucos_corners, arucos_ids = self.get_arucos_info_in_image(self.ocv_image)
                     self.displayed_image_ocv = self.ocv_image.copy()
                     
-                    if len(arucos_corners) > 0:                                        
+                    if len(arucos_corners) > 0:        
+                        print (id) 
+                        print (self.arucoCoordinates{id})                               
                         aruco_corners, aruco_id = self.filter_to_only_biggest_area_aruco(arucos_corners, arucos_ids)
                         arucos_corners = [aruco_corners]
                         self.displayed_image_ocv = self.draw_arucos(self.displayed_image_ocv, arucos_corners)
@@ -261,7 +266,8 @@ class ArucoDetector():
                         self.robot_pose_msg.y = y_calc
                         self.robot_pose_msg.theta = self.current_angle
                     else:
-                        print("NO ARUCO, bypassing odom")
+                        #
+                        # print("NO ARUCO, bypassing odom")
                         x_calc, y_calc = self.current_position_xy_2d
                         self.robot_pose_msg.x = x_calc
                         self.robot_pose_msg.y = y_calc
@@ -274,8 +280,16 @@ class ArucoDetector():
                     x_calc, y_calc = self.current_position_xy_2d
                     self.robot_pose_msg.x = x_calc
                     self.robot_pose_msg.y = y_calc
-                    self.robot_pose_msg.theta = self.current_angle                        
-                self.robot_pose_pub.publish(self.robot_pose_msg)
+                    self.robot_pose_msg.theta = self.current_angle     
+
+                if np.isnan(self.robot_pose_msg.theta) or np.isnan(self.robot_pose_msg.x) or np.isnan(self.robot_pose_msg.y):
+                    self.robot_pose_pub.publish(self.bypass_odom)
+
+                elif np.isinf(self.robot_pose_msg.theta) or np.isinf(self.robot_pose_msg.x) or np.isinf(self.robot_pose_msg.y):          
+                    self.robot_pose_pub.publish(self.bypass_odom)
+
+                else:
+                    self.robot_pose_pub.publish(self.robot_pose_msg)
             self.rate.sleep()
    
 

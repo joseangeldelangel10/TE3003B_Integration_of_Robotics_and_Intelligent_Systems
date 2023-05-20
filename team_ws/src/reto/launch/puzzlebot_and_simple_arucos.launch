@@ -59,6 +59,8 @@
 
   <node name="kalman_filter" pkg="reto" type="KalmanFilterForPuzzlebotPose.py" output="screen"/>
 
+  <node name="kalman_odometry" pkg="reto" type="KalmanPredictionStage.py" output="screen"/>
+
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reto)/rviz_config/rviz_config.rviz"/>
 
 </launch>
