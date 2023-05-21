@@ -660,10 +660,10 @@
       <pose frame=''>-2.93968 -1.87014 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>413 48000000</sim_time>
-      <real_time>414 262161809</real_time>
-      <wall_time>1684623843 427948179</wall_time>
-      <iterations>413048</iterations>
+      <sim_time>680 231000000</sim_time>
+      <real_time>267 710017765</real_time>
+      <wall_time>1684634077 7392879</wall_time>
+      <iterations>267183</iterations>
       <model name='aruco_plain_0'>
         <pose frame=''>2 2 0.1 0 -1.57 0</pose>
         <scale>1 1 1</scale>
@@ -685,20 +685,20 @@
         </link>
       </model>
       <model name='aruco_plain_2'>
-        <pose frame=''>-2 -2 0.1 0 1.57 0</pose>
+        <pose frame=''>-2 -2 0.1 0 -1.57 -3.14159</pose>
         <scale>1 1 1</scale>
         <link name='robot_link'>
-          <pose frame=''>-2 -2 0.1 0 1.57 0</pose>
+          <pose frame=''>-2 -2 0.1 0 -1.57 -3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='aruco_plain_3'>
-        <pose frame=''>-2 2 0.1 0 1.57 0</pose>
+        <pose frame=''>-2 2 0.1 0 -1.57 -3.14159</pose>
         <scale>1 1 1</scale>
         <link name='robot_link'>
-          <pose frame=''>-2 2 0.1 0 1.57 0</pose>
+          <pose frame=''>-2 2 0.1 0 -1.57 -3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -725,20 +725,20 @@
         </link>
       </model>
       <model name='aruco_plain_6'>
-        <pose frame=''>-4 -4 0.1 0 1.57 0</pose>
+        <pose frame=''>-4 -4 0.1 0 -1.57 -3.14159</pose>
         <scale>1 1 1</scale>
         <link name='robot_link'>
-          <pose frame=''>-4 -4 0.1 0 1.57 0</pose>
+          <pose frame=''>-4 -4 0.1 0 -1.57 -3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='aruco_plain_7'>
-        <pose frame=''>-4 4 0.1 0 1.57 0</pose>
+        <pose frame=''>-4 4 0.1 0 -1.57 -3.14159</pose>
         <scale>1 1 1</scale>
         <link name='robot_link'>
-          <pose frame=''>-4 4 0.1 0 1.57 0</pose>
+          <pose frame=''>-4 4 0.1 0 -1.57 -3.14159</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -760,7 +760,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>0.627474 -10.1259 9.36891 -0 0.703643 1.6922</pose>
+        <pose frame=''>3.26196 -9.42323 6.34333 0 0.687643 2.08421</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>

@@ -207,6 +207,7 @@ class ArucoDetector():
                     self.displayed_image_ocv = self.draw_arucos(self.displayed_image_ocv, arucos_corners)
                     self.displayed_image_ocv = cv2.resize(self.displayed_image_ocv, (100,100), interpolation = cv2.INTER_AREA)
 
+                    print("aruco id is: ", aruco_id[0])
                     aruco_cordinates = self.id2coordinate(aruco_id[0])
                     self.publish_sensor_data(aruco_cordinates)                        
 

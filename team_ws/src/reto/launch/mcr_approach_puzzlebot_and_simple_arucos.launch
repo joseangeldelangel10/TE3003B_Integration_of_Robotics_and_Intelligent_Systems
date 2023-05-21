@@ -55,18 +55,13 @@
 
   <node name="odometry" pkg="mini_challenge_2" type="wheelBasedDeadReckoning.py"/>
 
-  <node name="detect_aruco" pkg="reto" type="detect_aruco_mcr_approach.py" output="screen"/>
-  <!--
-
-  <node name="detect_aruco" pkg="reto" type="detect_aruco_Q0-t0.py" output="screen"/>
-
-  <node name="kalman_filter" pkg="reto" type="KalmanFilterForPuzzlebotPose.py" output="screen"/>
+  <node name="detect_aruco" pkg="reto" type="detect_aruco_mcr_approach.py" output="screen"/>  
+  
+  <node name="kalman_filter" pkg="reto" type="McrApproachKalmanFilterForPuzzlebot.py" output="screen"/>
 
   <node name="kalman_odometry" pkg="reto" type="KalmanPredictionStage.py" output="screen"/>
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reto)/rviz_config/rviz_config.rviz"/>
-
-  -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find reto)/rviz_config/rviz_config.rviz"/>  
 
 </launch>
 
