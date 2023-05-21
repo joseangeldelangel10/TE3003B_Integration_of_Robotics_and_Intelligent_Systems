@@ -55,6 +55,7 @@
 
   <node name="odometry" pkg="mini_challenge_2" type="wheelBasedDeadReckoning.py"/>
 
+  <node name="detect_aruco" pkg="reto" type="detect_aruco_mcr_approach.py" output="screen"/>
   <!--
 
   <node name="detect_aruco" pkg="reto" type="detect_aruco_Q0-t0.py" output="screen"/>

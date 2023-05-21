@@ -23,7 +23,8 @@ class OdometryNode():
         rospy.init_node('odometry')        
         self.wr_sub = rospy.Subscriber('/wr', Float32, self.puzzlebot_wr_callback)
         self.wl_sub = rospy.Subscriber('/wl', Float32, self.puzzlebot_wl_callback)        
-        self.puzzlebot_odom_pub = rospy.Publisher('/odom', Odometry, queue_size=1)        
+        self.puzzlebot_odom_pub = rospy.Publisher('/odom', Odometry, queue_size=1)
+        self.puzzlebot_simple_odom_pub = rospy.Publisher('/simple_odom', Pose2D, queue_size=1)        
         self.reset_puzzlebot_service_result = rospy.Service("reset_odometry", ResetOdometry, self.reset_odometry)
         
         self.get_covariance_mat_server = rospy.Service("get_puzzlebot_covariance_mat_on_sim", GetPuzzlebotCovarianceMatOnSim, self.get_covariance_mat)        
@@ -31,6 +32,7 @@ class OdometryNode():
         # ______________ fill in publisher messages ______________
         self.initial_x, self.initial_y, self.initial_theta = (initial_x, initial_y, initial_theta)        
         self.puzzlebot_estimated_pose = Odometry()        
+        self.puzzlebot_simple_odom_msg = Pose2D()
         self.fill_odometry_header()        
         self.puzzlebot_estimated_pose.pose.pose.position.x, self.puzzlebot_estimated_pose.pose.pose.position.y = (self.initial_x, self.initial_y)        
         self.puzzlebot_estimated_rot = self.initial_theta        
@@ -189,8 +191,15 @@ class OdometryNode():
                     self.puzzlebot_estimated_pose.twist.twist = self.puzzlebot_twist
                     # _________ end of filling puzzlebot pose data ______________
 
+                    
+                    # _________ filling simple odom message _________
+                    self.puzzlebot_simple_odom_msg.x = self.puzzlebot_estimated_pose.pose.pose.position.x
+                    self.puzzlebot_simple_odom_msg.y = self.puzzlebot_estimated_pose.pose.pose.position.y
+                    self.puzzlebot_simple_odom_msg.theta = self.puzzlebot_estimated_rot%(2.0*np.pi)
+                    # _________ end of filling simple odom message _________
 
-                    self.last_sampling_time = current_time                    
+                    self.last_sampling_time = current_time
+            self.puzzlebot_simple_odom_pub.publish(self.puzzlebot_simple_odom_msg)                    
             self.puzzlebot_odom_pub.publish(self.puzzlebot_estimated_pose)
             self.rate.sleep()
 

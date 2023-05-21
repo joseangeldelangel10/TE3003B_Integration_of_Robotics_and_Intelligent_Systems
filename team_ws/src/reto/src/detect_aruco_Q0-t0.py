@@ -241,7 +241,7 @@ class ArucoDetector():
                     
                     if len(arucos_corners) > 0:        
                         print (id) 
-                        print (self.arucoCoordinates{id})                               
+                        #print (self.arucoCoordinates{id})                               
                         aruco_corners, aruco_id = self.filter_to_only_biggest_area_aruco(arucos_corners, arucos_ids)
                         arucos_corners = [aruco_corners]
                         self.displayed_image_ocv = self.draw_arucos(self.displayed_image_ocv, arucos_corners)
