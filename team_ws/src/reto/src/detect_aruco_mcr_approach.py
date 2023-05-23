@@ -9,7 +9,7 @@ from sensor_msgs.msg import Image, LaserScan
 from geometry_msgs.msg import Pose2D
 from std_msgs.msg import Header, Float64MultiArray, MultiArrayLayout, MultiArrayDimension
 from nav_functions import *
-
+import nav_functions
 
 class ArucoDetector():
     def __init__(self, aruco_dict = cv2.aruco.DICT_4X4_50):
@@ -25,12 +25,13 @@ class ArucoDetector():
 
         # ________ ros atributes initialization ______        
         self.image_pub = rospy.Publisher("/image_detecting", Image, queue_size = 1)
-        self.visual_sensor_reading_pub = rospy.Publisher("/visual_sensor_reading", Float64MultiArray, queue_size = 1)        
-        self.visual_sensor_reading_msg = Float64MultiArray()
+        self.estimated_sensor_reading_pub = rospy.Publisher("/estimated_sensor_reading", Float64MultiArray, queue_size = 1) 
+        self.real_sensor_reading_pub = rospy.Publisher("/real_sensor_reading", Float64MultiArray, queue_size = 1)
+        self.estimated_visual_sensor_reading_msg = Float64MultiArray() 
+        self.real_visual_sensor_reading_msg = Float64MultiArray()
         self.relation_matrix_between_sensor_and_state_pub = rospy.Publisher("/relation_matrix_between_sensor_and_state", Float64MultiArray, queue_size = 1)        
         self.relation_matrix_between_sensor_and_state_msg = Float64MultiArray()
         self.odom_sub = rospy.Subscriber('/kalman_corrected_odom', Odometry, self.odom_callback)
-        # TODO change /odom topic to /Kalman_odom topic 
         self.scan_sub = rospy.Subscriber('/scan', LaserScan,self.scan_callback)
         self.image_sub = rospy.Subscriber("/camera/image_raw", Image, self.image_callback)
 
@@ -64,6 +65,15 @@ class ArucoDetector():
         _, _, yaw = euler_from_quaternion([data.pose.pose.orientation.x, data.pose.pose.orientation.y, data.pose.pose.orientation.z, data.pose.pose.orientation.w])
         self.current_angle = yaw
         #print("current angle {c}".format(c = self.current_angle))
+        
+    def midpoint_equation(self, p1, p2):
+        return ( (p1[0]+p2[0])/2, (p1[1]+p2[1])/2 )
+    
+    def get_aruco_midpoint(self, rectangle_corners):
+        """ function that returns the x,y cordinates of the aruco's midpoint """                
+        rectangle_corners_for_x_y = rectangle_corners.reshape((4,2))        
+        x_center_px, y_center_px = self.midpoint_equation(rectangle_corners_for_x_y[0,:], rectangle_corners_for_x_y[2,:])        
+        return (x_center_px, y_center_px)
 
     def fill_sensor_data_multi_array_layout(self):
         layout = MultiArrayLayout()
@@ -75,7 +85,7 @@ class ArucoDetector():
         layout.dim[0] = dimension_0       
         layout.data_offset = 0
         
-        self.visual_sensor_reading_msg.layout = layout
+        self.real_visual_sensor_reading_msg.layout = layout
 
     def fill_relation_matrix_between_sensor_and_state_multi_array_layout(self):
         layout = MultiArrayLayout()
@@ -177,10 +187,27 @@ class ArucoDetector():
         aruco_corners_areas_and_ids.sort(reverse = True, key = lambda x:x[0])
         return (aruco_corners_areas_and_ids[0][1], aruco_corners_areas_and_ids[0][2])
 
-    def publish_sensor_data(self, aruco_cordinates):
+    def get_laser_index_from_angle(self, angle_in_deg):
+        angle_in_deg_only_positive = nav_functions.angle_to_only_possitive_deg(angle_in_deg)        
+        angle_index = np.floor( (angle_in_deg_only_positive*len(self.scan.ranges))/360.0 )
+        return int(angle_index)
+    
+    def get_alpha(self, aruco_midpoint, camera_fov = 1.3962634, image_width = 800.0):
+        """
+        input:
+            aruco_midpoint : tuple with (x_center_px, y_center_px)
+        output:
+            aruco_angle: float with aruco angle in rads
+        """
+        angle = -(camera_fov/image_width)*aruco_midpoint[0] + camera_fov/2
+        return angle
+
+    def publish_sensor_data(self, aruco_cordinates, aruco_midpoint):
         if self.current_position_xy_2d != None and self.current_angle != None:
             delta_x = aruco_cordinates[0] - self.current_position_xy_2d[0]
             delta_y = aruco_cordinates[1] - self.current_position_xy_2d[1]
+            print ("delta_x: ", delta_x)
+            print ("delta_y: ", delta_y)
             p = self.euclidean_distance((delta_x, delta_y))
             alpha = np.arctan2(delta_y, delta_x) - self.current_angle
             
@@ -192,8 +219,21 @@ class ArucoDetector():
             
             self.relation_matrix_between_sensor_and_state_msg.data = flattened_relation_matrix_between_sensor_and_state.tolist()
             self.relation_matrix_between_sensor_and_state_pub.publish(self.relation_matrix_between_sensor_and_state_msg)
-            self.visual_sensor_reading_msg.data = [p, alpha]
-            self.visual_sensor_reading_pub.publish(self.visual_sensor_reading_msg)
+            self.estimated_visual_sensor_reading_msg.data = [p, alpha]
+            self.estimated_sensor_reading_pub.publish(self.estimated_visual_sensor_reading_msg)
+
+            real_alpha = self.get_alpha(aruco_midpoint)
+            real_alpha_in_deg = np.rad2deg(real_alpha) 
+            #print ("angle is:", str(real_alpha))
+            #print("scan ranges type is: {t}".format(t=type(self.scan.ranges)))
+            #print("scan ranges len is: {t}".format(t=len(self.scan.ranges)))
+            index = self.get_laser_index_from_angle(real_alpha_in_deg)
+            #print ("index: ", index)
+            real_p = self.scan.ranges[index]
+            self.real_visual_sensor_reading_msg.data = [real_p, real_alpha]
+            self.real_sensor_reading_pub.publish(self.real_visual_sensor_reading_msg)
+            #print ("real: ", self.real_visual_sensor_reading_msg.data)
+            #print ("estimated: ", self.estimated_visual_sensor_reading_msg.data)
 
     def main(self):
         while not rospy.is_shutdown():            
@@ -210,7 +250,8 @@ class ArucoDetector():
 
                     print("aruco id is: ", aruco_id[0])
                     aruco_cordinates = self.id2coordinate(aruco_id[0])
-                    self.publish_sensor_data(aruco_cordinates)                        
+                    aruco_midpoint_px = self.get_aruco_midpoint(aruco_corners)
+                    self.publish_sensor_data(aruco_cordinates, aruco_midpoint_px)                        
 
                 self.curr_signs_image_msg = self.cv2_to_imgmsg(self.displayed_image_ocv, encoding = "bgr8")
                 self.image_pub.publish(self.curr_signs_image_msg)

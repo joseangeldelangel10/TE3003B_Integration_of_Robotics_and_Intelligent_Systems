@@ -28,9 +28,10 @@ class KalmanFilterForPuzzlebotPose():
         
         rospy.init_node("kalman_filter_for_puzzlebot_pose")
         rospy.Subscriber("/kalman_prediction_odom", Odometry, self.odom_callback)                
-        rospy.Subscriber("/visual_sensor_reading", Float64MultiArray, self.visual_sensor_reading_callback)        
+        rospy.Subscriber("/estimated_sensor_reading", Float64MultiArray, self.estimated_visual_sensor_reading_callback)        
         rospy.Subscriber("/relation_matrix_between_sensor_and_state", Float64MultiArray, self.visual_sensor_reading_c_mat_callback)
-        
+        rospy.Subscriber("/real_sensor_reading", Float64MultiArray, self.real_sensor_Reading_callback)
+
         self.kalman_corrected_odom_pub = rospy.Publisher("/kalman_corrected_odom",Odometry, queue_size=1)
         self.kalman_position_message = Odometry()
         self.puzzlebot_6_times_6_covariance_matrix = np.zeros((6*6,), dtype=float)        
@@ -41,6 +42,8 @@ class KalmanFilterForPuzzlebotPose():
         self.predicted_state = None        
         self.predicted_state_covariance = None        
         self.visual_sensor_reading = None
+
+        self.real_yk = None
 
         self.last_visual_sensor_msg_timestamp = None
         self.last_visual_sensor_processed_msg_timestamp = None
@@ -53,11 +56,15 @@ class KalmanFilterForPuzzlebotPose():
     def odom_callback(self, data):
         self.odom_msg_to_state_vector(data)
    
-    def visual_sensor_reading_callback(self, msg):                
+    def estimated_visual_sensor_reading_callback(self, msg):                
         reading_as_array = np.array(msg.data)
         self.visual_sensor_reading = reading_as_array.reshape((2,1))
         self.last_visual_sensor_msg_timestamp = rospy.get_time()
         self.new_sensor_reading_recieved = True
+    
+    def real_sensor_Reading_callback(self, msg):
+        reading_as_array = np.array(msg.data)
+        self.real_yk = reading_as_array.reshape((2,1))
 
     def visual_sensor_reading_c_mat_callback(self, msg):
         reading_as_array = np.array(msg.data)
@@ -81,7 +88,7 @@ class KalmanFilterForPuzzlebotPose():
     def kalman(self,xk_pred,Pk_pred,C,R,yk):        
         #Correction
         Gk = Pk_pred@(C.T)@np.linalg.inv((C@Pk_pred@C.T)+R)        
-        xk_corrected = xk_pred+ Gk@(yk-(C@xk_pred)) 
+        xk_corrected = xk_pred+ Gk@(self.real_yk - yk) 
         Pk_corrected = (np.identity(len(xk_pred), dtype=float)-(Gk@C))@Pk_pred        
         return xk_corrected,Pk_corrected
     
@@ -133,12 +140,20 @@ class KalmanFilterForPuzzlebotPose():
                                                                             self.state_uncertainty_matrix,
                                                                             self.visual_sensor_reading)
                     self.last_visual_sensor_processed_msg_timestamp = self.last_visual_sensor_msg_timestamp
-                
+                    if np.isnan(corrected_state_mean):
+                        corrected_state_mean = self.predicted_state
+                        corrected_state_cov = self.predicted_state_covariance
+                                    
                 else:
+                    
                     corrected_state_mean = self.predicted_state
                     corrected_state_cov = self.predicted_state_covariance    
 
-                self.create_kalman_position_message(corrected_state_mean, corrected_state_cov)                
+  
+                self.create_kalman_position_message(corrected_state_mean, corrected_state_cov) 
+            
+            else:
+                print ("yk is none")               
             self.rate.sleep()          
 
 if __name__ == "__main__":
