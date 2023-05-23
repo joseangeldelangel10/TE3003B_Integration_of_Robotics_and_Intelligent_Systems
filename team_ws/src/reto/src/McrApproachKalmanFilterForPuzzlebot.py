@@ -140,7 +140,7 @@ class KalmanFilterForPuzzlebotPose():
                                                                             self.state_uncertainty_matrix,
                                                                             self.visual_sensor_reading)
                     self.last_visual_sensor_processed_msg_timestamp = self.last_visual_sensor_msg_timestamp
-                    if np.isnan(corrected_state_mean):
+                    if np.any(np.isnan(corrected_state_mean)):
                         corrected_state_mean = self.predicted_state
                         corrected_state_cov = self.predicted_state_covariance
                                     

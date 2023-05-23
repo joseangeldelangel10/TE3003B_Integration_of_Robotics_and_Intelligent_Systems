@@ -218,22 +218,22 @@ class ArucoDetector():
             flattened_relation_matrix_between_sensor_and_state = relation_matrix_between_sensor_and_state.reshape((6, ))
             
             self.relation_matrix_between_sensor_and_state_msg.data = flattened_relation_matrix_between_sensor_and_state.tolist()
-            self.relation_matrix_between_sensor_and_state_pub.publish(self.relation_matrix_between_sensor_and_state_msg)
+            
             self.estimated_visual_sensor_reading_msg.data = [p, alpha]
-            self.estimated_sensor_reading_pub.publish(self.estimated_visual_sensor_reading_msg)
 
             real_alpha = self.get_alpha(aruco_midpoint)
             real_alpha_in_deg = np.rad2deg(real_alpha) 
-            #print ("angle is:", str(real_alpha))
-            #print("scan ranges type is: {t}".format(t=type(self.scan.ranges)))
-            #print("scan ranges len is: {t}".format(t=len(self.scan.ranges)))
+            
             index = self.get_laser_index_from_angle(real_alpha_in_deg)
-            #print ("index: ", index)
+
             real_p = self.scan.ranges[index]
             self.real_visual_sensor_reading_msg.data = [real_p, real_alpha]
-            self.real_sensor_reading_pub.publish(self.real_visual_sensor_reading_msg)
-            #print ("real: ", self.real_visual_sensor_reading_msg.data)
-            #print ("estimated: ", self.estimated_visual_sensor_reading_msg.data)
+            #self.real_sensor_reading_pub.publish(self.real_visual_sensor_reading_msg)
+
+            if not np.isinf(real_p):
+                self.relation_matrix_between_sensor_and_state_pub.publish(self.relation_matrix_between_sensor_and_state_msg)
+                self.estimated_sensor_reading_pub.publish(self.estimated_visual_sensor_reading_msg)
+                self.real_sensor_reading_pub.publish(self.real_visual_sensor_reading_msg)
 
     def main(self):
         while not rospy.is_shutdown():            
