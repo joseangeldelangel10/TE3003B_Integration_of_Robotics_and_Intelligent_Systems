@@ -20,7 +20,7 @@ class ArucoDetector():
         self.arucoDict = cv2.aruco.getPredefinedDictionary(aruco_dict)
         self.arucoParams = cv2.aruco.DetectorParameters()
         self.arucoDetector = cv2.aruco.ArucoDetector(self.arucoDict, self.arucoParams)
-        self.arucoCoordinates = {"0": (2.0,2.0),"1": (2.0,-2.0),"2": (-2.0,-2.0),"3": (-2.0,2.0),"4": (4.0,4.0),"5": (4.0,-4.0),"6": (-4.0,-4.0),"7": (-4.0,4.0)}
+        self.arucoCoordinates = {"0": (1.0,0.0),"1": (2.0,-2.0),"2": (-2.0,-2.0),"3": (-2.0,2.0),"4": (4.0,4.0),"5": (4.0,-4.0),"6": (-4.0,-4.0),"7": (-4.0,4.0)}
         #self.arucoBoxDim = 0.24
 
         # ________ ros atributes initialization ______        
@@ -29,7 +29,8 @@ class ArucoDetector():
         self.visual_sensor_reading_msg = Float64MultiArray()
         self.relation_matrix_between_sensor_and_state_pub = rospy.Publisher("/relation_matrix_between_sensor_and_state", Float64MultiArray, queue_size = 1)        
         self.relation_matrix_between_sensor_and_state_msg = Float64MultiArray()
-        self.odom_sub = rospy.Subscriber('/odom', Odometry, self.odom_callback)
+        self.odom_sub = rospy.Subscriber('/kalman_corrected_odom', Odometry, self.odom_callback)
+        # TODO change /odom topic to /Kalman_odom topic 
         self.scan_sub = rospy.Subscriber('/scan', LaserScan,self.scan_callback)
         self.image_sub = rospy.Subscriber("/camera/image_raw", Image, self.image_callback)
 

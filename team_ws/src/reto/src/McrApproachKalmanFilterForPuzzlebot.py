@@ -81,7 +81,7 @@ class KalmanFilterForPuzzlebotPose():
     def kalman(self,xk_pred,Pk_pred,C,R,yk):        
         #Correction
         Gk = Pk_pred@(C.T)@np.linalg.inv((C@Pk_pred@C.T)+R)        
-        xk_corrected = xk_pred+ Gk@(yk-(C@xk_pred))  
+        xk_corrected = xk_pred+ Gk@(yk-(C@xk_pred)) 
         Pk_corrected = (np.identity(len(xk_pred), dtype=float)-(Gk@C))@Pk_pred        
         return xk_corrected,Pk_corrected
     
@@ -124,6 +124,8 @@ class KalmanFilterForPuzzlebotPose():
                 elif (((self.last_visual_sensor_processed_msg_timestamp == None and self.last_visual_sensor_msg_timestamp != None) or 
                 (self.last_visual_sensor_processed_msg_timestamp < self.last_visual_sensor_msg_timestamp)) and
                 (self.new_sensor_reading_recieved and self.new_relation_matrix_between_state_and_sensor_recieved)):
+                    
+                    # TODO Check elif conditions
                     
                     corrected_state_mean, corrected_state_cov = self.kalman(self.predicted_state,
                                                                             self.predicted_state_covariance,
