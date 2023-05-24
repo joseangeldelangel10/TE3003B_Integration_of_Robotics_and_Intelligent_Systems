@@ -17,13 +17,15 @@ def calculate_yaw_angle_deg(orientation_q):
     yaw = angle_to_only_possitive_deg(yaw)
     return yaw  
 
-def angle_to_only_possitive_deg(angle):
+def angle_to_only_possitive_deg(angle_recieved):
+    angle = angle_recieved%360.0
     theta = angle
     if np.sign(theta) == -1.0:
         theta = 360.0 + theta
     return theta
 
-def angle_to_only_possitive(angle):
+def angle_to_only_possitive(angle_recieved):
+    angle = angle_recieved%(2.0*np.pi)
     theta = angle
     if np.sign(theta) == -1.0:
         theta = 2.0*math.pi + theta
@@ -32,6 +34,11 @@ def angle_to_only_possitive(angle):
 def rad2deg(theta):
     res = theta*(180.0/math.pi)
     res = angle_to_only_possitive_deg(res)
+    return res
+
+def deg2rad(theta):
+    res = theta*(math.pi/180.0)
+    res = angle_to_only_possitive(res)
     return res
 
 def euclidean_distance_point_to_point_2d(p1, p2):
