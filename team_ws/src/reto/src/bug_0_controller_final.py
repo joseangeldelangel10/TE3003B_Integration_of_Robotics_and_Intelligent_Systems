@@ -312,11 +312,30 @@ class Bug0():
             #print("LEFT SCAN VALUES ARE: {v} ".format(v = left_scan_values))
             print("LEFT SCAN len is: {}".format(len(left_scan_values)))
 
-            self.right_scan_value = min(right_scan_values)
-            self.front_right_scan_value = min(front_right_scan_values)
-            self.front_scan_value = min(front_scan_values)
-            self.front_left_scan_value = min(front_left_scan_values)
-            self.left_scan_value = min(left_scan_values)
+            if min(right_scan_values) == np.inf:
+                self.right_scan_value = 12.0
+            else:
+                self.right_scan_value = min(right_scan_values)
+
+            if min(front_right_scan_values) == np.inf:
+                self.front_right_scan_angle = 12.0
+            else:
+                self.front_right_scan_value = min(front_right_scan_values)
+            
+            if min(front_scan_values) == np.inf:
+                self.front_scan_value = 12.0
+            else:
+                self.front_scan_value = min(front_scan_values)
+
+            if min(front_left_scan_values) == np.inf:
+                self.front_left_scan_value = 12.0
+            else:                
+                self.front_left_scan_value = min(front_left_scan_values)
+            
+            if min(left_scan_values) == np.inf:
+                self.left_scan_value = 12.0
+            else:
+                self.left_scan_value = min(left_scan_values)
                 
     def main(self):
         print("main inited node running")
