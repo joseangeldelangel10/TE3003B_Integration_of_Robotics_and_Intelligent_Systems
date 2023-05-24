@@ -372,5 +372,5 @@ class Bug0():
 if __name__ == "__main__":
     # TODO - Pass this as an argument
     targets = [(5.0, 5.0), (10.0, 0.0), (5.0, -5.0), (0.0, 0.0)]
-    bug_0 = Bug0(targets,0.5)
+    bug_0 = Bug0(targets,0.35)
     bug_0.main()
