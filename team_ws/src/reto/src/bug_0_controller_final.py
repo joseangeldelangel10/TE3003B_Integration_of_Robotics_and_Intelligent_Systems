@@ -44,7 +44,7 @@ class Bug0():
         self.current_angle = None
         self.displaced_angle = 0.0
                      
-        self.angular_error_treshold = 0.3    
+        self.angular_error_treshold = 0.4    
         self.distance_error_treshold = 0.08                    
 
         self.go2point_angular_kp = 0.08
@@ -341,7 +341,9 @@ class Bug0():
         print("main inited node running")
         print("Siguiente punto es:", self.target_postition_xy_2d)
         while not rospy.is_shutdown():
-            if self.index < len(self.targets) -1:
+            
+            if self.index < len(self.targets):
+                self.target_postition_xy_2d = self.targets[self.index]
                 print("state is {s}".format(s = self.state))         
                 self.vel_msg.linear.x = 0.0
                 self.vel_msg.angular.z = 0.0
@@ -360,8 +362,7 @@ class Bug0():
                     elif self.state == "arrived":
                         print("ia llegue")
                         self.index += 1
-                        self.target_postition_xy_2d = self.targets[self.index]
-                        print("Siguiente punto es: {s}".format(s = self.target_postition_xy_2d))
+                        #print("Siguiente punto es: {s}".format(s = self.target_postition_xy_2d))
                         self.state = "go_to_point"
                                      
                     self.vel_pub.publish(self.vel_msg)
