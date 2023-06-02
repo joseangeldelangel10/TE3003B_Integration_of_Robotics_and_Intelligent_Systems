@@ -54,7 +54,7 @@ class ArucoDetector():
         self.current_position_xy_2d = None
         self.current_angle = None        
 
-        self.rate = rospy.Rate(20.0)        
+        self.rate = rospy.Rate(5.0)        
 
     def image_callback(self, msg):
         self.image = msg
@@ -68,15 +68,6 @@ class ArucoDetector():
         _, _, yaw = euler_from_quaternion([data.pose.pose.orientation.x, data.pose.pose.orientation.y, data.pose.pose.orientation.z, data.pose.pose.orientation.w])
         self.current_angle = yaw
         #print("current angle {c}".format(c = self.current_angle))
-        
-    def midpoint_equation(self, p1, p2):
-        return ( (p1[0]+p2[0])/2, (p1[1]+p2[1])/2 )
-    
-    def get_aruco_midpoint(self, rectangle_corners):
-        """ function that returns the x,y cordinates of the aruco's midpoint """                
-        rectangle_corners_for_x_y = rectangle_corners.reshape((4,2))        
-        x_center_px, y_center_px = self.midpoint_equation(rectangle_corners_for_x_y[0,:], rectangle_corners_for_x_y[2,:])        
-        return (x_center_px, y_center_px)
 
     def fill_sensor_data_multi_array_layout(self):
         layout = MultiArrayLayout()
@@ -109,35 +100,6 @@ class ArucoDetector():
         
         self.relation_matrix_between_sensor_and_state_msg.layout = layout
 
-    def draw_arucos(self, image, corners):
-        # verify *at least* one ArUco marker was detected
-        if len(corners) > 0:
-			# loop over the detected ArUCo corners
-            for markerCorner in corners:
-				# extract the marker corners (which are always returned
-				# in top-left, top-right, bottom-right, and bottom-left
-				# order)
-                corners = markerCorner.reshape((4, 2))
-
-                (topLeft, topRight, bottomRight, bottomLeft) = corners
-
-				# convert each of the (x, y)-coordinate pairs to integers
-                topRight = (int(topRight[0]), int(topRight[1]))
-                bottomRight = (int(bottomRight[0]), int(bottomRight[1]))
-                bottomLeft = (int(bottomLeft[0]), int(bottomLeft[1]))
-                topLeft = (int(topLeft[0]), int(topLeft[1]))
-
-				# draw the bounding box of the ArUCo detection
-                image = cv2.line(image, topLeft, topRight, self.green, 2)
-                image = cv2.line(image, topRight, bottomRight, self.green, 2)
-                image = cv2.line(image, bottomRight, bottomLeft, self.green, 2)
-                image = cv2.line(image, bottomLeft, topLeft, self.green, 2)
-        return image
-
-    def get_arucos_info_in_image(self, image):
-        # detect ArUco markers in the input frame
-        (corners, ids, rejected) = self.arucoDetector.detectMarkers(image)    
-        return (corners, ids)
 
     def cv2_to_imgmsg(self, image, encoding = "bgr8"):
         #print("cv2_to_imgmsg image shape is:" + str(image.shape))
@@ -174,27 +136,6 @@ class ArucoDetector():
         aruco_coordinate = self.arucoCoordinates[str(id)]
         return aruco_coordinate
         
-    def get_aruco_area_given_corners(self, unshaped_corners):
-        corners = unshaped_corners.reshape((4,2))
-        corners_for_det = np.concatenate((corners, corners[0,:].reshape((1,2))), axis = 0)
-        det1 = np.linalg.det( corners_for_det[:2,:] )
-        det2 = np.linalg.det( corners_for_det[1:3,:] )
-        det3 = np.linalg.det( corners_for_det[2:4,:] )
-        det4 = np.linalg.det( corners_for_det[3:5,:] )
-        area = (det1 + det2 + det3 + det4)/2.0
-        return area
-    
-    def filter_to_only_biggest_area_aruco(self, aruco_corners, aruco_ids):        
-        aruco_areas = list(map(self.get_aruco_area_given_corners, aruco_corners))
-        aruco_corners_areas_and_ids = list(zip(aruco_areas, aruco_corners, aruco_ids))
-        aruco_corners_areas_and_ids.sort(reverse = True, key = lambda x:x[0])
-        return (aruco_corners_areas_and_ids[0][1], aruco_corners_areas_and_ids[0][2])
-
-    def get_laser_index_from_angle(self, angle_in_deg):
-        angle_in_deg_only_positive = nav_functions.angle_to_only_possitive_deg(angle_in_deg)        
-        angle_index = np.floor( (angle_in_deg_only_positive*len(self.scan.ranges))/360.0 )
-        return int(angle_index)
-    
     def get_alpha(self, aruco_midpoint, camera_fov = 1.3962634, image_width = 800.0):
         """
         input:
@@ -224,7 +165,7 @@ class ArucoDetector():
             
             self.estimated_visual_sensor_reading_msg.data = [p, alpha]
 
-            real_alpha = self.get_alpha(aruco_midpoint,1.045212533)
+            real_alpha = self.get_alpha(aruco_midpoint,2.967059728)
             real_alpha_in_deg = np.rad2deg(real_alpha) 
             
             index = self.get_laser_index_from_angle(real_alpha_in_deg)
@@ -233,7 +174,7 @@ class ArucoDetector():
             self.real_visual_sensor_reading_msg.data = [real_p, real_alpha]
             #self.real_sensor_reading_pub.publish(self.real_visual_sensor_reading_msg)
 
-            if not np.isinf(real_p) and real_p < 2.0:
+            if not np.isinf(real_p):
                 self.relation_matrix_between_sensor_and_state_pub.publish(self.relation_matrix_between_sensor_and_state_msg)
                 self.estimated_sensor_reading_pub.publish(self.estimated_visual_sensor_reading_msg)
                 self.real_sensor_reading_pub.publish(self.real_visual_sensor_reading_msg)

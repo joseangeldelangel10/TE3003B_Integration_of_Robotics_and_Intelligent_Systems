@@ -37,7 +37,7 @@ class KalmanFilterForPuzzlebotPose():
         self.puzzlebot_6_times_6_covariance_matrix = np.zeros((6*6,), dtype=float)        
 
         self.relation_matrix_between_output_and_state = None
-        self.state_uncertainty_matrix = np.identity(2) *0.2
+        self.state_uncertainty_matrix = np.identity(2) * 0.2
 
         self.predicted_state = None        
         self.predicted_state_covariance = None        
@@ -50,7 +50,7 @@ class KalmanFilterForPuzzlebotPose():
         self.new_sensor_reading_recieved = False
         self.new_relation_matrix_between_state_and_sensor_recieved = False
 
-        self.rate_val = 5.0
+        self.rate_val = 20.0
         self.rate = rospy.Rate(self.rate_val)    
 
     def odom_callback(self, data):

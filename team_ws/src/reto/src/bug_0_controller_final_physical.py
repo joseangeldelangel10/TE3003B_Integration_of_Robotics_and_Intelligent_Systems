@@ -44,16 +44,16 @@ class Bug0():
         self.current_angle = None
         self.displaced_angle = 0.0
                      
-        self.angular_error_treshold = 0.4    
+        self.angular_error_treshold = 0.2    
         self.distance_error_treshold = 0.08                    
 
-        self.go2point_angular_kp = 0.08
+        self.go2point_angular_kp = 0.02
         self.go2point_linear_kp = 0.3
 
-        self.v_max = 0.2
-        self.w_max = 0.4
+        self.v_max = 0.16        
+        self.w_max = 0.035
 
-        self.puzzlebot_passing_diameter = 0.60 # meters
+        self.puzzlebot_passing_diameter = 0.30 # meters
 
         self.state = "go_to_point"                
 
@@ -104,33 +104,31 @@ class Bug0():
 
         #self.angle_to_turn = abs(angle_to_turn)
         """
-        self.angle_to_turn = np.pi/2.0
+        self.angle_to_turn = (np.pi/2.0)/4.0
         self.angle_to_turn_is_computed = True
         self.displaced_angle = 0.0
         self.last_turn_time = rospy.get_time()
+        #print("angle to turn is: {a}".format(a = self.angle_to_turn))
 
-    def turn_left(self):
-        # TODO when we pass this to rover change logic so that the loop is closed using imu data
-        if self.scan != None:            
-            if not self.angle_to_turn_is_computed:
-                self.get_angle_to_turn()
-                print("angle to turn is: {a}".format(a = nav_functions.rad2deg(self.angle_to_turn)))
-            else:                                    
-                if self.displaced_angle < self.angle_to_turn:                
-                    self.vel_msg.linear.x = 0.0
-                    self.vel_msg.angular.z = self.w_max                                                                    
-                    current_time = rospy.get_time()
-                    self.displaced_angle += abs(self.vel_msg.angular.z)*(current_time - self.last_turn_time)
-                    self.last_turn_time = current_time
-                else:                
-                    self.vel_msg.linear.x = 0.0
-                    self.vel_msg.angular.z = 0.0
-                    self.state = "follow_wall"
+    def turn_left_qto(self):
+        # TODO when we pass this to rover change logic so that the loop is closed using imu data                    
+        self.angle_to_turn = (np.pi/2.0)/4.0
+        if self.displaced_angle < self.angle_to_turn:                
+            self.vel_msg.linear.x = 0.00
+            self.vel_msg.angular.z = self.w_max                                                                    
+            #current_time = rospy.get_time()
+            self.displaced_angle += abs(self.w_max)*(1.0/20.0)
+            #self.last_turn_time = current_time
+            print("displaced angle is {d}".format(d = self.displaced_angle))
+        else:                
+            self.vel_msg.linear.x = 0.0
+            self.vel_msg.angular.z = 0.0
+            self.state = "follow_wall"
 
-                    self.angle_to_turn = None    
-                    self.angle_to_turn_is_computed = False
-                    self.displaced_angle = 0.0
-                    self.last_turn_time = None
+            self.angle_to_turn = None    
+            self.angle_to_turn_is_computed = False
+            self.displaced_angle = 0.0
+            self.last_turn_time = None
 
     def go_to_point_controller(self, angle_error, distance_error):
         if distance_error <= self.distance_error_treshold:                                                            
@@ -178,7 +176,7 @@ class Bug0():
         return target_is_clear        
     
     def obstacle_in_front(self):
-        wall_dist_fov = 2.0*( 90.0 - nav_functions.rad2deg(np.arctan(self.wall_distance/(self.puzzlebot_passing_diameter/2.0))) )                
+        wall_dist_fov = 1.0*( 90.0 - nav_functions.rad2deg(np.arctan(self.wall_distance/(self.puzzlebot_passing_diameter/2.0))) )                
         values_in_front = self.get_values_at_target(0.0, wall_dist_fov)
         #side_dists_to_obstacle = self.get_values_at_target(315.0, 30.0) # TODO check this, this should probably be deleted 
         return min(values_in_front) <= self.wall_distance
@@ -206,7 +204,7 @@ class Bug0():
     def right_hand_rule_controller(self, p2p_target_angle):
         if self.scan != None:
             self.get_ray_sectors_info()
-            if self.front_scan_value <= 1.5*self.wall_distance:
+            if self.obstacle_in_front():
                 self.state = "turn_left"
             elif self.target_path_is_clear(p2p_target_angle):
                 self.state = "go_to_point"
@@ -229,12 +227,12 @@ class Bug0():
                 perpendicular_vect_to_robot_unitary = perpendicular_vect_to_robot/self.get_vector_mag(perpendicular_vect_to_robot)
                 wall_dist_error_vect = perpendicular_vect_to_robot - self.wall_distance*perpendicular_vect_to_robot_unitary
 
-                parallel_kp = 0.25
-                wall_dist_kp = 0.25
+                parallel_kp = 0.4
+                wall_dist_kp = 0.12
 
                 follow_wall_vect = wall_dist_kp*wall_dist_error_vect + parallel_kp*tangent_vect 
 
-                self.vel_msg.angular.z = np.arctan2( follow_wall_vect[1], follow_wall_vect[0] )            
+                self.vel_msg.angular.z = nav_functions.saturate_signal(np.arctan2( follow_wall_vect[1], follow_wall_vect[0] ), self.w_max )        
                 self.vel_msg.linear.x = self.v_max                
 
     def get_laser_index_from_angle_in_rad(self, angle_in_rad):
@@ -316,23 +314,28 @@ class Bug0():
                     target_angle = nav_functions.rad2deg(math.atan2( target_vector_minus_robot_vector[1],target_vector_minus_robot_vector[0]))                                    
                     angle_error = nav_functions.calculate_angular_error_considering_upper_boundary_lag(target_angle, self.current_angle, "deg", (0.0,360.0))                
                     distance_error = nav_functions.euclidean_distance_single_point_2d( target_vector_minus_robot_vector )                          
+                    print("bool cond {b}".format(b = self.state == "turn_left"))
                     if self.state == "go_to_point":
                         self.go_to_point_controller(angle_error, distance_error)
                     elif self.state == "follow_wall":
                         self.right_hand_rule_controller(target_angle)  
                     elif self.state == "turn_left":
-                        self.turn_left() 
+                        self.turn_left_qto() 
                     elif self.state == "arrived":
                         print("ia llegue")
                         self.index += 1
+                        #print("Siguiente punto es: {s}".format(s = self.target_postition_xy_2d))
                         self.state = "go_to_point"
                                      
                     self.vel_pub.publish(self.vel_msg)
+                else:
+                    print("no scan nor odometry data")
             else: 
                 print("ia llegue al final")  
             self.rate.sleep()          
 
 if __name__ == "__main__":
-    targets = [(3.0, 3.0), (7.5, 0.0), (4.0, -3.0), (0.0, 0.0)]
-    bug_0 = Bug0(targets,0.3)
+    # TODO - Pass this as an argument
+    targets = [(1.5, 0.0), (1.5, 1.5),(0.0,1.5),(0.0,0.0)]
+    bug_0 = Bug0(targets,0.35)
     bug_0.main()
