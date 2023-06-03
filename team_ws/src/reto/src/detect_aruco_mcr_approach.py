@@ -20,8 +20,12 @@ class ArucoDetector():
         self.arucoDict = cv2.aruco.getPredefinedDictionary(aruco_dict)
         self.arucoParams = cv2.aruco.DetectorParameters()
         self.arucoDetector = cv2.aruco.ArucoDetector(self.arucoDict, self.arucoParams)
-        aruco_cordinates_for_challenge_world = {"0": (3.0,-1.0),"1": (1.5,3.0),"2": (6.0,3.0),"3": (7.5,1.5),"4": (7.5,-2.5),"5": (4.0,-4.0)}
-        #aruco_cordinates_for_challenge_world = {"0": (2.5,0.0),"1": (0.5,5.5),"2": (7.5,5.5),"3": (10.5,-1.5),"4": (7.5,-5.5),"5": (2.5,-5.5)} 
+        aruco_cordinates_for_challenge_world = {"0":(0.515/3.0,2.152/3.0), "1":(1.937/3,-3.929/3.0),"2":(7.074/3.0,0.499/3.0),
+                                                "3":(4.998/3.0,1.22/3.0), "4":(7.0/3.0,-4.0/3),"5":(5.6/3.0,5.1/3.0), "6":(5.0/3.0,-1.2/3.0),
+                                                "7":(-1.3/3,0.0),"8":(2.5/3.0,0.0),"10":(5.511/3,-2.086/3),"11":(2.7/3,-0.5/3),
+                                                "12":(5.0/3.0,2.26/3.0), "13":(6.498/3,0.008/3)}
+
+        #aruco_cordinates_for_challenge_world = {"0": (2.0,0.0),"1": (1.0,2.0),"2": (-0.5,1.5),"3": (0.0,-0.5)} 
         #self.arucoCoordinates = {"0": (1.0,0.0),"1": (2.0,-2.0),"2": (-2.0,-2.0),"3": (-2.0,2.0),"4": (4.0,4.0),"5": (4.0,-4.0),"6": (-4.0,-4.0),"7": (-4.0,4.0)}
         self.arucoCoordinates = aruco_cordinates_for_challenge_world
         #self.arucoBoxDim = 0.24
@@ -36,7 +40,7 @@ class ArucoDetector():
         self.relation_matrix_between_sensor_and_state_msg = Float64MultiArray()
         self.odom_sub = rospy.Subscriber('/kalman_corrected_odom', Odometry, self.odom_callback)
         self.scan_sub = rospy.Subscriber('/scan', LaserScan,self.scan_callback)
-        self.image_sub = rospy.Subscriber("/camera/image_raw", Image, self.image_callback)
+        self.image_sub = rospy.Subscriber("/video_source/raw", Image, self.image_callback)
 
         #__________ image ______________        
         self.curr_signs_image_msg = Image()        
@@ -195,7 +199,7 @@ class ArucoDetector():
         angle_index = np.floor( (angle_in_deg_only_positive*len(self.scan.ranges))/360.0 )
         return int(angle_index)
     
-    def get_alpha(self, aruco_midpoint, camera_fov = 1.3962634, image_width = 800.0):
+    def get_alpha(self, aruco_midpoint, camera_fov = 1.08559, image_width = 640.0):
         """
         input:
             aruco_midpoint : tuple with (x_center_px, y_center_px)
@@ -224,7 +228,7 @@ class ArucoDetector():
             
             self.estimated_visual_sensor_reading_msg.data = [p, alpha]
 
-            real_alpha = self.get_alpha(aruco_midpoint,1.045212533)
+            real_alpha = self.get_alpha(aruco_midpoint)
             real_alpha_in_deg = np.rad2deg(real_alpha) 
             
             index = self.get_laser_index_from_angle(real_alpha_in_deg)
@@ -232,12 +236,15 @@ class ArucoDetector():
             real_p = self.scan.ranges[index]
             self.real_visual_sensor_reading_msg.data = [real_p, real_alpha]
             #self.real_sensor_reading_pub.publish(self.real_visual_sensor_reading_msg)
+            
+            if not np.isinf(real_p) and real_p < 0.5 and p < 0.5:
 
-            if not np.isinf(real_p) and real_p < 2.0:
+                print("Aruco distance is {s}".format(s = real_p))
+
                 self.relation_matrix_between_sensor_and_state_pub.publish(self.relation_matrix_between_sensor_and_state_msg)
                 self.estimated_sensor_reading_pub.publish(self.estimated_visual_sensor_reading_msg)
                 self.real_sensor_reading_pub.publish(self.real_visual_sensor_reading_msg)
-                print("Sending data")
+            
 
     def main(self):
         while not rospy.is_shutdown():            
@@ -253,9 +260,10 @@ class ArucoDetector():
                     self.displayed_image_ocv = cv2.resize(self.displayed_image_ocv, (100,100), interpolation = cv2.INTER_AREA)
 
                     print("aruco id is: ", aruco_id[0])
-                    aruco_cordinates = self.id2coordinate(aruco_id[0])
-                    aruco_midpoint_px = self.get_aruco_midpoint(aruco_corners)
-                    self.publish_sensor_data(aruco_cordinates, aruco_midpoint_px)                        
+                    if aruco_id[0] >= 0 and aruco_id[0] <= 13:
+                        aruco_cordinates = self.id2coordinate(aruco_id[0])
+                        aruco_midpoint_px = self.get_aruco_midpoint(aruco_corners)
+                        self.publish_sensor_data(aruco_cordinates, aruco_midpoint_px)                        
 
                 self.curr_signs_image_msg = self.cv2_to_imgmsg(self.displayed_image_ocv, encoding = "bgr8")
                 self.image_pub.publish(self.curr_signs_image_msg)
@@ -264,5 +272,5 @@ class ArucoDetector():
    
 
 if __name__ == "__main__":
-    aruco_detector = ArucoDetector()
+    aruco_detector = ArucoDetector(cv2.aruco.DICT_5X5_50)
     aruco_detector.main()

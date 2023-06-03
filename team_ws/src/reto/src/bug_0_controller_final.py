@@ -334,5 +334,5 @@ class Bug0():
 
 if __name__ == "__main__":
     targets = [(3.0, 3.0), (7.5, 0.0), (4.0, -3.0), (0.0, 0.0)]
-    bug_0 = Bug0(targets,0.3)
+    bug_0 = Bug0(targets,0.2)
     bug_0.main()

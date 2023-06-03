@@ -37,7 +37,7 @@ class KalmanFilterForPuzzlebotPose():
         self.puzzlebot_6_times_6_covariance_matrix = np.zeros((6*6,), dtype=float)        
 
         self.relation_matrix_between_output_and_state = None
-        self.state_uncertainty_matrix = np.identity(2) * 0.2
+        self.state_uncertainty_matrix = np.identity(2) *0.2
 
         self.predicted_state = None        
         self.predicted_state_covariance = None        
@@ -87,8 +87,8 @@ class KalmanFilterForPuzzlebotPose():
 
     def kalman(self,xk_pred,Pk_pred,C,R,yk):        
         #Correction
-        Gk = Pk_pred@(C.T)@np.linalg.inv((C@Pk_pred@C.T)+R)        
-        xk_corrected = xk_pred+ Gk@(self.real_yk - yk) 
+        Gk = Pk_pred@(C.T)@np.linalg.inv((C@Pk_pred@C.T)+R) 
+        xk_corrected = xk_pred+ Gk@(self.real_yk - yk)
         Pk_corrected = (np.identity(len(xk_pred), dtype=float)-(Gk@C))@Pk_pred        
         return xk_corrected,Pk_corrected
     
@@ -123,6 +123,7 @@ class KalmanFilterForPuzzlebotPose():
     def main(self):        
         while not rospy.is_shutdown():
             if self.predicted_state is not None and self.predicted_state_covariance is not None:
+
                 if self.last_visual_sensor_msg_timestamp == None and self.last_visual_sensor_processed_msg_timestamp == None:
                     
                     corrected_state_mean = self.predicted_state
@@ -139,7 +140,9 @@ class KalmanFilterForPuzzlebotPose():
                                                                             self.relation_matrix_between_output_and_state,
                                                                             self.state_uncertainty_matrix,
                                                                             self.visual_sensor_reading)
+                    
                     self.last_visual_sensor_processed_msg_timestamp = self.last_visual_sensor_msg_timestamp
+
                     if np.any(np.isnan(corrected_state_mean)):
                         corrected_state_mean = self.predicted_state
                         corrected_state_cov = self.predicted_state_covariance

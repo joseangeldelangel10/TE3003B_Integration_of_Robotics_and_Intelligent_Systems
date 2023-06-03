@@ -51,7 +51,7 @@ class Bug0():
         self.go2point_linear_kp = 0.3
 
         self.v_max = 0.16        
-        self.w_max = 0.035
+        self.w_max = 0.08
 
         self.puzzlebot_passing_diameter = 0.30 # meters
 
@@ -336,6 +336,7 @@ class Bug0():
 
 if __name__ == "__main__":
     # TODO - Pass this as an argument
-    targets = [(1.5, 0.0), (1.5, 1.5),(0.0,1.5),(0.0,0.0)]
-    bug_0 = Bug0(targets,0.35)
+    targets = [(5.0/3.0, 0.0), (5.0/3.0, 4.0/3.0), (7.57/3.0, -2.0/3.0), (3.0/3.0, -1.5/3.0), (3.0/3.0, 2.0/3.0), (0.001/3.0, 0.001/3.0)]
+    #targets = [(1.5, 0.0), (1.5, 1.5),(0.0,1.5),(0.0,0.0)]
+    bug_0 = Bug0(targets,0.30)
     bug_0.main()
