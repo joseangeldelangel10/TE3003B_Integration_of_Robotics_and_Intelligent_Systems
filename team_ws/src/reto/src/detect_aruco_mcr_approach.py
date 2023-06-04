@@ -20,15 +20,11 @@ class ArucoDetector():
         self.arucoDict = cv2.aruco.getPredefinedDictionary(aruco_dict)
         self.arucoParams = cv2.aruco.DetectorParameters()
         self.arucoDetector = cv2.aruco.ArucoDetector(self.arucoDict, self.arucoParams)
-        aruco_cordinates_for_challenge_world = {"0":(0.515/3.0,2.152/3.0), "1":(1.937/3,-3.929/3.0),"2":(7.074/3.0,0.499/3.0),
-                                                "3":(4.998/3.0,1.22/3.0), "4":(7.0/3.0,-4.0/3),"5":(5.6/3.0,5.1/3.0), "6":(5.0/3.0,-1.2/3.0),
-                                                "7":(-1.3/3,0.0),"8":(2.5/3.0,0.0),"10":(5.511/3,-2.086/3),"11":(2.7/3,-0.5/3),
-                                                "12":(5.0/3.0,2.26/3.0), "13":(6.498/3,0.008/3)}
 
-        #aruco_cordinates_for_challenge_world = {"0": (2.0,0.0),"1": (1.0,2.0),"2": (-0.5,1.5),"3": (0.0,-0.5)} 
-        #self.arucoCoordinates = {"0": (1.0,0.0),"1": (2.0,-2.0),"2": (-2.0,-2.0),"3": (-2.0,2.0),"4": (4.0,4.0),"5": (4.0,-4.0),"6": (-4.0,-4.0),"7": (-4.0,4.0)}
+        aruco_cordinates_for_challenge_world = {"0": (2.0,0.0),"1": (1.0,2.0),"2": (-0.5,1.5),"3": (0.0,-0.5)} 
+        
         self.arucoCoordinates = aruco_cordinates_for_challenge_world
-        #self.arucoBoxDim = 0.24
+        
 
         # ________ ros atributes initialization ______        
         self.image_pub = rospy.Publisher("/image_detecting", Image, queue_size = 1)
