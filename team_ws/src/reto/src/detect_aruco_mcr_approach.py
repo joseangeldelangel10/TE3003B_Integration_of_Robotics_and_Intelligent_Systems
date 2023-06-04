@@ -21,7 +21,7 @@ class ArucoDetector():
         self.arucoParams = cv2.aruco.DetectorParameters()
         self.arucoDetector = cv2.aruco.ArucoDetector(self.arucoDict, self.arucoParams)
 
-        aruco_cordinates_for_challenge_world = {"0": (2.0,0.0),"1": (1.0,2.0),"2": (-0.5,1.5),"3": (0.0,-0.5)} 
+        aruco_cordinates_for_challenge_world = {"0": (3.0,-1.0),"1": (1.5,3.0),"2": (6.0,3.0),"3": (7.5,1.5),"4":(7.5,-2.5),"5":(-4.0,-4.0)} 
         
         self.arucoCoordinates = aruco_cordinates_for_challenge_world
         
@@ -233,7 +233,7 @@ class ArucoDetector():
             self.real_visual_sensor_reading_msg.data = [real_p, real_alpha]
             #self.real_sensor_reading_pub.publish(self.real_visual_sensor_reading_msg)
             
-            if not np.isinf(real_p) and real_p < 0.5 and p < 0.5:
+            if not np.isinf(real_p) :
 
                 print("Aruco distance is {s}".format(s = real_p))
 
@@ -268,5 +268,5 @@ class ArucoDetector():
    
 
 if __name__ == "__main__":
-    aruco_detector = ArucoDetector(cv2.aruco.DICT_5X5_50)
+    aruco_detector = ArucoDetector()
     aruco_detector.main()
