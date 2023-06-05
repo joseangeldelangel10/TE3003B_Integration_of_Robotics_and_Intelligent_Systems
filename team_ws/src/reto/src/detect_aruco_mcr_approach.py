@@ -21,10 +21,10 @@ class ArucoDetector():
         self.arucoParams = cv2.aruco.DetectorParameters()
         self.arucoDetector = cv2.aruco.ArucoDetector(self.arucoDict, self.arucoParams)
 
-        aruco_cordinates_for_challenge_world = {"0": (3.0,-1.0),"1": (1.5,3.0),"2": (6.0,3.0),"3": (7.5,1.5),"4":(7.5,-2.5),"5":(-4.0,-4.0)} 
-        
+        aruco_cordinates_for_challenge_world = {"0": (3.0,-1.0),"1": (1.5,3.0),"2": (6.0,3.0),"3": (7.5,1.5),"4":(7.5,-2.5),"5":(-4.0,4.0)} 
+        #self.arucoCoordinates = {"0": (1.0,0.0),"1": (2.0,-2.0),"2": (-2.0,-2.0),"3": (-2.0,2.0),"4": (4.0,4.0),"5": (4.0,-4.0),"6": (-4.0,-4.0),"7": (-4.0,4.0)}
         self.arucoCoordinates = aruco_cordinates_for_challenge_world
-        
+        #self.arucoBoxDim = 0.24
 
         # ________ ros atributes initialization ______        
         self.image_pub = rospy.Publisher("/image_detecting", Image, queue_size = 1)
@@ -36,7 +36,7 @@ class ArucoDetector():
         self.relation_matrix_between_sensor_and_state_msg = Float64MultiArray()
         self.odom_sub = rospy.Subscriber('/kalman_corrected_odom', Odometry, self.odom_callback)
         self.scan_sub = rospy.Subscriber('/scan', LaserScan,self.scan_callback)
-        self.image_sub = rospy.Subscriber("/video_source/raw", Image, self.image_callback)
+        self.image_sub = rospy.Subscriber("/camera/image_raw", Image, self.image_callback)
 
         #__________ image ______________        
         self.curr_signs_image_msg = Image()        
@@ -209,6 +209,7 @@ class ArucoDetector():
         if self.current_position_xy_2d != None and self.current_angle != None:
             delta_x = aruco_cordinates[0] - self.current_position_xy_2d[0]
             delta_y = aruco_cordinates[1] - self.current_position_xy_2d[1]
+            print("Position is {p}".format(p=self.current_position_xy_2d))
             print ("delta_x: ", delta_x)
             print ("delta_y: ", delta_y)
             p = self.euclidean_distance((delta_x, delta_y))
@@ -233,7 +234,7 @@ class ArucoDetector():
             self.real_visual_sensor_reading_msg.data = [real_p, real_alpha]
             #self.real_sensor_reading_pub.publish(self.real_visual_sensor_reading_msg)
             
-            if not np.isinf(real_p) :
+            if not np.isinf(real_p):
 
                 print("Aruco distance is {s}".format(s = real_p))
 
@@ -243,26 +244,29 @@ class ArucoDetector():
             
 
     def main(self):
-        while not rospy.is_shutdown():            
-            if self.image != None and self.scan != None and self.current_position_xy_2d != None:                
+        while not rospy.is_shutdown():
+            if self.image != None and self.scan != None and self.current_position_xy_2d != None:            
                 self.ocv_image = self.imgmsg_to_cv2(self.image)
                 arucos_corners, arucos_ids = self.get_arucos_info_in_image(self.ocv_image)
+
                 self.displayed_image_ocv = self.ocv_image.copy()
                 
                 if len(arucos_corners) > 0:
+                    
                     aruco_corners, aruco_id = self.filter_to_only_biggest_area_aruco(arucos_corners, arucos_ids)
                     arucos_corners = [aruco_corners]
                     self.displayed_image_ocv = self.draw_arucos(self.displayed_image_ocv, arucos_corners)
                     self.displayed_image_ocv = cv2.resize(self.displayed_image_ocv, (100,100), interpolation = cv2.INTER_AREA)
 
-                    print("aruco id is: ", aruco_id[0])
-                    if aruco_id[0] >= 0 and aruco_id[0] <= 13:
+                    if aruco_id[0] >= 0 and aruco_id[0] <= 5:
+                        print("aruco id is: ", aruco_id[0])
                         aruco_cordinates = self.id2coordinate(aruco_id[0])
                         aruco_midpoint_px = self.get_aruco_midpoint(aruco_corners)
                         self.publish_sensor_data(aruco_cordinates, aruco_midpoint_px)                        
 
                 self.curr_signs_image_msg = self.cv2_to_imgmsg(self.displayed_image_ocv, encoding = "bgr8")
                 self.image_pub.publish(self.curr_signs_image_msg)
+                
                                 
             self.rate.sleep()
    
